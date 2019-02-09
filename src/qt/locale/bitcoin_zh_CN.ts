@@ -13,9 +13,9 @@
     </message>
     <message>
         <location line="+41"/>
-        <source>Copyright © 2009-2014 The Bitcoin developers
-Copyright © 2012-2014 The NovaCoin developers
-Copyright © 2014 The vulcoin developers</source>
+        <source>Copyright © 2009-2019 The Bitcoin developers
+Copyright © 2012-2019 The NovaCoin developers
+Copyright © 2019 The Vulcoin developers</source>
         <translation>版权所有 © 2009-2014 比特币Bitcoin开发组
 版权所有 © 2012-2014 新星币Novacoin开发组
 版权所有 © 2014 黑币vulcoin开发组</translation>
