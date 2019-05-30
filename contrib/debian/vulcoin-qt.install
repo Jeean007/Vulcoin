@@ -1,0 +1,6 @@
+usr/local/bin/vulcoin-qt usr/bin
+share/pixmaps/vulcoin32.xpm usr/share/pixmaps
+share/pixmaps/vulcoin16.xpm usr/share/pixmaps
+share/pixmaps/vulcoin128.xpm usr/share/pixmaps
+debian/vulcoin-qt.desktop usr/share/applications
+debian/vulcoin-qt.protocol usr/share/kde4/services/

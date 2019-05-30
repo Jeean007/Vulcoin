@@ -1,9 +1,0 @@
-Vulcoin
-Name: VULCOIN
-Ticker: VLC
-Algorithm: Scrypt
-Type: POW / POS
-Maximum money: (77.000.000)
-Premine: (20.000.000)
-p2p port=33655
-rpc port=33656

@@ -1,80 +1,60 @@
 Translations
 ============
 
-The Qt GUI can be easily translated into other languages. Here's how we
-handle those translations.
+The Vulcoin Core project has been designed to support multiple localisations. This makes adding new phrases, and completely new languages easily achievable.
 
-Files and Folders
------------------
+### Writing code with translations
+We use automated scripts to help extract translations in both Qt, and non-Qt source files. It is rarely necessary to manually edit the files in `src/qt/locale/`. The translation source files must adhere to the following format:
+`vulcoin_xx_YY.ts or vulcoin_xx.ts`
 
-### bitcoin-qt.pro
+`src/qt/locale/vulcoin_en.ts` is treated in a special way. It is used as the source for all other translations. Whenever a string in the source code is changed, this file must be updated to reflect those changes. A custom script is used to extract strings from the non-Qt parts. This script makes use of `gettext`, so make sure that utility is installed (ie, `apt-get install gettext` on Ubuntu/Debian). Once this has been updated, `lupdate` (included in the Qt SDK) is used to update `vulcoin_en.ts`.
 
-This file takes care of generating `.qm` files from `.ts` files. It is mostly
-automated.
+To automatically regenerate the `vulcoin_en.ts` file, run the following commands:
+```sh
+cd src/
+make translate
+```
 
-### src/qt/bitcoin.qrc
+`contrib/vulcoin-qt.pro` takes care of generating `.qm` (binary compiled) files from `.ts` (source files) files. It’s mostly automated, and you shouldn’t need to worry about it.
 
-This file must be updated whenever a new translation is added. Please note that
-files must end with `.qm`, not `.ts`.
+**Example Qt translation**
+```cpp
+QToolBar *toolbar = addToolBar(tr("Tabs toolbar"));
+```
 
-    <qresource prefix="/translations">
-        <file alias="en">locale/bitcoin_en.qm</file>
-        ...
-    </qresource>
+### Creating a pull-request
+For general PRs, you shouldn’t include any updates to the translation source files. They will be updated periodically, primarily around pre-releases, allowing time for any new phrases to be translated before public releases. This is also important in avoiding translation related merge conflicts.
 
-### src/qt/locale/
+To create the pull-request, use the following commands:
+```
+git add src/qt/vulcoinstrings.cpp src/qt/locale/vulcoin_en.ts
+git commit
+```
 
-This directory contains all translations. Filenames must adhere to this format:
+### Handling Plurals (in source files)
+When new plurals are added to the source file, it's important to do the following steps:
 
-    bitcoin_xx_YY.ts or bitcoin_xx.ts
+1. Open `vulcoin_en.ts` in Qt Linguist (included in the Qt SDK)
+2. Search for `%n`, which will take you to the parts in the translation that use plurals
+3. Look for empty `English Translation (Singular)` and `English Translation (Plural)` fields
+4. Add the appropriate strings for the singular and plural form of the base string
+5. Mark the item as done (via the green arrow symbol in the toolbar)
+6. Repeat from step 2, until all singular and plural forms are in the source file
+7. Save the source file
 
-#### Source file
+### Translating a new language
+To create a new language template, you will need to edit the languages manifest file `src/qt/vulcoin_locale.qrc` and add a new entry. Below is an example of the English language entry.
 
-`src/qt/locale/bitcoin_en.ts` is treated in a special way. It is used as the
-source for all other translations. Whenever a string in the code is changed
-this file must be updated to reflect those changes. Usually, this can be
-accomplished by running `lupdate` (included in the Qt SDK).
+```xml
+<qresource prefix="/translations">
+    <file alias="en">locale/vulcoin_en.qm</file>
+    ...
+</qresource>
+```
 
-An updated source file should be merged to github and transifex will pick it
-up from there. Afterwards the new strings show up as "Remaining" in transifex
-and can be translated.
+**Note:** that the language translation file **must end in `.qm`** (the compiled extension), and not `.ts`.
 
-Syncing with transifex
-----------------------
+### Questions and general assistance
+[Vulcoin Discord](https://discord.vulcoincoin.io).
 
-We are using http://transifex.net as a frontend for translating the client.
-
-https://www.transifex.net/projects/p/bitcoin/resource/tx/
-
-The "transifex client" (see: http://help.transifex.net/features/client/)
-will help with fetching new translations from transifex. Use the following
-config to be able to connect with the client.
-
-### .tx/config
-
-    [main]
-    host = https://www.transifex.net
-
-    [bitcoin.tx]
-    file_filter = src/qt/locale/bitcoin_<lang>.ts
-    source_file = src/qt/locale/bitcoin_en.ts
-    source_lang = en
-    
-### .tx/config (for Windows)
-
-    [main]
-    host = https://www.transifex.net
-
-    [bitcoin.tx]
-    file_filter = src\qt\locale\bitcoin_<lang>.ts
-    source_file = src\qt\locale\bitcoin_en.ts
-    source_lang = en
-
-It is also possible to directly download new translations one by one from transifex.
-
-### Fetching new translations
-
-1. `tx pull -a`
-2. update `src/qt/bitcoin.qrc` manually or via
-   `ls src/qt/locale/*ts|xargs -n1 basename|sed 's/\(bitcoin_\(.*\)\).ts/<file alias="\2">locale/\1.qm<\/file>/'`
-3. `git add` new translations from `src/qt/locale/`
+Announcements will be posted during application pre-releases to notify translators to check for updates.

@@ -1,0 +1,11 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Vulcoin
+Comment=Vulcoin P2P Cryptocurrency
+Exec=vulcoin-qt %u
+Terminal=false
+Type=Application
+Icon=vulcoin128
+MimeType=x-scheme-handler/vulcoin;
+Categories=Office;Finance;
+Name[en_US]=vulcoin-qt.desktop

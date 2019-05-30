@@ -82,7 +82,7 @@ TEST(FilterBlockTest, MultiChunk) {
   builder.StartBlock(2000);
   builder.AddKey("bar");
 
-  // Second filter
+  // Vlcond filter
   builder.StartBlock(3100);
   builder.AddKey("box");
 

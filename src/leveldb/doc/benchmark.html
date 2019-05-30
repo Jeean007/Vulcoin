@@ -124,49 +124,49 @@ parameters are varied.  For the baseline:</p>
 <h3>A. Sequential Reads</h3>
 <table class="bn bnbase">
 <tr><td class="c1">LevelDB</td>
-    <td class="c2">4,030,000 ops/sec</td>
+    <td class="c2">4,030,000 ops/vlc</td>
     <td class="c3"><div class="bldb" style="width:350px">&nbsp;</div></td>
 <tr><td class="c1">Kyoto TreeDB</td>
-    <td class="c2">1,010,000 ops/sec</td>
+    <td class="c2">1,010,000 ops/vlc</td>
     <td class="c3"><div class="bkct" style="width:95px">&nbsp;</div></td>
 <tr><td class="c1">SQLite3</td>
-    <td class="c2">383,000 ops/sec</td>
+    <td class="c2">383,000 ops/vlc</td>
     <td class="c3"><div class="bsql" style="width:33px">&nbsp;</div></td>
 </table>
 <h3>B. Random Reads</h3>
 <table class="bn bnbase">
 <tr><td class="c1">LevelDB</td>
-    <td class="c2">129,000 ops/sec</td>
+    <td class="c2">129,000 ops/vlc</td>
     <td class="c3"><div class="bldb" style="width:298px">&nbsp;</div></td>
 <tr><td class="c1">Kyoto TreeDB</td>
-    <td class="c2">151,000 ops/sec</td>
+    <td class="c2">151,000 ops/vlc</td>
     <td class="c3"><div class="bkct" style="width:350px">&nbsp;</div></td>
 <tr><td class="c1">SQLite3</td>
-    <td class="c2">134,000 ops/sec</td>
+    <td class="c2">134,000 ops/vlc</td>
     <td class="c3"><div class="bsql" style="width:310px">&nbsp;</div></td>
 </table>
 <h3>C. Sequential Writes</h3>
 <table class="bn bnbase">
 <tr><td class="c1">LevelDB</td>
-    <td class="c2">779,000 ops/sec</td>
+    <td class="c2">779,000 ops/vlc</td>
     <td class="c3"><div class="bldb" style="width:350px">&nbsp;</div></td>
 <tr><td class="c1">Kyoto TreeDB</td>
-    <td class="c2">342,000 ops/sec</td>
+    <td class="c2">342,000 ops/vlc</td>
     <td class="c3"><div class="bkct" style="width:154px">&nbsp;</div></td>
 <tr><td class="c1">SQLite3</td>
-    <td class="c2">48,600 ops/sec</td>
+    <td class="c2">48,600 ops/vlc</td>
     <td class="c3"><div class="bsql" style="width:22px">&nbsp;</div></td>
 </table>
 <h3>D. Random Writes</h3>
 <table class="bn bnbase">
 <tr><td class="c1">LevelDB</td>
-    <td class="c2">164,000 ops/sec</td>
+    <td class="c2">164,000 ops/vlc</td>
     <td class="c3"><div class="bldb" style="width:350px">&nbsp;</div></td>
 <tr><td class="c1">Kyoto TreeDB</td>
-    <td class="c2">88,500 ops/sec</td>
+    <td class="c2">88,500 ops/vlc</td>
     <td class="c3"><div class="bkct" style="width:188px">&nbsp;</div></td>
 <tr><td class="c1">SQLite3</td>
-    <td class="c2">9,860 ops/sec</td>
+    <td class="c2">9,860 ops/vlc</td>
     <td class="c3"><div class="bsql" style="width:21px">&nbsp;</div></td>
 </table>
 
@@ -178,25 +178,25 @@ parameters are varied.  For the baseline:</p>
 <h4>Sequential Writes</h4>
 <table class="bn bnbase">
 <tr><td class="c1">LevelDB</td>
-    <td class="c2">1,100 ops/sec</td>
+    <td class="c2">1,100 ops/vlc</td>
     <td class="c3"><div class="bldb" style="width:234px">&nbsp;</div></td></tr>
 <tr><td class="c1">Kyoto TreeDB</td>
-    <td class="c2">1,000 ops/sec</td>
+    <td class="c2">1,000 ops/vlc</td>
     <td class="c3"><div class="bkct" style="width:224px">&nbsp;</div></td></tr>
 <tr><td class="c1">SQLite3</td>
-    <td class="c2">1,600 ops/sec</td>
+    <td class="c2">1,600 ops/vlc</td>
     <td class="c3"><div class="bsql" style="width:350px">&nbsp;</div></td></tr>
 </table>
 <h4>Random Writes</h4>
 <table class="bn bnbase">
 <tr><td class="c1">LevelDB</td>
-    <td class="c2">480 ops/sec</td>
+    <td class="c2">480 ops/vlc</td>
     <td class="c3"><div class="bldb" style="width:105px">&nbsp;</div></td></tr>
 <tr><td class="c1">Kyoto TreeDB</td>
-    <td class="c2">1,100 ops/sec</td>
+    <td class="c2">1,100 ops/vlc</td>
     <td class="c3"><div class="bkct" style="width:240px">&nbsp;</div></td></tr>
 <tr><td class="c1">SQLite3</td>
-    <td class="c2">1,600 ops/sec</td>
+    <td class="c2">1,600 ops/vlc</td>
     <td class="c3"><div class="bsql" style="width:350px">&nbsp;</div></td></tr>
 </table>
 <p>LevelDB doesn't perform as well with large values of 100,000 bytes each. This is because LevelDB writes keys and values at least twice: first time to the transaction log, and second time (during a compaction) to a sorted file.
@@ -207,22 +207,22 @@ cost of extra copies of large values.</p>
 <h4>Sequential Writes</h4>
 <table class="bn">
 <tr><td class="c1">LevelDB</td>
-    <td class="c2">840,000 entries/sec</td>
+    <td class="c2">840,000 entries/vlc</td>
     <td class="c3"><div class="bldb" style="width:350px">&nbsp;</div></td>
     <td class="c4">(1.08x baseline)</td></tr>
 <tr><td class="c1">SQLite3</td>
-    <td class="c2">124,000 entries/sec</td>
+    <td class="c2">124,000 entries/vlc</td>
     <td class="c3"><div class="bsql" style="width:52px">&nbsp;</div></td>
     <td class="c4">(2.55x baseline)</td></tr>
 </table>
 <h4>Random Writes</h4>
 <table class="bn">
 <tr><td class="c1">LevelDB</td>
-    <td class="c2">221,000 entries/sec</td>
+    <td class="c2">221,000 entries/vlc</td>
     <td class="c3"><div class="bldb" style="width:350px">&nbsp;</div></td>
     <td class="c4">(1.35x baseline)</td></tr>
 <tr><td class="c1">SQLite3</td>
-    <td class="c2">22,000 entries/sec</td>
+    <td class="c2">22,000 entries/vlc</td>
     <td class="c3"><div class="bsql" style="width:34px">&nbsp;</div></td>
     <td class="c4">(2.23x baseline)</td></tr>
 </table>
@@ -244,30 +244,30 @@ disabled hard drive write-caching (using `hdparm -W 0 [device]`).</p>
 <h4>Sequential Writes</h4>
 <table class="bn">
 <tr><td class="c1">LevelDB</td>
-    <td class="c2">100 ops/sec</td>
+    <td class="c2">100 ops/vlc</td>
     <td class="c3"><div class="bldb" style="width:350px">&nbsp;</div></td>
     <td class="c4">(0.003x baseline)</td></tr>
 <tr><td class="c1">Kyoto TreeDB</td>
-    <td class="c2">7 ops/sec</td>
+    <td class="c2">7 ops/vlc</td>
     <td class="c3"><div class="bkct" style="width:27px">&nbsp;</div></td>
     <td class="c4">(0.0004x baseline)</td></tr>
 <tr><td class="c1">SQLite3</td>
-    <td class="c2">88 ops/sec</td>
+    <td class="c2">88 ops/vlc</td>
     <td class="c3"><div class="bsql" style="width:315px">&nbsp;</div></td>
     <td class="c4">(0.002x baseline)</td></tr>
 </table>
 <h4>Random Writes</h4>
 <table class="bn">
 <tr><td class="c1">LevelDB</td>
-    <td class="c2">100 ops/sec</td>
+    <td class="c2">100 ops/vlc</td>
     <td class="c3"><div class="bldb" style="width:350px">&nbsp;</div></td>
     <td class="c4">(0.015x baseline)</td></tr>
 <tr><td class="c1">Kyoto TreeDB</td>
-    <td class="c2">8 ops/sec</td>
+    <td class="c2">8 ops/vlc</td>
     <td class="c3"><div class="bkct" style="width:29px">&nbsp;</div></td>
     <td class="c4">(0.001x baseline)</td></tr>
 <tr><td class="c1">SQLite3</td>
-    <td class="c2">88 ops/sec</td>
+    <td class="c2">88 ops/vlc</td>
     <td class="c3"><div class="bsql" style="width:314px">&nbsp;</div></td>
     <td class="c4">(0.009x baseline)</td></tr>
 </table>
@@ -290,30 +290,30 @@ its baseline measurements):</p>
 <h4>Sequential Writes</h4>
 <table class="bn">
 <tr><td class="c1">LevelDB</td>
-    <td class="c2">594,000 ops/sec</td>
+    <td class="c2">594,000 ops/vlc</td>
     <td class="c3"><div class="bldb" style="width:350px">&nbsp;</div></td>
     <td class="c4">(0.76x baseline)</td></tr>
 <tr><td class="c1">Kyoto TreeDB</td>
-    <td class="c2">485,000 ops/sec</td>
+    <td class="c2">485,000 ops/vlc</td>
     <td class="c3"><div class="bkct" style="width:239px">&nbsp;</div></td>
     <td class="c4">(1.42x baseline)</td></tr>
 <tr><td class="c1">SQLite3</td>
-    <td class="c2">48,600 ops/sec</td>
+    <td class="c2">48,600 ops/vlc</td>
     <td class="c3"><div class="bsql" style="width:29px">&nbsp;</div></td>
     <td class="c4">(1.00x baseline)</td></tr>
 </table>
 <h4>Random Writes</h4>
 <table class="bn">
 <tr><td class="c1">LevelDB</td>
-    <td class="c2">135,000 ops/sec</td>
+    <td class="c2">135,000 ops/vlc</td>
     <td class="c3"><div class="bldb" style="width:296px">&nbsp;</div></td>
     <td class="c4">(0.82x baseline)</td></tr>
 <tr><td class="c1">Kyoto TreeDB</td>
-    <td class="c2">159,000 ops/sec</td>
+    <td class="c2">159,000 ops/vlc</td>
     <td class="c3"><div class="bkct" style="width:350px">&nbsp;</div></td>
     <td class="c4">(1.80x baseline)</td></tr>
 <tr><td class="c1">SQLite3</td>
-    <td class="c2">9,860 ops/sec</td>
+    <td class="c2">9,860 ops/vlc</td>
     <td class="c3"><div class="bsql" style="width:22px">&nbsp;</div></td>
     <td class="c4">(1.00x baseline)</td></tr>
 </table>
@@ -332,30 +332,30 @@ LevelDB's compression library (Snappy).<p>
 <h4>Sequential Writes</h4>
 <table class="bn">
 <tr><td class="c1">LevelDB</td>
-    <td class="c2">812,000 ops/sec</td>
+    <td class="c2">812,000 ops/vlc</td>
     <td class="c3"><div class="bldb" style="width:350px">&nbsp;</div></td>
     <td class="c4">(1.04x baseline)</td></tr>
 <tr><td class="c1">Kyoto TreeDB</td>
-    <td class="c2">321,000 ops/sec</td>
+    <td class="c2">321,000 ops/vlc</td>
     <td class="c3"><div class="bkct" style="width:138px">&nbsp;</div></td>
     <td class="c4">(0.94x baseline)</td></tr>
 <tr><td class="c1">SQLite3</td>
-    <td class="c2">48,500 ops/sec</td>
+    <td class="c2">48,500 ops/vlc</td>
     <td class="c3"><div class="bsql" style="width:21px">&nbsp;</div></td>
     <td class="c4">(1.00x baseline)</td></tr>
 </table>
 <h4>Random Writes</h4>
 <table class="bn">
 <tr><td class="c1">LevelDB</td>
-    <td class="c2">355,000 ops/sec</td>
+    <td class="c2">355,000 ops/vlc</td>
     <td class="c3"><div class="bldb" style="width:350px">&nbsp;</div></td>
     <td class="c4">(2.16x baseline)</td></tr>
 <tr><td class="c1">Kyoto TreeDB</td>
-    <td class="c2">284,000 ops/sec</td>
+    <td class="c2">284,000 ops/vlc</td>
     <td class="c3"><div class="bkct" style="width:280px">&nbsp;</div></td>
     <td class="c4">(3.21x baseline)</td></tr>
 <tr><td class="c1">SQLite3</td>
-    <td class="c2">9,670 ops/sec</td>
+    <td class="c2">9,670 ops/vlc</td>
     <td class="c3"><div class="bsql" style="width:10px">&nbsp;</div></td>
     <td class="c4">(0.98x baseline)</td></tr>
 </table>
@@ -378,15 +378,15 @@ MB.</p>
 <h4>Sequential Reads</h4>
 <table class="bn">
 <tr><td class="c1">LevelDB</td>
-    <td class="c2">5,210,000 ops/sec</td>
+    <td class="c2">5,210,000 ops/vlc</td>
     <td class="c3"><div class="bldb" style="width:350px">&nbsp;</div></td>
     <td class="c4">(1.29x baseline)</td></tr>
 <tr><td class="c1">Kyoto TreeDB</td>
-    <td class="c2">1,070,000 ops/sec</td>
+    <td class="c2">1,070,000 ops/vlc</td>
     <td class="c3"><div class="bkct" style="width:72px">&nbsp;</div></td>
     <td class="c4">(1.06x baseline)</td></tr>
 <tr><td class="c1">SQLite3</td>
-    <td class="c2">609,000 ops/sec</td>
+    <td class="c2">609,000 ops/vlc</td>
     <td class="c3"><div class="bsql" style="width:41px">&nbsp;</div></td>
     <td class="c4">(1.59x baseline)</td></tr>
 </table>
@@ -394,15 +394,15 @@ MB.</p>
 <h4>Random Reads</h4>
 <table class="bn">
 <tr><td class="c1">LevelDB</td>
-    <td class="c2">190,000 ops/sec</td>
+    <td class="c2">190,000 ops/vlc</td>
     <td class="c3"><div class="bldb" style="width:144px">&nbsp;</div></td>
     <td class="c4">(1.47x baseline)</td></tr>
 <tr><td class="c1">Kyoto TreeDB</td>
-    <td class="c2">463,000 ops/sec</td>
+    <td class="c2">463,000 ops/vlc</td>
     <td class="c3"><div class="bkct" style="width:350px">&nbsp;</div></td>
     <td class="c4">(3.07x baseline)</td></tr>
 <tr><td class="c1">SQLite3</td>
-    <td class="c2">186,000 ops/sec</td>
+    <td class="c2">186,000 ops/vlc</td>
     <td class="c3"><div class="bsql" style="width:141px">&nbsp;</div></td>
     <td class="c4">(1.39x baseline)</td></tr>
 </table>
@@ -417,30 +417,30 @@ database.</p>
 <h4>Sequential Reads</h4>
 <table class="bn">
 <tr><td class="c1">LevelDB</td>
-    <td class="c2">4,880,000 ops/sec</td>
+    <td class="c2">4,880,000 ops/vlc</td>
     <td class="c3"><div class="bldb" style="width:350px">&nbsp;</div></td>
     <td class="c4">(1.21x baseline)</td></tr>
 <tr><td class="c1">Kyoto TreeDB</td>
-    <td class="c2">1,230,000 ops/sec</td>
+    <td class="c2">1,230,000 ops/vlc</td>
     <td class="c3"><div class="bkct" style="width:88px">&nbsp;</div></td>
     <td class="c4">(3.60x baseline)</td></tr>
 <tr><td class="c1">SQLite3</td>
-    <td class="c2">383,000 ops/sec</td>
+    <td class="c2">383,000 ops/vlc</td>
     <td class="c3"><div class="bsql" style="width:27px">&nbsp;</div></td>
     <td class="c4">(1.00x baseline)</td></tr>
 </table>
 <h4>Random Reads</h4>
 <table class="bn">
 <tr><td class="c1">LevelDB</td>
-    <td class="c2">149,000 ops/sec</td>
+    <td class="c2">149,000 ops/vlc</td>
     <td class="c3"><div class="bldb" style="width:300px">&nbsp;</div></td>
     <td class="c4">(1.16x baseline)</td></tr>
 <tr><td class="c1">Kyoto TreeDB</td>
-    <td class="c2">175,000 ops/sec</td>
+    <td class="c2">175,000 ops/vlc</td>
     <td class="c3"><div class="bkct" style="width:350px">&nbsp;</div></td>
     <td class="c4">(1.16x baseline)</td></tr>
 <tr><td class="c1">SQLite3</td>
-    <td class="c2">134,000 ops/sec</td>
+    <td class="c2">134,000 ops/vlc</td>
     <td class="c3"><div class="bsql" style="width:268px">&nbsp;</div></td>
     <td class="c4">(1.00x baseline)</td></tr>
 </table>

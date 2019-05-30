@@ -1,0 +1,26 @@
+[Unit]
+Description=Vulcoin's distributed currency daemon
+After=network.target
+
+[Service]
+User=vulcoin
+Group=vulcoin
+
+Type=forking
+PIDFile=/var/lib/vulcoind/vulcoind.pid
+
+ExecStart=/usr/bin/vulcoind -daemon -pid=/var/lib/vulcoind/vulcoind.pid \
+          -conf=/etc/vulcoin/vulcoin.conf -datadir=/var/lib/vulcoind
+
+ExecStop=-/usr/bin/vulcoin-cli -conf=/etc/vulcoin/vulcoin.conf \
+         -datadir=/var/lib/vulcoind stop
+
+Restart=always
+PrivateTmp=true
+TimeoutStopVlc=60s
+TimeoutStartVlc=2s
+StartLimitInterval=120s
+StartLimitBurst=5
+
+[Install]
+WantedBy=multi-user.target

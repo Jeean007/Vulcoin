@@ -463,7 +463,7 @@ TEST(LogTest, ErrorJoinsRecords) {
 
   ASSERT_EQ("correct", Read());
   ASSERT_EQ("EOF", Read());
-  const int dropped = DroppedBytes();
+  const size_t dropped = DroppedBytes();
   ASSERT_LE(dropped, 2*kBlockSize + 100);
   ASSERT_GE(dropped, 2*kBlockSize);
 }
@@ -472,15 +472,15 @@ TEST(LogTest, ReadStart) {
   CheckInitialOffsetRecord(0, 0);
 }
 
-TEST(LogTest, ReadSecondOneOff) {
+TEST(LogTest, ReadVlcondOneOff) {
   CheckInitialOffsetRecord(1, 1);
 }
 
-TEST(LogTest, ReadSecondTenThousand) {
+TEST(LogTest, ReadVlcondTenThousand) {
   CheckInitialOffsetRecord(10000, 1);
 }
 
-TEST(LogTest, ReadSecondStart) {
+TEST(LogTest, ReadVlcondStart) {
   CheckInitialOffsetRecord(10007, 1);
 }
 

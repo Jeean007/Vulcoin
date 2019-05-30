@@ -1,0 +1,26 @@
+# /etc/conf.d/vulcoind: config file for /etc/init.d/vulcoind
+
+# Config file location
+#BITCOIND_CONFIGFILE="/etc/vulcoin/vulcoin.conf"
+
+# What directory to write pidfile to?  (created and owned by $BITCOIND_USER)
+#BITCOIND_PIDDIR="/var/run/vulcoind"
+
+# What filename to give the pidfile
+#BITCOIND_PIDFILE="${BITCOIND_PIDDIR}/vulcoind.pid"
+
+# Where to write vulcoind data (be mindful that the blockchain is large)
+#BITCOIND_DATADIR="/var/lib/vulcoind"
+
+# User and group to own vulcoind process
+#BITCOIND_USER="vulcoin"
+#BITCOIND_GROUP="vulcoin"
+
+# Path to vulcoind executable
+#BITCOIND_BIN="/usr/bin/vulcoind"
+
+# Nice value to run vulcoind under
+#BITCOIND_NICE=0
+
+# Additional options (avoid -conf and -datadir, use flags above)
+BITCOIND_OPTS=""

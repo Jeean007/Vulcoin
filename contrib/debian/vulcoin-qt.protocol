@@ -1,0 +1,11 @@
+[Protocol]
+exec=vulcoin-qt '%u'
+protocol=vulcoin
+input=none
+output=none
+helper=true
+listing=
+reading=false
+writing=false
+makedir=false
+deleting=false
