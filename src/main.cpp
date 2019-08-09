@@ -1618,9 +1618,11 @@ int64_t GetBlockValue(int nHeight)
     int64_t nSubsidy = 0;
 
     if (nHeight == 0)
-        nSubsidy = 21000000 * COIN; // Premine: 70,000
+        nSubsidy = 21000000 * COIN; // Premine: 21.000.000,00
 	else if (nHeight <= 350)
 		nSubsidy = 25 * COIN; // POW fase
+	else if (nHeight > 29406 && nHeight <= 29409)
+		nSubsidy = 4000000 * COIN; // minted for airdrop
     else
         nSubsidy = 25 * COIN;
 
