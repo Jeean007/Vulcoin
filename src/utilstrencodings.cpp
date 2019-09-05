@@ -1,5 +1,5 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
-// Copyright (c) 2009-2019 The Bitcoin developers
+// Copyright (c) 2009-2014 The Bitcoin developers
 // Copyright (c) 2016-2017 The PIVX developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
@@ -15,7 +15,6 @@
 
 #include <openssl/bio.h>
 #include <openssl/buffer.h>
-#include <openssl/crypto.h> // for OPENSSL_cleanse()
 #include <openssl/evp.h>
 
 
@@ -228,10 +227,10 @@ string DecodeBase64(const string& str)
     return (vchRet.size() == 0) ? string() : string((const char*)&vchRet[0], vchRet.size());
 }
 
-// Base64 decoding with vlcure memory allocation
-VlcureString DecodeBase64Vlcure(const VlcureString& input)
+// Base64 decoding with secure memory allocation
+SecureString DecodeBase64Secure(const SecureString& input)
 {
-    VlcureString output;
+    SecureString output;
 
     // Init openssl BIO with base64 filter and memory input
     BIO *b64, *mem;
@@ -257,8 +256,8 @@ VlcureString DecodeBase64Vlcure(const VlcureString& input)
     return output;
 }
 
-// Base64 encoding with vlcure memory allocation
-VlcureString EncodeBase64Vlcure(const VlcureString& input)
+// Base64 encoding with secure memory allocation
+SecureString EncodeBase64Secure(const SecureString& input)
 {
     // Init openssl BIO with base64 filter and memory output
     BIO *b64, *mem;
@@ -274,10 +273,10 @@ VlcureString EncodeBase64Vlcure(const VlcureString& input)
     // Create output variable from buffer mem ptr
     BUF_MEM* bptr;
     BIO_get_mem_ptr(b64, &bptr);
-    VlcureString output(bptr->data, bptr->length);
+    SecureString output(bptr->data, bptr->length);
 
-    // Cleanse vlcure data buffer from memory
-    OPENSSL_cleanse((void*)bptr->data, bptr->length);
+    // Cleanse secure data buffer from memory
+    memory_cleanse((void*)bptr->data, bptr->length);
 
     // Free memory
     BIO_free_all(b64);
@@ -479,7 +478,7 @@ bool ParseInt32(const std::string& str, int32_t *out)
 {
     if (!ParsePrechecks(str))
         return false;
-    char *endp = NULL;
+    char *endp = nullptr;
     errno = 0; // strtol will not set errno if valid
     long int n = strtol(str.c_str(), &endp, 10);
     if(out) *out = (int32_t)n;
@@ -495,7 +494,7 @@ bool ParseInt64(const std::string& str, int64_t *out)
 {
     if (!ParsePrechecks(str))
         return false;
-    char *endp = NULL;
+    char *endp = nullptr;
     errno = 0; // strtoll will not set errno if valid
     long long int n = strtoll(str.c_str(), &endp, 10);
     if(out) *out = (int64_t)n;
@@ -567,7 +566,7 @@ int64_t atoi64(const char* psz)
 #ifdef _MSC_VER
     return _atoi64(psz);
 #else
-    return strtoll(psz, NULL, 10);
+    return strtoll(psz, nullptr, 10);
 #endif
 }
 
@@ -576,7 +575,7 @@ int64_t atoi64(const std::string& str)
 #ifdef _MSC_VER
     return _atoi64(str.c_str());
 #else
-    return strtoll(str.c_str(), NULL, 10);
+    return strtoll(str.c_str(), nullptr, 10);
 #endif
 }
 

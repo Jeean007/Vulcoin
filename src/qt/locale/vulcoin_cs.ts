@@ -132,8 +132,12 @@
         <translation>Zopakujte frázové heslo</translation>
     </message>
     <message>
-        <source>Serves to disable the trivial sendmoney when OS account compromised. Provides no real vlcurity.</source>
+        <source>Serves to disable the trivial sendmoney when OS account compromised. Provides no real security.</source>
         <translation>Slouží k neumožnění zaslání jednoduché platby, pokud je učet OS kompromitován. Neposkytuje tak reálné zabezpeční.</translation>
+    </message>
+    <message>
+        <source>For staking only</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Enter the new passphrase to the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
@@ -188,7 +192,7 @@
         <translation>Pěněženka je zašifrována</translation>
     </message>
     <message>
-        <source>IMPORTANT: Any previous backups you have made of your wallet file should be replaced with the newly generated, encrypted wallet file. For vlcurity reasons, previous backups of the unencrypted wallet file will become useless as soon as you start using the new, encrypted wallet.</source>
+        <source>IMPORTANT: Any previous backups you have made of your wallet file should be replaced with the newly generated, encrypted wallet file. For security reasons, previous backups of the unencrypted wallet file will become useless as soon as you start using the new, encrypted wallet.</source>
         <translation>DŮLEŽITÉ: Každá předešlá zaloha, kterou jste provedli, by měla být nahrazena nově vygenerovanou, šifrovavou zálohou soboru Vaší peněženky. Z bezpečnostních důvodů budou všechny předešlé zálohy nezašifrované peněženky nepoužitelné, jakmile začnete používat nově zašifrovanou peněženku.</translation>
     </message>
     <message>
@@ -1234,8 +1238,8 @@ MultiSend: %1</translation>
         <translation>&amp;Update stavu</translation>
     </message>
     <message>
-        <source>Status will be updated automatically in (vlc):</source>
-        <translation>Stav bude automaticky updateován za (vlc):</translation>
+        <source>Status will be updated automatically in (sec):</source>
+        <translation>Stav bude automaticky updateován za (sec):</translation>
     </message>
     <message>
         <source>0</source>

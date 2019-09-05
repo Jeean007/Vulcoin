@@ -184,7 +184,7 @@
         <translation>Кошелек зашифрован</translation>
     </message>
     <message>
-        <source>IMPORTANT: Any previous backups you have made of your wallet file should be replaced with the newly generated, encrypted wallet file. For vlcurity reasons, previous backups of the unencrypted wallet file will become useless as soon as you start using the new, encrypted wallet.</source>
+        <source>IMPORTANT: Any previous backups you have made of your wallet file should be replaced with the newly generated, encrypted wallet file. For security reasons, previous backups of the unencrypted wallet file will become useless as soon as you start using the new, encrypted wallet.</source>
         <translation>ВАЖНО: все предыдущие резервные копии вашего файла кошелька должны быть заменены вновь созданным зашифрованным файлом кошелька. Из соображений безопасности предыдущие резервные копии незашифрованного файла кошелька станут бесполезными, как только вы начнете использовать новый зашифрованный кошелек.</translation>
     </message>
     <message>
@@ -975,8 +975,8 @@ MultiSend: %1</translation>
         <translation>средне-высокий</translation>
     </message>
     <message>
-        <source>Can vary +/- %1 uvulcoin per input.</source>
-        <translation>Может вариировать +/- %1 uvulcoin к вводу</translation>
+        <source>Can vary +/- %1 uvlc per input.</source>
+        <translation>Может вариировать +/- %1 uvlc к вводу</translation>
     </message>
     <message>
         <source>medium</source>
@@ -1290,7 +1290,7 @@ MultiSend: %1</translation>
         <translation>&amp;Обновить состояние</translation>
     </message>
     <message>
-        <source>Status will be updated automatically in (vlc):</source>
+        <source>Status will be updated automatically in (sec):</source>
         <translation>Состояние будет автоматически обновлено через (сек):</translation>
     </message>
     <message>
@@ -1805,8 +1805,8 @@ Please check the address and try again.</source>
         <translation>Не удалось запустить vulcoin: обработчик click-to-pay </translation>
     </message>
     <message>
-        <source>URI cannot be parsed! This can be caused by an invalid VLC address or malformed URI parameters.</source>
-        <translation>URI не интерпретируется! Причиной этому может быть неверный VLC адрес или неверные параметеры URI.</translation>
+        <source>URI cannot be parsed! This can be caused by an invalid Vulcoin address or malformed URI parameters.</source>
+        <translation>URI не интерпретируется! Причиной этому может быть неверный Vulcoin адрес или неверные параметеры URI.</translation>
     </message>
     <message>
         <source>Payment request file cannot be read! This can be caused by an invalid payment request file.</source>
@@ -2486,7 +2486,7 @@ Please check the address and try again.</source>
         <translation>Копировать изменение</translation>
     </message>
     <message>
-        <source>Warning: Invalid VLC address</source>
+        <source>Warning: Invalid Vulcoin address</source>
         <translation>Предупреждение: неправильный VLC адрес</translation>
     </message>
     <message>

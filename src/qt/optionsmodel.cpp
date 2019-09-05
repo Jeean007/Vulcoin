@@ -1,6 +1,6 @@
-// Copyright (c) 2011-2019 The Bitcoin developers
-// Copyright (c) 2014-2019 The Dash developers
-// Copyright (c) 2015-2019 The PIVX developers
+// Copyright (c) 2011-2014 The Bitcoin developers
+// Copyright (c) 2014-2015 The Dash developers
+// Copyright (c) 2015-2017 The PIVX developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -69,14 +69,25 @@ void OptionsModel::Init()
         settings.setValue("strThirdPartyTxUrls", "");
     strThirdPartyTxUrls = settings.value("strThirdPartyTxUrls", "").toString();
 
+    if (!settings.contains("fHideZeroBalances"))
+        settings.setValue("fHideZeroBalances", true);
+    fHideZeroBalances = settings.value("fHideZeroBalances").toBool();
+
     if (!settings.contains("fCoinControlFeatures"))
-        settings.setValue("fCoinControlFeatures", true);
-    fCoinControlFeatures = settings.value("fCoinControlFeatures").toBool();
+        settings.setValue("fCoinControlFeatures", false);
+    fCoinControlFeatures = settings.value("fCoinControlFeatures", false).toBool();
 
 
 
     if (!settings.contains("fShowMasternodesTab"))
         settings.setValue("fShowMasternodesTab", masternodeConfig.getCount());
+
+    if (!settings.contains("fShowBudgetProposalsTab"))
+        settings.setValue("fShowBudgetProposalsTab", true);     /*  default: true */
+
+    if (!settings.contains("fShowCommunityProposalsTab"))
+        settings.setValue("fShowCommunityProposalsTab", false); /*  default: false */
+
 
     // These are shared with the core or have a command-line parameter
     // and we want command-line parameters to overwrite the GUI settings.
@@ -132,8 +143,6 @@ void OptionsModel::Init()
     // Display
     if (!settings.contains("digits"))
         settings.setValue("digits", "2");
-    if (!settings.contains("fCSSexternal"))
-        settings.setValue("fCSSexternal", false);
     if (!settings.contains("language"))
         settings.setValue("language", "");
     if (!SoftSetArg("-lang", settings.value("language").toString().toStdString()))
@@ -200,6 +209,11 @@ QVariant OptionsModel::data(const QModelIndex& index, int role) const
         case ShowMasternodesTab:
             return settings.value("fShowMasternodesTab");
 #endif
+        case ShowBudgetProposalsTab:
+            return settings.value("fShowBudgetProposalsTab");
+        case ShowCommunityProposalsTab:
+            return settings.value("fShowCommunityProposalsTab");
+
         case StakeSplitThreshold:
             if (pwalletMain)
                 return QVariant((int)pwalletMain->nStakeSplitThreshold);
@@ -218,6 +232,8 @@ QVariant OptionsModel::data(const QModelIndex& index, int role) const
             return settings.value("nDatabaseCache");
         case ThreadsScriptVerif:
             return settings.value("nThreadsScriptVerif");
+        case HideZeroBalances:
+            return settings.value("fHideZeroBalances");
         case Listen:
             return settings.value("fListen");
         default:
@@ -293,6 +309,18 @@ bool OptionsModel::setData(const QModelIndex& index, const QVariant& value, int 
             }
             break;
 #endif
+        case ShowBudgetProposalsTab:
+            if (settings.value("fShowBudgetProposalsTab") != value) {
+                settings.setValue("fShowBudgetProposalsTab", value);
+                setRestartRequired(true);
+            }
+            break;
+        case ShowCommunityProposalsTab:
+            if (settings.value("fShowCommunityProposalsTab") != value) {
+                settings.setValue("fShowCommunityProposalsTab", value);
+                setRestartRequired(true);
+            }
+            break;
         case StakeSplitThreshold:
             settings.setValue("nStakeSplitThreshold", value.toInt());
             setStakeSplitThreshold(value.toInt());
@@ -318,6 +346,11 @@ bool OptionsModel::setData(const QModelIndex& index, const QVariant& value, int 
                 settings.setValue("language", value);
                 setRestartRequired(true);
             }
+            break;
+        case HideZeroBalances:
+            fHideZeroBalances = value.toBool();
+            settings.setValue("fHideZeroBalances", fHideZeroBalances);
+            emit hideZeroBalancesChanged(fHideZeroBalances);
             break;
         case CoinControlFeatures:
             fCoinControlFeatures = value.toBool();

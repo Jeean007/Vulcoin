@@ -1,7 +1,7 @@
-// Copyright (c) 2011-2019 The Bitcoin developers
-// Copyright (c) 2014-2019 The Dash developers
-// Copyright (c) 2015-2019 The PIVX developers
-// Copyright (c) 2019 The Vulcoin developers
+// Copyright (c) 2011-2014 The Bitcoin developers
+// Copyright (c) 2014-2015 The Dash developers
+// Copyright (c) 2015-2017 The PIVX developers
+// Copyright (c) 2017-2017 The Vulcoin Core developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -42,11 +42,11 @@ QString BitcoinUnits::id(int unit)
 {
     switch (unit) {
     case VLC:
-        return QString("vulcoin");
+        return QString("vlc");
     case mVLC:
-        return QString("mvulcoin");
+        return QString("mvlc");
     case uVLC:
-        return QString::fromUtf8("uvulcoin");
+        return QString::fromUtf8("uvlc");
     default:
         return QString("???");
     }
@@ -70,9 +70,9 @@ QString BitcoinUnits::name(int unit)
         case VLC:
             return QString("tVLC");
         case mVLC:
-            return QString("mtVLC");
+            return QString("tmVLC");
         case uVLC:
-            return QString::fromUtf8("μtVLC");
+            return QString::fromUtf8("tμVLC");
         default:
             return QString("???");
         }
@@ -207,14 +207,10 @@ QString BitcoinUnits::floorWithUnit(int unit, const CAmount& amount, bool plussi
     return result + QString(" ") + name(unit);
 }
 
-QString BitcoinUnits::floorHtmlWithUnit(int unit, const CAmount& amount, bool plussign, SeparatorStyle separators, bool super)
+QString BitcoinUnits::floorHtmlWithUnit(int unit, const CAmount& amount, bool plussign, SeparatorStyle separators)
 {
     QString str(floorWithUnit(unit, amount, plussign, separators));
     str.replace(QChar(THIN_SP_CP), QString(THIN_SP_HTML));
-
-    if (super)
-        str.replace(name(unit), "<sup style='color:#fff;'>" + name(unit) + "</sup>");
-
     return QString("<span style='white-space: nowrap;'>%1</span>").arg(str);
 }
 
@@ -287,5 +283,5 @@ QVariant BitcoinUnits::data(const QModelIndex& index, int role) const
 
 CAmount BitcoinUnits::maxMoney()
 {
-    return Params().MaxMoneyOut();
+    return MAX_MONEY;
 }

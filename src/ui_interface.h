@@ -1,7 +1,7 @@
 // Copyright (c) 2010 Satoshi Nakamoto
 // Copyright (c) 2012-2014 The Bitcoin developers
-// Copyright (c) 2017-2019 The PIVX developers
-// Copyright (c) 2019 The Vulcoin developers
+// Copyright (c) 2017-2018 The PIVX developers
+// Copyright (c) 2017-2019 The Vulcoin Core developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -69,7 +69,7 @@ public:
         MODAL = 0x10000000U,
 
         /** Do not print contents of message to debug log */
-        VLCURE = 0x40000000U,
+        SECURE = 0x40000000U,
 
         /** Predefined combinations for certain default usage cases */
         MSG_INFORMATION = ICON_INFORMATION,
@@ -103,7 +103,7 @@ public:
 
     /** New block has been accepted */
     boost::signals2::signal<void(const uint256& hash)> NotifyBlockTip;
-	
+
     /** New block has been accepted and is over a certain size */
     boost::signals2::signal<void(int size, const uint256& hash)> NotifyBlockSize;
 };

@@ -132,8 +132,12 @@
         <translation>再次输入新密码</translation>
     </message>
     <message>
-        <source>Serves to disable the trivial sendmoney when OS account compromised. Provides no real vlcurity.</source>
+        <source>Serves to disable the trivial sendmoney when OS account compromised. Provides no real security.</source>
         <translation>用于在操作系统帐户遭到破坏时禁用琐碎的sendmoney。没有真正的安全性。</translation>
+    </message>
+    <message>
+        <source>For staking only</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Enter the new passphrase to the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
@@ -188,7 +192,7 @@
         <translation>钱包加密</translation>
     </message>
     <message>
-        <source>IMPORTANT: Any previous backups you have made of your wallet file should be replaced with the newly generated, encrypted wallet file. For vlcurity reasons, previous backups of the unencrypted wallet file will become useless as soon as you start using the new, encrypted wallet.</source>
+        <source>IMPORTANT: Any previous backups you have made of your wallet file should be replaced with the newly generated, encrypted wallet file. For security reasons, previous backups of the unencrypted wallet file will become useless as soon as you start using the new, encrypted wallet.</source>
         <translation>重要提示：一旦您开始使用新的加密钱包，以前未加密的钱包备份都将失效。所以在新加密钱包生效后请务必重新备份您的钱包。</translation>
     </message>
     <message>

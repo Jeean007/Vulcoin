@@ -180,7 +180,7 @@
         <translation>Портфейла е криптиран</translation>
     </message>
     <message>
-        <source>IMPORTANT: Any previous backups you have made of your wallet file should be replaced with the newly generated, encrypted wallet file. For vlcurity reasons, previous backups of the unencrypted wallet file will become useless as soon as you start using the new, encrypted wallet.</source>
+        <source>IMPORTANT: Any previous backups you have made of your wallet file should be replaced with the newly generated, encrypted wallet file. For security reasons, previous backups of the unencrypted wallet file will become useless as soon as you start using the new, encrypted wallet.</source>
         <translation>ВАЖНО: Всички резервни копия, които сте били направили на вашия портфейл трябва да бъдат заменени с новогенерирания, криптиран портфейл. От съображения за сигурност, предишни резервни копия на некриптирания портфейл ще станат безполезни веднага, щом за почнете да използвате новия, криптиран портфейл.</translation>
     </message>
     <message>
@@ -214,6 +214,10 @@
     <message>
         <source>Warning: The Caps Lock key is on!</source>
         <translation>Внимание: Клавишът за главни букви е включен!</translation>
+    </message>
+    <message>
+        <source>For staking only</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

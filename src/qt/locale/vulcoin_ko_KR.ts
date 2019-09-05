@@ -132,8 +132,12 @@
         <translation>새로운 암호 확인</translation>
     </message>
     <message>
-        <source>Serves to disable the trivial sendmoney when OS account compromised. Provides no real vlcurity.</source>
+        <source>Serves to disable the trivial sendmoney when OS account compromised. Provides no real security.</source>
         <translation>운영체제 계정이 손상되었을 때 일반적인 송금을 비활성화 합니다. 실질적인 보안을 제공하지 않습니다.</translation>
+    </message>
+    <message>
+        <source>For staking only</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Enter the new passphrase to the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
@@ -188,7 +192,7 @@
         <translation>지갑 암호화 완료</translation>
     </message>
     <message>
-        <source>IMPORTANT: Any previous backups you have made of your wallet file should be replaced with the newly generated, encrypted wallet file. For vlcurity reasons, previous backups of the unencrypted wallet file will become useless as soon as you start using the new, encrypted wallet.</source>
+        <source>IMPORTANT: Any previous backups you have made of your wallet file should be replaced with the newly generated, encrypted wallet file. For security reasons, previous backups of the unencrypted wallet file will become useless as soon as you start using the new, encrypted wallet.</source>
         <translation>중요: 이전에 지갑 파일로 백업 한 경우 지갑 파일을 암호화 된 지갑 파일로 대체해야 합니다. 보안상 문제로, 암호화되지 않은 지갑 파일의 이전 백업은 새롭게 암호화 된 지갑을 사용하게 되면 쓸모없게 될 것입니다.</translation>
     </message>
     <message>
@@ -979,8 +983,8 @@ Address: %4
         <translation>중간 높음</translation>
     </message>
     <message>
-        <source>Can vary +/- %1 uvulcoin per input.</source>
-        <translation>입력당 +/- %1 uvulcoin을 변경할 수 있습니다.</translation>
+        <source>Can vary +/- %1 uvlc per input.</source>
+        <translation>입력당 +/- %1 uvlc을 변경할 수 있습니다.</translation>
     </message>
     <message>
         <source>medium</source>
@@ -1294,7 +1298,7 @@ Address: %4
         <translation>&amp;업데이트 상태</translation>
     </message>
     <message>
-        <source>Status will be updated automatically in (vlc):</source>
+        <source>Status will be updated automatically in (sec):</source>
         <translation>상태가 (초) 단위로 자동 업데이트됩니다:</translation>
     </message>
     <message>
@@ -1813,8 +1817,8 @@ Please check the address and try again.</source>
         <translation>vulcoin을 시작할 수 없습니다: 결제하기 위한 클릭 처리</translation>
     </message>
     <message>
-        <source>URI cannot be parsed! This can be caused by an invalid VLC address or malformed URI parameters.</source>
-        <translation>URI를 분석할 수 없습니다! 이는 잘못된 VLC 주소 또는 URI 매개변수 손상으로 인해 발생할 수 있습니다.</translation>
+        <source>URI cannot be parsed! This can be caused by an invalid Vulcoin address or malformed URI parameters.</source>
+        <translation>URI를 분석할 수 없습니다! 이는 잘못된 Vulcoin 주소 또는 URI 매개변수 손상으로 인해 발생할 수 있습니다.</translation>
     </message>
     <message>
         <source>Payment request file cannot be read! This can be caused by an invalid payment request file.</source>
@@ -2261,7 +2265,7 @@ Please check the address and try again.</source>
 <context>
     <name>ReceiveCoinsDialog</name>
     <message>
-        <source>Reuse one of the previously used receiving addresses.&lt;br&gt;Reusing addresses has vlcurity and privacy issues.&lt;br&gt;Do not use this unless re-generating a payment request made before.</source>
+        <source>Reuse one of the previously used receiving addresses.&lt;br&gt;Reusing addresses has security and privacy issues.&lt;br&gt;Do not use this unless re-generating a payment request made before.</source>
         <translation>이전에 사용한 수신 주소 중 하나를 다시 사용하십시오.&lt;br&gt;주소 재사용은 보안 및 개인정보보호 문제가 있습니다.&lt;br&gt;이전에 만든 결제 요청을 다시 생성하지 않는 한 이것을 사용하지 마십시오.</translation>
     </message>
     <message>
@@ -2658,7 +2662,7 @@ Please check the address and try again.</source>
         <translation>사용</translation>
     </message>
     <message>
-        <source>Warning: Invalid VLC address</source>
+        <source>Warning: Invalid Vulcoin address</source>
         <translation>경고: 잘못된 VLC 주소</translation>
     </message>
     <message>

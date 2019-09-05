@@ -180,7 +180,7 @@
         <translation>錢包已加密</translation>
     </message>
     <message>
-        <source>IMPORTANT: Any previous backups you have made of your wallet file should be replaced with the newly generated, encrypted wallet file. For vlcurity reasons, previous backups of the unencrypted wallet file will become useless as soon as you start using the new, encrypted wallet.</source>
+        <source>IMPORTANT: Any previous backups you have made of your wallet file should be replaced with the newly generated, encrypted wallet file. For security reasons, previous backups of the unencrypted wallet file will become useless as soon as you start using the new, encrypted wallet.</source>
         <translation>重要: 任何之前你所備份的舊錢包檔案應該使用新產生並且有加密的錢包檔案取代, 為了安全起見, 當你開始使用新錢包後, 您之前所備份的未加密舊錢包將會失效.</translation>
     </message>
     <message>

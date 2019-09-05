@@ -1,6 +1,6 @@
-// Copyright (c) 2011-2019 The Bitcoin developers
-// Copyright (c) 2014-2019 The Dash developers
-// Copyright (c) 2015-2019 The PIVX developers
+// Copyright (c) 2011-2014 The Bitcoin developers
+// Copyright (c) 2014-2015 The Dash developers
+// Copyright (c) 2015-2017 The PIVX developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -25,7 +25,7 @@
 
 #define DECORATION_SIZE 48
 #define ICON_OFFSET 16
-#define NUM_ITEMS 8
+#define NUM_ITEMS 9
 
 extern CWallet* pwalletMain;
 
@@ -57,19 +57,8 @@ public:
         qint64 amount = index.data(TransactionTableModel::AmountRole).toLongLong();
         bool confirmed = index.data(TransactionTableModel::ConfirmedRole).toBool();
 
-        // Check transaction status
-        int nStatus = index.data(TransactionTableModel::StatusRole).toInt();
-        bool fConflicted = false;
-        if (nStatus == TransactionStatus::Conflicted || nStatus == TransactionStatus::NotAccepted) {
-            fConflicted = true; // Most probably orphaned, but could have other reasons as well
-        }
-        bool fImmature = false;
-        if (nStatus == TransactionStatus::Immature) {
-            fImmature = true;
-        }
-
         QVariant value = index.data(Qt::ForegroundRole);
-        QColor foreground = COLOR_WHITE;
+        QColor foreground = COLOR_BLACK;
         if (value.canConvert<QBrush>()) {
             QBrush brush = qvariant_cast<QBrush>(value);
             foreground = brush.color();
@@ -85,15 +74,9 @@ public:
             iconWatchonly.paint(painter, watchonlyRect);
         }
 
-        if(fConflicted) { // No need to check anything else for conflicted transactions
-            foreground = COLOR_CONFLICTED;
-        } else if (!confirmed || fImmature) {
-            foreground = COLOR_UNCONFIRMED;
-        } else if (amount < 0) {
+        if (amount < 0)
             foreground = COLOR_NEGATIVE;
-        } else {
-            foreground = COLOR_WHITE;
-        }
+
         painter->setPen(foreground);
         QString amountText = BitcoinUnits::formatWithUnit(unit, amount, true, BitcoinUnits::separatorNever);
         if (!confirmed) {
@@ -101,7 +84,7 @@ public:
         }
         painter->drawText(amountRect, Qt::AlignRight | Qt::AlignVCenter, amountText);
 
-        painter->setPen(COLOR_WHITE);
+        painter->setPen(COLOR_BLACK);
         painter->drawText(amountRect, Qt::AlignLeft | Qt::AlignVCenter, GUIUtil::dateTimeStr(date));
 
         painter->restore();
@@ -141,8 +124,8 @@ OverviewPage::OverviewPage(QWidget* parent) : QWidget(parent),
     connect(ui->listTransactions, SIGNAL(clicked(QModelIndex)), this, SLOT(handleTransactionClicked(QModelIndex)));
 
     // init "out of sync" warning labels
-    ui->labelWalletStatus->setToolTip("(" + tr("out of sync") + ")");
-    ui->labelTransactionsStatus->setToolTip("(" + tr("out of sync") + ")");
+    ui->labelWalletStatus->setText("(" + tr("out of sync") + ")");
+    ui->labelTransactionsStatus->setText("(" + tr("out of sync") + ")");
 
     // start with displaying the "out of sync" warnings
     showOutOfSyncWarning(true);
@@ -169,39 +152,68 @@ void OverviewPage::setBalance(const CAmount& balance, const CAmount& unconfirmed
     currentWatchUnconfBalance = watchUnconfBalance;
     currentWatchImmatureBalance = watchImmatureBalance;
 
+    CAmount nLockedBalance = 0;
+    CAmount nWatchOnlyLockedBalance = 0;
+    if (pwalletMain) {
+        nLockedBalance = pwalletMain->GetLockedCoins();
+        nWatchOnlyLockedBalance = pwalletMain->GetLockedWatchOnlyBalance();
+    }
+
+    // VLC Balance
+    CAmount nTotalBalance = balance + unconfirmedBalance;
+    CAmount nAvailableBalance = balance - immatureBalance - nLockedBalance;
+
+    // VLC Watch-Only Balance
+    CAmount nTotalWatchBalance = watchOnlyBalance + watchUnconfBalance;
+    CAmount nAvailableWatchBalance = watchOnlyBalance - watchImmatureBalance - nWatchOnlyLockedBalance;
+
     // VLC labels
-    ui->labelBalance->setText(BitcoinUnits::floorHtmlWithUnit(nDisplayUnit, balance - immatureBalance, false, BitcoinUnits::separatorNever, true));
-    ui->labelPending->setText(BitcoinUnits::floorHtmlWithUnit(nDisplayUnit, unconfirmedBalance, false, BitcoinUnits::separatorNever, true));
-    ui->labelImmature->setText(BitcoinUnits::floorHtmlWithUnit(nDisplayUnit, immatureBalance, false, BitcoinUnits::separatorNever, true));
-    ui->labelTotal->setText(BitcoinUnits::floorHtmlWithUnit(nDisplayUnit, balance + unconfirmedBalance, false, BitcoinUnits::separatorNever, true));
+    ui->labelAvailable->setText(BitcoinUnits::floorHtmlWithUnit(nDisplayUnit, nAvailableBalance, false, BitcoinUnits::separatorNever));
+    ui->labelPending->setText(BitcoinUnits::floorHtmlWithUnit(nDisplayUnit, unconfirmedBalance, false, BitcoinUnits::separatorNever));
+    ui->labelImmature->setText(BitcoinUnits::floorHtmlWithUnit(nDisplayUnit, immatureBalance, false, BitcoinUnits::separatorNever));
+    ui->labelLocked->setText(BitcoinUnits::floorHtmlWithUnit(nDisplayUnit, nLockedBalance, false, BitcoinUnits::separatorNever));
+    ui->labelTotal->setText(BitcoinUnits::floorHtmlWithUnit(nDisplayUnit, nTotalBalance, false, BitcoinUnits::separatorNever));
 
     // Watchonly labels
-    ui->labelWatchAvailable->setText(BitcoinUnits::floorHtmlWithUnit(nDisplayUnit, watchOnlyBalance, false, BitcoinUnits::separatorNever, true));
-    ui->labelWatchPending->setText(BitcoinUnits::floorHtmlWithUnit(nDisplayUnit, watchUnconfBalance, false, BitcoinUnits::separatorNever, true));
-    ui->labelWatchImmature->setText(BitcoinUnits::floorHtmlWithUnit(nDisplayUnit, watchImmatureBalance, false, BitcoinUnits::separatorNever, true));
-    ui->labelWatchTotal->setText(BitcoinUnits::floorHtmlWithUnit(nDisplayUnit, watchOnlyBalance + watchUnconfBalance + watchImmatureBalance, false, BitcoinUnits::separatorNever, true));
+    ui->labelWatchAvailable->setText(BitcoinUnits::floorHtmlWithUnit(nDisplayUnit, nAvailableWatchBalance, false, BitcoinUnits::separatorNever));
+    ui->labelWatchPending->setText(BitcoinUnits::floorHtmlWithUnit(nDisplayUnit, watchUnconfBalance, false, BitcoinUnits::separatorNever));
+    ui->labelWatchImmature->setText(BitcoinUnits::floorHtmlWithUnit(nDisplayUnit, watchImmatureBalance, false, BitcoinUnits::separatorNever));
+    ui->labelWatchLocked->setText(BitcoinUnits::floorHtmlWithUnit(nDisplayUnit, nWatchOnlyLockedBalance, false, BitcoinUnits::separatorNever));
+    ui->labelWatchTotal->setText(BitcoinUnits::floorHtmlWithUnit(nDisplayUnit, nTotalWatchBalance, false, BitcoinUnits::separatorNever));
 
-    // only show immature (newly mined) balance if it's non-zero, so as not to complicate things
-    // for the non-mining users
-    bool showImmature = immatureBalance != 0;
-    bool showWatchOnlyImmature = watchImmatureBalance != 0;
-    bool showPending = unconfirmedBalance != 0;
-    bool showWatchOnlyPending = watchUnconfBalance != 0;
+    // Only show most balances if they are non-zero for the sake of simplicity
+    QSettings settings;
+    bool settingShowAllBalances = !settings.value("fHideZeroBalances").toBool();
+    bool showWatchOnly = nTotalWatchBalance != 0;
 
-    // for symmetry reasons also show immature label when the watch-only one is shown
-    ui->labelImmature->setVisible(showImmature || showWatchOnlyImmature);
-    ui->labelImmatureText->setVisible(showImmature || showWatchOnlyImmature);
-    ui->labelWatchImmature->setVisible(showWatchOnlyImmature); // show watch-only immature balance
-    ui->labelPending->setVisible(showPending || showWatchOnlyPending);
+    bool showAvailable = settingShowAllBalances || nAvailableBalance != nTotalBalance;
+    bool showWatchOnlyAvailable = showAvailable || nAvailableWatchBalance != nTotalWatchBalance;
+
+    // Available
+    ui->labelAvailableText->setVisible(showAvailable || showWatchOnlyAvailable);
+    ui->labelAvailable->setVisible(showAvailable || showWatchOnlyAvailable);
+    ui->labelWatchAvailable->setVisible(showWatchOnlyAvailable && showWatchOnly);
+
+    // Pending
+    bool showPending = settingShowAllBalances || unconfirmedBalance != 0;
+    bool showWatchOnlyPending = showPending || watchUnconfBalance != 0;
     ui->labelPendingText->setVisible(showPending || showWatchOnlyPending);
-    ui->labelWatchPending->setVisible(showWatchOnlyPending); // show watch-only pending balance
+    ui->labelPending->setVisible(showPending || showWatchOnlyPending);
+    ui->labelWatchPending->setVisible(showWatchOnlyPending && showWatchOnly);
 
-    // hide also the available balance if immature and pending are zero
-    //ui->labelBalanceText->setVisible(ui->labelImmature->isVisible() || ui->labelPending->isVisible());
-    //ui->labelBalance->setVisible(ui->labelImmature->isVisible() || ui->labelPending->isVisible());
-    //ui->labelWatchAvailable->setVisible(ui->labelImmature->isVisible() || ui->labelPending->isVisible());
+    // Immature
+    bool showImmature = settingShowAllBalances || immatureBalance != 0;
+    bool showWatchOnlyImmature = showImmature || watchImmatureBalance != 0;
+    ui->labelImmatureText->setVisible(showImmature || showWatchOnlyImmature);
+    ui->labelImmature->setVisible(showImmature || showWatchOnlyImmature); // for symmetry reasons also show immature label when the watch-only one is shown
+    ui->labelWatchImmature->setVisible(showWatchOnlyImmature && showWatchOnly); // show watch-only immature balance
 
-
+    // Locked
+    bool showLocked = settingShowAllBalances || nLockedBalance != 0;
+    bool showWatchOnlyLocked = showLocked || nWatchOnlyLockedBalance != 0;
+    ui->labelLockedText->setVisible(showLocked || showWatchOnlyLocked);
+    ui->labelLocked->setVisible(showLocked || showWatchOnlyLocked);
+    ui->labelWatchLocked->setVisible(showWatchOnlyLocked && showWatchOnly);
     static int cachedTxLocks = 0;
 
     if (cachedTxLocks != nCompleteTXLocks) {
@@ -217,14 +229,16 @@ void OverviewPage::updateWatchOnlyLabels(bool showWatchOnly)
     ui->labelWatchonly->setVisible(showWatchOnly);      // show watch-only label
     ui->labelWatchAvailable->setVisible(showWatchOnly); // show watch-only available balance
     ui->labelWatchPending->setVisible(showWatchOnly);   // show watch-only pending balance
+    ui->labelWatchLocked->setVisible(showWatchOnly);     // show watch-only locked balance
     ui->labelWatchTotal->setVisible(showWatchOnly);     // show watch-only total balance
 
     if (!showWatchOnly) {
         ui->labelWatchImmature->hide();
     } else {
-        ui->labelBalance->setIndent(20);
-        //ui->labelPending->setIndent(20);
+        ui->labelAvailable->setIndent(20);
+        ui->labelPending->setIndent(20);
         ui->labelImmature->setIndent(20);
+        ui->labelLocked->setIndent(20);
         ui->labelTotal->setIndent(20);
     }
 }

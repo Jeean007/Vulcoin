@@ -1,11 +1,12 @@
 // Copyright (c) 2014-2016 The Dash developers
-// Copyright (c) 2015-2019 The PIVX developers
-// Copyright (c) 2019 The Vulcoin developers
+// Copyright (c) 2015-2017 The PIVX developers
+// Copyright (c) 2017-2019 The Vulcoin Core developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include "activemasternode.h"
 #include "addrman.h"
+#include "main.h"
 #include "masternode.h"
 #include "masternodeconfig.h"
 #include "masternodeman.h"
@@ -39,7 +40,7 @@ void CActiveMasternode::ManageStatus()
     if (status == ACTIVE_MASTERNODE_INITIAL) {
         CMasternode* pmn;
         pmn = mnodeman.Find(pubKeyMasternode);
-        if (pmn != NULL) {
+        if (pmn != nullptr) {
             pmn->Check();
             if (pmn->IsEnabled() && pmn->protocolVersion == PROTOCOL_VERSION) EnableHotColdMasterNode(pmn->vin, pmn->addr);
         }
@@ -71,14 +72,14 @@ void CActiveMasternode::ManageStatus()
         } else {
             service = CService(strMasterNodeAddr);
         }
-		
-		// The service needs the correct default port to work properly
-        //if(!CMasternodeBroadcast::CheckDefaultPort(strMasterNodeAddr, errorMessage, "CActiveMasternode::ManageStatus()"))
-            //return;
+
+        // The service needs the correct default port to work properly
+        if(!CMasternodeBroadcast::CheckDefaultPort(strMasterNodeAddr, errorMessage, "CActiveMasternode::ManageStatus()"))
+            return;
 
         LogPrintf("CActiveMasternode::ManageStatus() - Checking inbound connection to '%s'\n", service.ToString());
 
-        CNode* pnode = ConnectNode((CAddress)service, NULL);
+        CNode* pnode = ConnectNode((CAddress)service, nullptr);
         if (!pnode) {
             notCapableReason = "Could not connect to " + service.ToString();
             LogPrintf("CActiveMasternode::ManageStatus() - not capable: %s\n", notCapableReason);
@@ -118,10 +119,10 @@ void CActiveMasternode::ManageStatus()
                 return;
             }
 
-			//send to all peers
+            //send to all peers
             LogPrintf("CActiveMasternode::ManageStatus() - Relay broadcast vin = %s\n", vin.ToString());
             mnb.Relay();
-			
+
             LogPrintf("CActiveMasternode::ManageStatus() - Is capable master node!\n");
             status = ACTIVE_MASTERNODE_STARTED;
 
@@ -182,7 +183,7 @@ bool CActiveMasternode::SendMasternodePing(std::string& errorMessage)
 
     // Update lastPing for our masternode in Masternode list
     CMasternode* pmn = mnodeman.Find(vin);
-    if (pmn != NULL) {
+    if (pmn != nullptr) {
         if (pmn->IsPingedWithin(MASTERNODE_PING_SECONDS, mnp.sigTime)) {
             errorMessage = "Too early to send Masternode Ping";
             return false;
@@ -238,12 +239,12 @@ bool CActiveMasternode::CreateBroadcast(std::string strService, std::string strK
     CService service = CService(strService);
 
     // The service needs the correct default port to work properly
-    //if(!CMasternodeBroadcast::CheckDefaultPort(strService, errorMessage, "CActiveMasternode::CreateBroadcast()"))
-        //return false;
+    if(!CMasternodeBroadcast::CheckDefaultPort(strService, errorMessage, "CActiveMasternode::CreateBroadcast()"))
+        return false;
 
     addrman.Add(CAddress(service), CNetAddr("127.0.0.1"), 2 * 60 * 60);
 
-	return CreateBroadcast(vin, CService(strService), keyCollateralAddress, pubKeyCollateralAddress, keyMasternode, pubKeyMasternode, errorMessage, mnb);
+    return CreateBroadcast(vin, CService(strService), keyCollateralAddress, pubKeyCollateralAddress, keyMasternode, pubKeyMasternode, errorMessage, mnb);
 }
 
 bool CActiveMasternode::CreateBroadcast(CTxIn vin, CService service, CKey keyCollateralAddress, CPubKey pubKeyCollateralAddress, CKey keyMasternode, CPubKey pubKeyMasternode, std::string& errorMessage, CMasternodeBroadcast &mnb)
@@ -271,14 +272,14 @@ bool CActiveMasternode::CreateBroadcast(CTxIn vin, CService service, CKey keyCol
     return true;
 }
 
-bool CActiveMasternode::GetMasterNodeVin(CTxIn& vin, CPubKey& pubkey, CKey& vlcretKey)
+bool CActiveMasternode::GetMasterNodeVin(CTxIn& vin, CPubKey& pubkey, CKey& secretKey)
 {
-    return GetMasterNodeVin(vin, pubkey, vlcretKey, "", "");
+    return GetMasterNodeVin(vin, pubkey, secretKey, "", "");
 }
 
-bool CActiveMasternode::GetMasterNodeVin(CTxIn& vin, CPubKey& pubkey, CKey& vlcretKey, std::string strTxHash, std::string strOutputIndex)
+bool CActiveMasternode::GetMasterNodeVin(CTxIn& vin, CPubKey& pubkey, CKey& secretKey, std::string strTxHash, std::string strOutputIndex)
 {
-	// wait for reindex and/or import to finish
+    // wait for reindex and/or import to finish
     if (fImporting || fReindex) return false;
 
     // Find possible candidates
@@ -291,7 +292,7 @@ bool CActiveMasternode::GetMasterNodeVin(CTxIn& vin, CPubKey& pubkey, CKey& vlcr
     // Find the vin
     if (!strTxHash.empty()) {
         // Let's find it
-        uint256 txHash(strTxHash);
+        uint256 txHash = uint256S(strTxHash);
         int outputIndex;
         try {
             outputIndex = std::stoi(strOutputIndex.c_str());
@@ -323,13 +324,13 @@ bool CActiveMasternode::GetMasterNodeVin(CTxIn& vin, CPubKey& pubkey, CKey& vlcr
     }
 
     // At this point we have a selected output, retrieve the associated info
-    return GetVinFromOutput(*selectedOutput, vin, pubkey, vlcretKey);
+    return GetVinFromOutput(*selectedOutput, vin, pubkey, secretKey);
 }
 
 // Extract Masternode vin information from output
-bool CActiveMasternode::GetVinFromOutput(COutput out, CTxIn& vin, CPubKey& pubkey, CKey& vlcretKey)
+bool CActiveMasternode::GetVinFromOutput(COutput out, CTxIn& vin, CPubKey& pubkey, CKey& secretKey)
 {
-	// wait for reindex and/or import to finish
+    // wait for reindex and/or import to finish
     if (fImporting || fReindex) return false;
 
     CScript pubScript;
@@ -347,12 +348,12 @@ bool CActiveMasternode::GetVinFromOutput(COutput out, CTxIn& vin, CPubKey& pubke
         return false;
     }
 
-    if (!pwalletMain->GetKey(keyID, vlcretKey)) {
+    if (!pwalletMain->GetKey(keyID, secretKey)) {
         LogPrintf("CActiveMasternode::GetMasterNodeVin - Private key for address is not known\n");
         return false;
     }
 
-    pubkey = vlcretKey.GetPubKey();
+    pubkey = secretKey.GetPubKey();
     return true;
 }
 

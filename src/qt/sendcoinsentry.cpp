@@ -1,6 +1,6 @@
-// Copyright (c) 2011-2019 The Bitcoin developers
-// Copyright (c) 2014-2019 The Dash developers
-// Copyright (c) 2015-2019 The PIVX developers
+// Copyright (c) 2011-2014 The Bitcoin developers
+// Copyright (c) 2014-2015 The Dash developers
+// Copyright (c) 2015-2017 The PIVX developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -27,17 +27,12 @@ SendCoinsEntry::SendCoinsEntry(QWidget* parent) : QStackedWidget(parent),
 #ifdef Q_OS_MAC
     ui->payToLayout->setSpacing(4);
 #endif
-#if QT_VERSION >= 0x040700
     ui->addAsLabel->setPlaceholderText(tr("Enter a label for this address to add it to your address book"));
-#endif
 
-    // normal vulcoin address field
+    // normal vlc address field
     GUIUtil::setupAddressWidget(ui->payTo, this);
-    // just a label for displaying vulcoin address(es)
+    // just a label for displaying vlc address(es)
     ui->payTo_is->setFont(GUIUtil::bitcoinAddressFont());
-
-    ui->payTo->setAttribute(Qt::WA_MacShowFocusRect, 0);
-    ui->addAsLabel->setAttribute(Qt::WA_MacShowFocusRect, 0);
 
     // Connect signals
     connect(ui->payAmount, SIGNAL(valueChanged()), this, SIGNAL(payAmountChanged()));
@@ -93,11 +88,11 @@ void SendCoinsEntry::clear()
     ui->messageTextLabel->clear();
     ui->messageTextLabel->hide();
     ui->messageLabel->hide();
-    // clear UI elements for invlcure payment request
+    // clear UI elements for insecure payment request
     ui->payTo_is->clear();
     ui->memoTextLabel_is->clear();
     ui->payAmount_is->clear();
-    // clear UI elements for vlcure payment request
+    // clear UI elements for secure payment request
     ui->payTo_s->clear();
     ui->memoTextLabel_s->clear();
     ui->payAmount_s->clear();
@@ -179,20 +174,20 @@ void SendCoinsEntry::setValue(const SendCoinsRecipient& value)
 
     if (recipient.paymentRequest.IsInitialized()) // payment request
     {
-        if (recipient.authenticatedMerchant.isEmpty()) // invlcure
+        if (recipient.authenticatedMerchant.isEmpty()) // insecure
         {
             ui->payTo_is->setText(recipient.address);
             ui->memoTextLabel_is->setText(recipient.message);
             ui->payAmount_is->setValue(recipient.amount);
             ui->payAmount_is->setReadOnly(true);
-            setCurrentWidget(ui->SendCoins_InvlcurePaymentRequest);
-        } else // vlcure
+            setCurrentWidget(ui->SendCoins_InsecurePaymentRequest);
+        } else // secure
         {
             ui->payTo_s->setText(recipient.authenticatedMerchant);
             ui->memoTextLabel_s->setText(recipient.message);
             ui->payAmount_s->setValue(recipient.amount);
             ui->payAmount_s->setReadOnly(true);
-            setCurrentWidget(ui->SendCoins_VlcurePaymentRequest);
+            setCurrentWidget(ui->SendCoins_SecurePaymentRequest);
         }
     } else // normal payment
     {

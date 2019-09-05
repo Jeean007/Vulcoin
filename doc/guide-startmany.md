@@ -56,9 +56,9 @@ Create a new wallet address for each MasterNode.
 
 Close your QT Wallet.
 
-### Send 2,500 VLC to New Addresses
+### Send 1,000 VLC to New Addresses
 
-Just like setting up a standard MN. Send exactly 2,500 VLC to each new address created above.
+Just like setting up a standard MN. Send exactly 1,000 VLC to each new address created above.
 
 ### Create New Masternode Private Keys
 
@@ -82,7 +82,7 @@ Copy the masternode private key and correspondig collateral output transaction t
 
 The masternode private key may be an existing key from [Option 1](#option1), or a newly generated key from [Option 2](#option2).
 
-*Please note, the masternode private key is not the same as a wallet private key. Never put your wallet private key in the masternode.conf file. That is equivalent to putting your 2,500 VLC on the remote server and defeats the purpose of a hot/cold setup.*
+*Please note, the masternode private key is not the same as a wallet private key. Never put your wallet private key in the masternode.conf file. That is equivalent to putting your 1,000 VLC on the remote server and defeats the purpose of a hot/cold setup.*
 
 ### Get the collateral output
 
@@ -95,7 +95,7 @@ Issue the following:
 Make note of the hash (which is your collaterla_output) and index.
 
 ### Enter your MasterNode details into your masternode.conf file
-[From the vulcoin github repo](https://github.com/VulcoinFoundation/VulcoinCoin/blob/master/doc/masternode_conf.md)
+[From the vulcoin github repo](https://github.com/vulcoin-official/vulcoin/blob/master/doc/masternode_conf.md)
 
 The new masternode.conf format consists of a space seperated text file. Each line consisting of an alias, IP address followed by port, masternode private key, collateral output transaction id and collateral output index, donation address and donation percentage (the latter two are optional and should be in format "address:percentage").
 
@@ -137,7 +137,7 @@ I usually confirm that remote is on the correct block by issuing:
 
 ```vulcoind getinfo```
 
-And compare with the official explorer at http://explorer.vulcoincoin.io
+And compare with the official explorer at http://explorer.vlc.org
 
 ### Local
 

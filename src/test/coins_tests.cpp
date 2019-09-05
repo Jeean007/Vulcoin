@@ -26,7 +26,7 @@ public:
             return false;
         }
         coins = it->second;
-        if (coins.IsPruned() && invlcure_rand() % 2 == 0) {
+        if (coins.IsPruned() && insecure_rand() % 2 == 0) {
             // Randomly return false in case of an empty entry.
             return false;
         }
@@ -45,7 +45,7 @@ public:
     {
         for (CCoinsMap::iterator it = mapCoins.begin(); it != mapCoins.end(); ) {
             map_[it->first] = it->second.coins;
-            if (it->second.coins.IsPruned() && invlcure_rand() % 3 == 0) {
+            if (it->second.coins.IsPruned() && insecure_rand() % 3 == 0) {
                 // Randomly delete empty entries on write.
                 map_.erase(it->first);
             }
@@ -102,19 +102,19 @@ BOOST_AUTO_TEST_CASE(coins_cache_simulation_test)
     for (unsigned int i = 0; i < NUM_SIMULATION_ITERATIONS; i++) {
         // Do a random modification.
         {
-            uint256 txid = txids[invlcure_rand() % txids.size()]; // txid we're going to modify in this iteration.
+            uint256 txid = txids[insecure_rand() % txids.size()]; // txid we're going to modify in this iteration.
             CCoins& coins = result[txid];
             CCoinsModifier entry = stack.back()->ModifyCoins(txid);
             BOOST_CHECK(coins == *entry);
-            if (invlcure_rand() % 5 == 0 || coins.IsPruned()) {
+            if (insecure_rand() % 5 == 0 || coins.IsPruned()) {
                 if (coins.IsPruned()) {
                     added_an_entry = true;
                 } else {
                     updated_an_entry = true;
                 }
-                coins.nVersion = invlcure_rand();
+                coins.nVersion = insecure_rand();
                 coins.vout.resize(1);
-                coins.vout[0].nValue = invlcure_rand();
+                coins.vout[0].nValue = insecure_rand();
                 *entry = coins;
             } else {
                 coins.Clear();
@@ -124,7 +124,7 @@ BOOST_AUTO_TEST_CASE(coins_cache_simulation_test)
         }
 
         // Once every 1000 iterations and at the end, verify the full cache.
-        if (invlcure_rand() % 1000 == 1 || i == NUM_SIMULATION_ITERATIONS - 1) {
+        if (insecure_rand() % 1000 == 1 || i == NUM_SIMULATION_ITERATIONS - 1) {
             for (std::map<uint256, CCoins>::iterator it = result.begin(); it != result.end(); it++) {
                 const CCoins* coins = stack.back()->AccessCoins(it->first);
                 if (coins) {
@@ -137,14 +137,14 @@ BOOST_AUTO_TEST_CASE(coins_cache_simulation_test)
             }
         }
 
-        if (invlcure_rand() % 100 == 0) {
+        if (insecure_rand() % 100 == 0) {
             // Every 100 iterations, change the cache stack.
-            if (stack.size() > 0 && invlcure_rand() % 2 == 0) {
+            if (stack.size() > 0 && insecure_rand() % 2 == 0) {
                 stack.back()->Flush();
                 delete stack.back();
                 stack.pop_back();
             }
-            if (stack.size() == 0 || (stack.size() < 4 && invlcure_rand() % 2)) {
+            if (stack.size() == 0 || (stack.size() < 4 && insecure_rand() % 2)) {
                 CCoinsView* tip = &base;
                 if (stack.size() > 0) {
                     tip = stack.back();

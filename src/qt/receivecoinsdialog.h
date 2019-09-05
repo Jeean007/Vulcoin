@@ -1,4 +1,6 @@
-// Copyright (c) 2011-2019 The Bitcoin developers
+// Copyright (c) 2011-2014 The Bitcoin developers
+// Copyright (c) 2017 The PIVX developers
+// Copyright (c) 2017-2019 The Vulcoin Core developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -35,7 +37,7 @@ public:
     enum ColumnWidths {
         DATE_COLUMN_WIDTH = 130,
         LABEL_COLUMN_WIDTH = 120,
-        AMOUNT_MINIMUM_COLUMN_WIDTH = 170,
+        AMOUNT_MINIMUM_COLUMN_WIDTH = 160,
         MINIMUM_COLUMN_WIDTH = 130
     };
 
@@ -71,6 +73,7 @@ private slots:
     void copyLabel();
     void copyMessage();
     void copyAmount();
+    void copyAddress();
 };
 
 #endif // BITCOIN_QT_RECEIVECOINSDIALOG_H

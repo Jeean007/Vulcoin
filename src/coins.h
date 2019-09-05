@@ -1,5 +1,5 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
-// Copyright (c) 2009-2019 The Bitcoin developers
+// Copyright (c) 2009-2014 The Bitcoin developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -178,9 +178,9 @@ public:
         unsigned int nMaskSize = 0, nMaskCode = 0;
         CalcMaskSize(nMaskSize, nMaskCode);
         bool fFirst = vout.size() > 0 && !vout[0].IsNull();
-        bool fVlcond = vout.size() > 1 && !vout[1].IsNull();
-        assert(fFirst || fVlcond || nMaskCode);
-        unsigned int nCode = 8 * (nMaskCode - (fFirst || fVlcond ? 0 : 1)) + (fCoinBase ? 1 : 0) + (fCoinStake ? 2 : 0) + (fFirst ? 4 : 0) + (fVlcond ? 8 : 0);
+        bool fSecond = vout.size() > 1 && !vout[1].IsNull();
+        assert(fFirst || fSecond || nMaskCode);
+        unsigned int nCode = 8 * (nMaskCode - (fFirst || fSecond ? 0 : 1)) + (fCoinBase ? 1 : 0) + (fCoinStake ? 2 : 0) + (fFirst ? 4 : 0) + (fSecond ? 8 : 0);
         // version
         nSize += ::GetSerializeSize(VARINT(this->nVersion), nType, nVersion);
         // size of header code
@@ -202,9 +202,9 @@ public:
         unsigned int nMaskSize = 0, nMaskCode = 0;
         CalcMaskSize(nMaskSize, nMaskCode);
         bool fFirst = vout.size() > 0 && !vout[0].IsNull();
-        bool fVlcond = vout.size() > 1 && !vout[1].IsNull();
-        assert(fFirst || fVlcond || nMaskCode);
-        unsigned int nCode = 16 * (nMaskCode - (fFirst || fVlcond ? 0 : 1)) + (fCoinBase ? 1 : 0) + (fCoinStake ? 2 : 0) + (fFirst ? 4 : 0) + (fVlcond ? 8 : 0);
+        bool fSecond = vout.size() > 1 && !vout[1].IsNull();
+        assert(fFirst || fSecond || nMaskCode);
+        unsigned int nCode = 16 * (nMaskCode - (fFirst || fSecond ? 0 : 1)) + (fCoinBase ? 1 : 0) + (fCoinStake ? 2 : 0) + (fFirst ? 4 : 0) + (fSecond ? 8 : 0);
         // version
         ::Serialize(s, VARINT(this->nVersion), nType, nVersion);
         // header code
@@ -327,7 +327,7 @@ struct CCoinsStats {
     uint256 hashSerialized;
     CAmount nTotalAmount;
 
-    CCoinsStats() : nHeight(0), hashBlock(0), nTransactions(0), nTransactionOutputs(0), nSerializedSize(0), hashSerialized(0), nTotalAmount(0) {}
+    CCoinsStats() : nHeight(0), nTransactions(0), nTransactionOutputs(0), nSerializedSize(0), nTotalAmount(0) {}
 };
 
 
@@ -433,7 +433,7 @@ public:
     bool BatchWrite(CCoinsMap& mapCoins, const uint256& hashBlock);
 
     /**
-     * Return a pointer to CCoins in the cache, or NULL if not found. This is
+     * Return a pointer to CCoins in the cache, or nullptr if not found. This is
      * more efficient than GetCoins. Modifications to other cache entries are
      * allowed while accessing the returned pointer.
      */

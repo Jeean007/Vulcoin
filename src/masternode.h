@@ -1,6 +1,6 @@
-// Copyright (c) 2014-2019 The Dash developers
-// Copyright (c) 2015-2019 The PIVX developers
-// Copyright (c) 2019 The Vulcoin developers
+// Copyright (c) 2014-2015 The Dash developers
+// Copyright (c) 2015-2017 The PIVX developers
+// Copyright (c) 2017-2019 The Vulcoin Core developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -9,7 +9,6 @@
 
 #include "base58.h"
 #include "key.h"
-#include "main.h"
 #include "net.h"
 #include "sync.h"
 #include "timedata.h"
@@ -23,7 +22,7 @@
 #define MASTERNODE_REMOVAL_SECONDS (130 * 60)
 #define MASTERNODE_CHECK_SECONDS 5
 
-#define MASTERNODE_COLLATERAL 1000000
+#define MASTERNODE_COLLATERAL 20000
 
 using namespace std;
 
@@ -64,7 +63,7 @@ public:
 
     bool CheckAndUpdate(int& nDos, bool fRequireEnabled = true, bool fCheckSigTimeOnly = false);
     bool Sign(CKey& keyMasternode, CPubKey& pubKeyMasternode);
-	bool VerifySignature(CPubKey& pubKeyMasternode, int &nDos);
+    bool VerifySignature(CPubKey& pubKeyMasternode, int &nDos);
     void Relay();
 
     uint256 GetHash()
@@ -256,17 +255,7 @@ public:
         return activeState == MASTERNODE_ENABLED;
     }
 
-    int GetMasternodeInputAge()
-    {
-        if (chainActive.Tip() == NULL) return 0;
-
-        if (cacheInputAge == 0) {
-            cacheInputAge = GetInputAge(vin);
-            cacheInputAgeBlock = chainActive.Tip()->nHeight;
-        }
-
-        return cacheInputAge + (chainActive.Tip()->nHeight - cacheInputAgeBlock);
-    }
+    int GetMasternodeInputAge();
 
     std::string GetStatus();
 
@@ -302,9 +291,9 @@ public:
     bool CheckAndUpdate(int& nDoS);
     bool CheckInputsAndAdd(int& nDos);
     bool Sign(CKey& keyCollateralAddress);
-	bool VerifySignature();
+    bool VerifySignature();
     void Relay();
-	std::string GetStrMessage();
+    std::string GetStrMessage();
 
     ADD_SERIALIZE_METHODS;
 
@@ -333,7 +322,7 @@ public:
     /// Create Masternode broadcast, needs to be relayed manually after that
     static bool Create(CTxIn vin, CService service, CKey keyCollateralAddressNew, CPubKey pubKeyCollateralAddressNew, CKey keyMasternodeNew, CPubKey pubKeyMasternodeNew, std::string& strErrorRet, CMasternodeBroadcast& mnbRet);
     static bool Create(std::string strService, std::string strKey, std::string strTxHash, std::string strOutputIndex, std::string& strErrorRet, CMasternodeBroadcast& mnbRet, bool fOffline = false);
-	static bool CheckDefaultPort(std::string strService, std::string& strErrorRet, std::string strContext);
+    static bool CheckDefaultPort(std::string strService, std::string& strErrorRet, std::string strContext);
 };
 
 #endif

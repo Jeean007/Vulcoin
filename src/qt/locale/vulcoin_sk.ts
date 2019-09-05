@@ -132,8 +132,12 @@
         <translation>Zopakujte prístupovú frázu</translation>
     </message>
     <message>
-        <source>Serves to disable the trivial sendmoney when OS account compromised. Provides no real vlcurity.</source>
+        <source>Serves to disable the trivial sendmoney when OS account compromised. Provides no real security.</source>
         <translation>Slúži na zakázanie obyčajného odoslania peňazí, v prípade, že bol OS účet kompromitovaný. Neposkytuje žiadnu skutočnú bezpečnosť.</translation>
+    </message>
+    <message>
+        <source>For staking only</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Enter the new passphrase to the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
@@ -188,7 +192,7 @@
         <translation>Peňaženka zašifrovaná</translation>
     </message>
     <message>
-        <source>IMPORTANT: Any previous backups you have made of your wallet file should be replaced with the newly generated, encrypted wallet file. For vlcurity reasons, previous backups of the unencrypted wallet file will become useless as soon as you start using the new, encrypted wallet.</source>
+        <source>IMPORTANT: Any previous backups you have made of your wallet file should be replaced with the newly generated, encrypted wallet file. For security reasons, previous backups of the unencrypted wallet file will become useless as soon as you start using the new, encrypted wallet.</source>
         <translation>DÔLEŽITÉ: Všetky predchádzajúce zálohy súboru peňaženky, by mali byť nahradené novo vytvoreným šifrovaným súborom peňaženky. Z bezpečnostných dôvodov sa predchádzajúce zálohy súboru nezašifrovanej peňaženky stanú nepotrebné, akonáhle začnete používať novú zašifrovanú peňaženku.</translation>
     </message>
     <message>

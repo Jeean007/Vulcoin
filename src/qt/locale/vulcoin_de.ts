@@ -132,8 +132,12 @@
         <translation>Neue Passphrase wiederholen</translation>
     </message>
     <message>
-        <source>Serves to disable the trivial sendmoney when OS account compromised. Provides no real vlcurity.</source>
+        <source>Serves to disable the trivial sendmoney when OS account compromised. Provides no real security.</source>
         <translation>Verhindert das einfache Überweisen von Geld, falls das Systemkonto kompromittiert wurde. Bietet keine wirkliche Sicherheit.</translation>
+    </message>
+    <message>
+        <source>For staking only</source>
+        <translation>Nur für Staking entsperren</translation>
     </message>
     <message>
         <source>Enter the new passphrase to the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
@@ -188,7 +192,7 @@
         <translation>Wallet verschlüsselt</translation>
     </message>
     <message>
-        <source>IMPORTANT: Any previous backups you have made of your wallet file should be replaced with the newly generated, encrypted wallet file. For vlcurity reasons, previous backups of the unencrypted wallet file will become useless as soon as you start using the new, encrypted wallet.</source>
+        <source>IMPORTANT: Any previous backups you have made of your wallet file should be replaced with the newly generated, encrypted wallet file. For security reasons, previous backups of the unencrypted wallet file will become useless as soon as you start using the new, encrypted wallet.</source>
         <translation>WICHTIG: Alle vorherigen Sicherungen sollten durch die neu erzeugte, verschlüsselte Wallet-Datei ersetzt werden. Aus Sicherheitsgründen werden vorherige Sicherungen der unverschlüsselten Wallet nutzlos, sobald Sie die neue, verschlüsselte Wallet verwenden.</translation>
     </message>
     <message>
@@ -1010,8 +1014,8 @@ Adresse: %4</translation>
         <translation>mittel-hoch</translation>
     </message>
     <message>
-        <source>Can vary +/- %1 uvulcoin per input.</source>
-        <translation>Kann um +/- %1 uvulcoin pro Eingang variieren.</translation>
+        <source>Can vary +/- %1 uvlc per input.</source>
+        <translation>Kann um +/- %1 uvlc pro Eingang variieren.</translation>
     </message>
     <message>
         <source>medium</source>
@@ -1325,7 +1329,7 @@ Adresse: %4</translation>
         <translation>Stat&amp;us aktualisieren</translation>
     </message>
     <message>
-        <source>Status will be updated automatically in (vlc):</source>
+        <source>Status will be updated automatically in (sec):</source>
         <translation>Status wird automatisch aktualisiert in (Sekunden):</translation>
     </message>
     <message>
@@ -1856,8 +1860,8 @@ Bitte Adresse überprüfen und nochmals versuchen.</translation>
         <translation>Kann vulcoin nicht starten: click-to-pay Handler</translation>
     </message>
     <message>
-        <source>URI cannot be parsed! This can be caused by an invalid VLC address or malformed URI parameters.</source>
-        <translation>URI kann nicht analysiert werden! Dies kann durch eine ungültige VLC-Adresse oder fehlerhafte URI-Parameter verursacht sein.</translation>
+        <source>URI cannot be parsed! This can be caused by an invalid Vulcoin address or malformed URI parameters.</source>
+        <translation>URI kann nicht analysiert werden! Dies kann durch eine ungültige Vulcoin-Adresse oder fehlerhafte URI-Parameter verursacht sein.</translation>
     </message>
     <message>
         <source>Payment request file cannot be read! This can be caused by an invalid payment request file.</source>
@@ -2303,7 +2307,7 @@ Bitte Adresse überprüfen und nochmals versuchen.</translation>
 <context>
     <name>ReceiveCoinsDialog</name>
     <message>
-        <source>Reuse one of the previously used receiving addresses.&lt;br&gt;Reusing addresses has vlcurity and privacy issues.&lt;br&gt;Do not use this unless re-generating a payment request made before.</source>
+        <source>Reuse one of the previously used receiving addresses.&lt;br&gt;Reusing addresses has security and privacy issues.&lt;br&gt;Do not use this unless re-generating a payment request made before.</source>
         <translation>Wiederverwendung eines der zuvor verwendeten Empfangsadressen.&lt;br&gt;Wiederverwendung-Adressen haben Sicherheits- und Datenschutzprobleme.&lt;br&gt;Verwenden Sie diese nicht, es sei denn, dass Sie zuvor eine Zahlungsanforderung generieren.</translation>
     </message>
     <message>
@@ -2708,7 +2712,7 @@ Bitte Adresse überprüfen und nochmals versuchen.</translation>
         <translation>benutzend</translation>
     </message>
     <message>
-        <source>Warning: Invalid VLC address</source>
+        <source>Warning: Invalid Vulcoin address</source>
         <translation>Warnung: Ungültige VLC-Adresse</translation>
     </message>
     <message>

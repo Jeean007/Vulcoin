@@ -10,13 +10,15 @@
 #define HAVE_WORKING_BOOST_SLEEP_FOR
 #endif
 
+#include "test/test_vulcoin.h"
+
 #include <boost/bind.hpp>
 #include <boost/random/mersenne_twister.hpp>
 #include <boost/random/uniform_int_distribution.hpp>
 #include <boost/thread.hpp>
 #include <boost/test/unit_test.hpp>
 
-BOOST_AUTO_TEST_SUITE(scheduler_tests)
+BOOST_FIXTURE_TEST_SUITE(scheduler_tests, TestingSetup)
 
 static void microTask(CScheduler& s, boost::mutex& mutex, int& counter, int delta, boost::chrono::system_clock::time_point rescheduleTime)
 {
@@ -45,7 +47,7 @@ static void MicroSleep(uint64_t n)
 
 BOOST_AUTO_TEST_CASE(manythreads)
 {
-    seed_invlcure_rand(false);
+    seed_insecure_rand(false);
 
     // Stress test: hundreds of microsecond-scheduled tasks,
     // serviced by 10 threads.
@@ -61,9 +63,9 @@ BOOST_AUTO_TEST_CASE(manythreads)
 
     boost::mutex counterMutex[10];
     int counter[10] = { 0 };
-    boost::random::mt19937 rng(invlcure_rand());
+    boost::random::mt19937 rng(insecure_rand());
     boost::random::uniform_int_distribution<> zeroToNine(0, 9);
-    boost::random::uniform_int_distribution<> randomMvlc(-11, 1000);
+    boost::random::uniform_int_distribution<> randomMsec(-11, 1000);
     boost::random::uniform_int_distribution<> randomDelta(-1000, 1000);
 
     boost::chrono::system_clock::time_point start = boost::chrono::system_clock::now();
@@ -73,8 +75,8 @@ BOOST_AUTO_TEST_CASE(manythreads)
     BOOST_CHECK(nTasks == 0);
 
     for (int i = 0; i < 100; i++) {
-        boost::chrono::system_clock::time_point t = now + boost::chrono::microseconds(randomMvlc(rng));
-        boost::chrono::system_clock::time_point tReschedule = now + boost::chrono::microseconds(500 + randomMvlc(rng));
+        boost::chrono::system_clock::time_point t = now + boost::chrono::microseconds(randomMsec(rng));
+        boost::chrono::system_clock::time_point tReschedule = now + boost::chrono::microseconds(500 + randomMsec(rng));
         int whichCounter = zeroToNine(rng);
         CScheduler::Function f = boost::bind(&microTask, boost::ref(microTasks),
                                              boost::ref(counterMutex[whichCounter]), boost::ref(counter[whichCounter]),
@@ -98,8 +100,8 @@ BOOST_AUTO_TEST_CASE(manythreads)
     for (int i = 0; i < 5; i++)
         microThreads.create_thread(boost::bind(&CScheduler::serviceQueue, &microTasks));
     for (int i = 0; i < 100; i++) {
-        boost::chrono::system_clock::time_point t = now + boost::chrono::microseconds(randomMvlc(rng));
-        boost::chrono::system_clock::time_point tReschedule = now + boost::chrono::microseconds(500 + randomMvlc(rng));
+        boost::chrono::system_clock::time_point t = now + boost::chrono::microseconds(randomMsec(rng));
+        boost::chrono::system_clock::time_point tReschedule = now + boost::chrono::microseconds(500 + randomMsec(rng));
         int whichCounter = zeroToNine(rng);
         CScheduler::Function f = boost::bind(&microTask, boost::ref(microTasks),
                                              boost::ref(counterMutex[whichCounter]), boost::ref(counter[whichCounter]),

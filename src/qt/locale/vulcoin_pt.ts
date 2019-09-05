@@ -132,8 +132,12 @@
         <translation>Repetir senha</translation>
     </message>
     <message>
-        <source>Serves to disable the trivial sendmoney when OS account compromised. Provides no real vlcurity.</source>
+        <source>Serves to disable the trivial sendmoney when OS account compromised. Provides no real security.</source>
         <translation>Serve para desabilitar envio trivial de dinheiro quando a conta do SO for comprometida, mas não provê segurança real.</translation>
+    </message>
+    <message>
+        <source>For staking only</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Enter the new passphrase to the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
@@ -188,7 +192,7 @@
         <translation>Carteira encriptada</translation>
     </message>
     <message>
-        <source>IMPORTANT: Any previous backups you have made of your wallet file should be replaced with the newly generated, encrypted wallet file. For vlcurity reasons, previous backups of the unencrypted wallet file will become useless as soon as you start using the new, encrypted wallet.</source>
+        <source>IMPORTANT: Any previous backups you have made of your wallet file should be replaced with the newly generated, encrypted wallet file. For security reasons, previous backups of the unencrypted wallet file will become useless as soon as you start using the new, encrypted wallet.</source>
         <translation>IMPORTANTE: Qualquer backup que você fez da sua carteira precisa ser substituído pelo novo arquivo encriptado. Por razões de segurança, arquivos anteriores de backup vão se tornar inúteis assim que você usar a carteira nova e encriptada.</translation>
     </message>
     <message>
@@ -236,7 +240,7 @@
     </message>
     <message>
         <source>Enter a VLC Address that you would like to encrypt using BIP 38. Enter a passphrase in the middle box. Press encrypt to compute the encrypted private key.</source>
-        <translation>Digite um endereço VLC que você gostaria de criptografar usando BIP 38. Digite uma frase vlcreta na caixa do meio. Pressione criptografar para calcular a chave privada criptografada.</translation>
+        <translation>Digite um endereço VLC que você gostaria de criptografar usando BIP 38. Digite uma frase secreta na caixa do meio. Pressione criptografar para calcular a chave privada criptografada.</translation>
     </message>
     <message>
         <source>Address:</source>

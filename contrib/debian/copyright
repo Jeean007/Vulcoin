@@ -32,6 +32,20 @@ Files: src/qt/res/icons/clock*.png, src/qt/res/icons/tx*.png,
 Copyright: Wladimir van der Laan
 License: Expat
 
+Files: src/qt/res/icons/address-book.png, src/qt/res/icons/export.png,
+       src/qt/res/icons/history.png, src/qt/res/icons/key.png,
+       src/qt/res/icons/lock_*.png, src/qt/res/icons/overview.png,
+       src/qt/res/icons/receive.png, src/qt/res/icons/send.png,
+       src/qt/res/icons/synced.png, src/qt/res/icons/filesave.png
+Copyright: David Vignoni (david@icon-king.com)
+           ICON KING - www.icon-king.com
+License: LGPL
+Comment: NUVOLA ICON THEME for KDE 3.x
+         Original icons: kaddressbook, klipper_dock, view-list-text,
+                         key-password, encrypted/decrypted, go-home, go-down,
+                         go-next, dialog-ok
+         Site: http://www.icon-king.com/projects/nuvola/
+
 Files: src/qt/res/icons/connect*.png
 Copyright: schollidesign
 License: GPL-3+

@@ -36,7 +36,7 @@ bool DecodeBase58(const char* psz, std::vector<unsigned char>& vch)
     while (*psz && !isspace(*psz)) {
         // Decode base58 character
         const char* ch = strchr(pszBase58, *psz);
-        if (ch == NULL)
+        if (ch == nullptr)
             return false;
         // Apply "b256 = b256 * 58 + ch".
         int carry = ch - pszBase58;
@@ -188,7 +188,7 @@ bool CBase58Data::SetString(const char* psz, unsigned int nVersionBytes)
     vchData.resize(vchTemp.size() - nVersionBytes);
     if (!vchData.empty())
         memcpy(&vchData[0], &vchTemp[nVersionBytes], vchData.size());
-    OPENSSL_cleanse(&vchTemp[0], vchData.size());
+    memory_cleanse(&vchTemp[0], vchData.size());
     return true;
 }
 
@@ -293,15 +293,15 @@ bool CBitcoinAddress::IsScript() const
     return IsValid() && vchVersion == Params().Base58Prefix(CChainParams::SCRIPT_ADDRESS);
 }
 
-void CBitcoinVlcret::SetKey(const CKey& vchVlcret)
+void CBitcoinSecret::SetKey(const CKey& vchSecret)
 {
-    assert(vchVlcret.IsValid());
-    SetData(Params().Base58Prefix(CChainParams::VLCRET_KEY), vchVlcret.begin(), vchVlcret.size());
-    if (vchVlcret.IsCompressed())
+    assert(vchSecret.IsValid());
+    SetData(Params().Base58Prefix(CChainParams::SECRET_KEY), vchSecret.begin(), vchSecret.size());
+    if (vchSecret.IsCompressed())
         vchData.push_back(1);
 }
 
-CKey CBitcoinVlcret::GetKey()
+CKey CBitcoinSecret::GetKey()
 {
     CKey ret;
     assert(vchData.size() >= 32);
@@ -309,19 +309,19 @@ CKey CBitcoinVlcret::GetKey()
     return ret;
 }
 
-bool CBitcoinVlcret::IsValid() const
+bool CBitcoinSecret::IsValid() const
 {
     bool fExpectedFormat = vchData.size() == 32 || (vchData.size() == 33 && vchData[32] == 1);
-    bool fCorrectVersion = vchVersion == Params().Base58Prefix(CChainParams::VLCRET_KEY);
+    bool fCorrectVersion = vchVersion == Params().Base58Prefix(CChainParams::SECRET_KEY);
     return fExpectedFormat && fCorrectVersion;
 }
 
-bool CBitcoinVlcret::SetString(const char* pszVlcret)
+bool CBitcoinSecret::SetString(const char* pszSecret)
 {
-    return CBase58Data::SetString(pszVlcret) && IsValid();
+    return CBase58Data::SetString(pszSecret) && IsValid();
 }
 
-bool CBitcoinVlcret::SetString(const std::string& strVlcret)
+bool CBitcoinSecret::SetString(const std::string& strSecret)
 {
-    return SetString(strVlcret.c_str());
+    return SetString(strSecret.c_str());
 }

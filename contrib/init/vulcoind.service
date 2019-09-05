@@ -17,8 +17,8 @@ ExecStop=-/usr/bin/vulcoin-cli -conf=/etc/vulcoin/vulcoin.conf \
 
 Restart=always
 PrivateTmp=true
-TimeoutStopVlc=60s
-TimeoutStartVlc=2s
+TimeoutStopSec=60s
+TimeoutStartSec=2s
 StartLimitInterval=120s
 StartLimitBurst=5
 

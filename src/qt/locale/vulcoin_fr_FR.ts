@@ -109,15 +109,15 @@
     <name>AskPassphraseDialog</name>
     <message>
         <source>Enter passphrase</source>
-        <translation>Entrer la phrase vlcrète</translation>
+        <translation>Entrer la phrase secrète</translation>
     </message>
     <message>
         <source>New passphrase</source>
-        <translation>Nouvelle phrase vlcrète</translation>
+        <translation>Nouvelle phrase secrète</translation>
     </message>
     <message>
         <source>Repeat new passphrase</source>
-        <translation>Confirmer la nouvelle phrase vlcrète</translation>
+        <translation>Confirmer la nouvelle phrase secrète</translation>
     </message>
     <message>
         <source>Encrypt wallet</source>
@@ -125,7 +125,7 @@
     </message>
     <message>
         <source>This operation needs your wallet passphrase to unlock the wallet.</source>
-        <translation>Cette opération requiert votre phrase vlcrète pour déverrouiller votre portefeuille.</translation>
+        <translation>Cette opération requiert votre phrase secrète pour déverrouiller votre portefeuille.</translation>
     </message>
     <message>
         <source>Unlock wallet</source>
@@ -133,7 +133,7 @@
     </message>
     <message>
         <source>This operation needs your wallet passphrase to decrypt the wallet.</source>
-        <translation>Cette opération nécessite votre phrase vlcrète de portefeuille pour décrypter le portefeuille </translation>
+        <translation>Cette opération nécessite votre phrase secrète de portefeuille pour décrypter le portefeuille </translation>
     </message>
     <message>
         <source>Decrypt wallet</source>
@@ -141,11 +141,11 @@
     </message>
     <message>
         <source>Change passphrase</source>
-        <translation>Changer la phrase vlcrète</translation>
+        <translation>Changer la phrase secrète</translation>
     </message>
     <message>
         <source>Enter the old and new passphrase to the wallet.</source>
-        <translation>Entrer l'ancienne et la nouvelle phrase vlcrète dans le portefeuille</translation>
+        <translation>Entrer l'ancienne et la nouvelle phrase secrète dans le portefeuille</translation>
     </message>
     <message>
         <source>Confirm wallet encryption</source>
@@ -161,7 +161,7 @@
     </message>
     <message>
         <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR VLC&lt;/b&gt;!</source>
-        <translation>Attention : si vous cryptez votre portefeuille et perdez votre phrase vlcrète, vous &lt;b&gt;PERDREZ TOUS VOS VLC&lt;/b&gt;!</translation>
+        <translation>Attention : si vous cryptez votre portefeuille et perdez votre phrase secrète, vous &lt;b&gt;PERDREZ TOUS VOS VLC&lt;/b&gt;!</translation>
     </message>
     <message>
         <source>Wallet encrypted</source>
@@ -177,7 +177,7 @@
     </message>
     <message>
         <source>The supplied passphrases do not match.</source>
-        <translation>Les phrases vlcrètes fournies ne correspondent pas.</translation>
+        <translation>Les phrases secrètes fournies ne correspondent pas.</translation>
     </message>
     <message>
         <source>Wallet unlock failed</source>
@@ -185,7 +185,7 @@
     </message>
     <message>
         <source>The passphrase entered for the wallet decryption was incorrect.</source>
-        <translation>La phrase vlcrète entrée pour le décryptage de votre portefeuille était incorrecte.</translation>
+        <translation>La phrase secrète entrée pour le décryptage de votre portefeuille était incorrecte.</translation>
     </message>
     <message>
         <source>Wallet decryption failed</source>
@@ -193,7 +193,7 @@
     </message>
     <message>
         <source>Wallet passphrase was successfully changed.</source>
-        <translation>La phrase vlcrète de votre portefeuille a été changée avec succès.</translation>
+        <translation>La phrase secrète de votre portefeuille a été changée avec succès.</translation>
     </message>
     <message>
         <source>Warning: The Caps Lock key is on!</source>
@@ -212,7 +212,7 @@
     </message>
     <message>
         <source>Enter a VLC Address that you would like to encrypt using BIP 38. Enter a passphrase in the middle box. Press encrypt to compute the encrypted private key.</source>
-        <translation>Entrez une adresse VLC que vous voulez crypter en utilisant BIP 38. Entrez une phrase vlcrète dans le champ du milieu. Cliquez sur crypter pour calculer la clé de cryptage privée.</translation>
+        <translation>Entrez une adresse VLC que vous voulez crypter en utilisant BIP 38. Entrez une phrase secrète dans le champ du milieu. Cliquez sur crypter pour calculer la clé de cryptage privée.</translation>
     </message>
     <message>
         <source>Address:</source>
@@ -240,7 +240,7 @@
     </message>
     <message>
         <source>Passphrase: </source>
-        <translation>Phrase vlcrète :</translation>
+        <translation>Phrase secrète :</translation>
     </message>
     <message>
         <source>Encrypted Key:</source>
@@ -296,7 +296,7 @@
     </message>
     <message>
         <source>The entered passphrase is invalid. </source>
-        <translation>La phrase vlcrète entrée est incorrect.</translation>
+        <translation>La phrase secrète entrée est incorrect.</translation>
     </message>
     <message>
         <source>Allowed: 0-9,a-z,A-Z,</source>
@@ -328,7 +328,7 @@
     </message>
     <message>
         <source>Please check the key and passphrase and try again.</source>
-        <translation>Veuillez vérifier la clé et la phrase vlcrète et réessayer.</translation>
+        <translation>Veuillez vérifier la clé et la phrase secrète et réessayer.</translation>
     </message>
     <message>
         <source>Data Not Valid.</source>
@@ -427,7 +427,7 @@
     </message>
     <message>
         <source>Change the passphrase used for wallet encryption</source>
-        <translation>Changer la phrase vlcrète utilisée pour l'encryptage du portefeuille</translation>
+        <translation>Changer la phrase secrète utilisée pour l'encryptage du portefeuille</translation>
     </message>
     <message>
         <source>&amp;Unlock Wallet...</source>
@@ -563,7 +563,7 @@
     </message>
     <message>
         <source>Encrypt and decrypt private keys using a passphrase</source>
-        <translation>Crypter et décrypter les clés privées en utilisant une phrase vlcrète</translation>
+        <translation>Crypter et décrypter les clés privées en utilisant une phrase secrète</translation>
     </message>
     <message>
         <source>Synchronizing with network...</source>

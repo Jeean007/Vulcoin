@@ -11,7 +11,7 @@ the same, tested dependencies are used and statically built into the executable.
 Multiple developers build the source code by following a specific descriptor
 ("recipe"), cryptographically sign the result, and upload the resulting signature.
 These results are compared and only if they match, the build is accepted and uploaded
-to vulcoincoin.io.
+to vlc.org.
 
 More independent gitian builders are needed, which is why I wrote this
 guide. It is preferred to follow these steps yourself instead of using someone else's
@@ -281,7 +281,7 @@ Clone the git repositories for vulcoin and gitian and then checkout the vulcoin 
 
 ```bash
 git clone https://github.com/devrandom/gitian-builder.git
-git clone https://github.com/VulcoinFoundation/VulcoinCoin.git
+git clone https://github.com/vulcoin-official/vulcoin.git
 cd vulcoin
 git checkout v${VERSION}
 cd ..
@@ -350,7 +350,7 @@ Output from `gbuild` will look something like
     remote: Total 35606 (delta 0), reused 0 (delta 0)
     Receiving objects: 100% (35606/35606), 26.52 MiB | 4.28 MiB/s, done.
     Resolving deltas: 100% (25724/25724), done.
-    From https://github.com/VulcoinFoundation/VulcoinCoin
+    From https://github.com/vulcoin-official/vulcoin
     ... (new tags, new branch etc)
     --- Building for trusty x86_64 ---
     Stopping target if it is up
@@ -390,7 +390,7 @@ Signing externally
 If you want to do the PGP signing on another device that's also possible; just define `SIGNER` as mentioned
 and follow the steps in the build process as normal.
 
-    gpg: skipped "crowning-": vlcret key not available
+    gpg: skipped "crowning-": secret key not available
 
 When you execute `gsign` you will get an error from GPG, which can be ignored. Copy the resulting `.assert` files
 in `gitian.sigs` to your signing machine and do

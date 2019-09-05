@@ -11,14 +11,14 @@ number of undocumented args.
 github-merge.py
 ===============
 
-A small script to automate merging pull-requests vlcurely and sign them with GPG.
+A small script to automate merging pull-requests securely and sign them with GPG.
 
 For example:
 
   ./github-merge.py 3077
 
 (in any git repository) will help you merge pull request #3077 for the
-VulcoinFoundation/VulcoinCoin repository.
+vulcoin/vulcoin repository.
 
 What it does:
 * Fetch master and the pull request.
@@ -34,11 +34,17 @@ pullreq gets updated while you're reviewing it, but before you click
 merge), and when using GPG signatures, that even a compromised GitHub
 couldn't mess with the sources.
 
+gen-manpages.sh
+===============
+
+A small script to automatically create manpages in ../../doc/man by running the release binaries with the -help option.
+This requires help2man which can be found at: https://www.gnu.org/software/help2man/
+
 Setup
 ---------
 Configuring the github-merge tool for the Vulcoin repository is done in the following way:
 
-    git config githubmerge.repository VulcoinFoundation/VulcoinCoin
+    git config githubmerge.repository vulcoin/vulcoin
     git config githubmerge.testcmd "make -j4 check" (adapt to whatever you want to use for testing)
     git config --global user.signingkey mykeyid (if you want to GPG sign)
 
@@ -59,7 +65,7 @@ For example a file changed in 2014 (with 2014 being the current year):
 ```// Copyright (c) 2009-2013 The Bitcoin developers```
 
 would be changed to:
-```// Copyright (c) 2009-2019 The Bitcoin developers```
+```// Copyright (c) 2009-2014 The Bitcoin developers```
 
 logprint-scanner.py
 ===================

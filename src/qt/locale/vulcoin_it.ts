@@ -132,8 +132,12 @@
         <translation>Ripetere la nuova parola d'ordine</translation>
     </message>
     <message>
-        <source>Serves to disable the trivial sendmoney when OS account compromised. Provides no real vlcurity.</source>
+        <source>Serves to disable the trivial sendmoney when OS account compromised. Provides no real security.</source>
         <translation>Serve per impedire invii accidentali nel caso in cui l'utenza del sistema operativo sia stata compromessa. Non garantisce alcuna reale sicurezza.</translation>
+    </message>
+    <message>
+        <source>For staking only</source>
+        <translation>Solo per staking</translation>
     </message>
     <message>
         <source>Enter the new passphrase to the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
@@ -188,7 +192,7 @@
         <translation>Portafoglio crittografato</translation>
     </message>
     <message>
-        <source>IMPORTANT: Any previous backups you have made of your wallet file should be replaced with the newly generated, encrypted wallet file. For vlcurity reasons, previous backups of the unencrypted wallet file will become useless as soon as you start using the new, encrypted wallet.</source>
+        <source>IMPORTANT: Any previous backups you have made of your wallet file should be replaced with the newly generated, encrypted wallet file. For security reasons, previous backups of the unencrypted wallet file will become useless as soon as you start using the new, encrypted wallet.</source>
         <translation>IMPORTANTE: Eventuali file di back-up precedenti del tuo portafoglio dovrebbero essere sostituiti con il nuovo file criptato generato. Per motivi di sicurezza, precedenti file di back-up del portafoglio non criptato diventeranno inutilizzabili nel momento in cui inizierai ad utilizzare il nuovo portafoglio criptato.</translation>
     </message>
     <message>
@@ -712,7 +716,7 @@ Indirizzo: %4
     <message>
         <source>Staking is active
  MultiSend: %1</source>
-        <translation>Lo Stacking è attivo
+        <translation>Lo Staking è attivo
 MultiSend: %1</translation>
     </message>
     <message>

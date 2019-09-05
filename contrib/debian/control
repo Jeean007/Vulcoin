@@ -22,9 +22,9 @@ Build-Depends: debhelper,
  libqrencode-dev,
  libprotobuf-dev, protobuf-compiler
 Standards-Version: 3.9.2
-Homepage: http://www.vulcoincoin.io
-Vcs-Git: git://github.com/VulcoinFoundation/VulcoinCoin.git
-Vcs-Browser: http://github.com/VulcoinFoundation/VulcoinCoin
+Homepage: http://www.vlc.org
+Vcs-Git: git://github.com/vulcoin-official/vulcoin.git
+Vcs-Browser: http://github.com/vulcoin-official/vulcoin
 
 Package: vulcoind
 Architecture: any
@@ -51,6 +51,13 @@ Description: peer-to-peer network based digital currency - Qt GUI
  It is a decentralized, peer-to-peer transactional currency designed
  to offer a solution to the problem posed by the exponential increase
  in energy consumed by Bitcoin and other proof-of-work currencies.
+ Proof-of-work mining is environmentally unsustainable due to the
+ electricity used by high-powered mining hardware. Vulcoin
+ utilizes an en- ergy efficient proof-of-stake algorithm, can be
+ mined on any computer, and will never require specialized mining
+ equipment. The Green Protocol offers a simple solution to
+ Bitcoin sustainability issues and provides a faster, more scalable
+ blockchain that is better suited for daily transactional use.
  .
  Full transaction history is stored locally at each client.  This
  requires 1+ GB of space, slowly growing.

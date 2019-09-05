@@ -1,5 +1,5 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
-// Copyright (c) 2009-2019 The Bitcoin developers
+// Copyright (c) 2009-2014 The Bitcoin developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -21,7 +21,7 @@ int64_t GetTime()
 {
     if (nMockTime) return nMockTime;
 
-    return time(NULL);
+    return time(nullptr);
 }
 
 void SetMockTime(int64_t nMockTimeIn)

@@ -1,4 +1,4 @@
-.TH vulcoin.conf "5" "January 2011" "vulcoin.conf 3.19"
+.TH VULCOIN.CONF "5" "January 2011" "vulcoin.conf 3.19"
 .SH NAME
 vulcoin.conf \- vulcoin configuration file
 .SH SYNOPSIS
@@ -32,22 +32,22 @@ Maximum number of inbound+outbound connections.
 Tells *vulcoin* to accept or not accept JSON-RPC commands.
 .TP
 \fBrpcuser=\fR\fI'username'\fR
-You must set *rpcuser* to vlcure the JSON-RPC api.
+You must set *rpcuser* to secure the JSON-RPC api.
 .TP
 \fBrpcpassword=\fR\fI'password'\fR
-You must set *rpcpassword* to vlcure the JSON-RPC api.
+You must set *rpcpassword* to secure the JSON-RPC api.
 .TP
 \fBrpcallowip=\fR\fI'192.168.1.*'\fR
 By default, only RPC connections from localhost are allowed. Specify as many *rpcallowip=* settings as you like to allow connections from other hosts (and you may use * as a wildcard character).
 .TP
-\fBrpcport=\fR\fI'22031'\fR
+\fBrpcport=\fR\fI'9332'\fR
 Listen for RPC connections on this TCP port.
 .TP
 \fBrpcconnect=\fR\fI'127.0.0.1'\fR
 You can use *vulcoin* or *vulcoind(1)* to send commands to *vulcoin*/*vulcoind(1)* running on another host using this option.
 .TP
 \fBrpcssl=\fR\fI'1'\fR
-Use Vlcure Sockets Layer (also known as TLS or HTTPS) to communicate with *vulcoin* '\-server' or *vulcoind(1)*. Example of OpenSSL settings used when *rpcssl*='1':
+Use Secure Sockets Layer (also known as TLS or HTTPS) to communicate with *vulcoin* '\-server' or *vulcoind(1)*. Example of OpenSSL settings used when *rpcssl*='1':
 .TP
 \fB\-rpcsslciphers=\fR<ciphers>
 Acceptable ciphers (default: TLSv1+HIGH:\:!SSLv2:\:!aNULL:\:!eNULL:\:!AH:\:!3DES:\:@STRENGTH)

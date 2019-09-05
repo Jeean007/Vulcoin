@@ -184,7 +184,7 @@
         <translation>Portemonnee versleuteld</translation>
     </message>
     <message>
-        <source>IMPORTANT: Any previous backups you have made of your wallet file should be replaced with the newly generated, encrypted wallet file. For vlcurity reasons, previous backups of the unencrypted wallet file will become useless as soon as you start using the new, encrypted wallet.</source>
+        <source>IMPORTANT: Any previous backups you have made of your wallet file should be replaced with the newly generated, encrypted wallet file. For security reasons, previous backups of the unencrypted wallet file will become useless as soon as you start using the new, encrypted wallet.</source>
         <translation>BELANGRIJK: Elke eerder gemaakte backup van uw portemonneebestand dient te worden vervangen door het nieuw gegenereerde, versleutelde portemonneebestand. Om veiligheidsredenen zullen eerdere backups van het niet-versleutelde portemonneebestand onbruikbaar worden zodra u uw nieuwe, versleutelde, portemonnee begint te gebruiken.</translation>
     </message>
     <message>
@@ -1971,7 +1971,7 @@ MultiSend: %1</translation>
         <translation>gebruikt</translation>
     </message>
     <message>
-        <source>Warning: Invalid VLC address</source>
+        <source>Warning: Invalid Vulcoin address</source>
         <translation>Waarschuwing: Ongeldig VLC adres</translation>
     </message>
     <message>

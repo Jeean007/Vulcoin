@@ -176,7 +176,7 @@
         <translation>PLånbok krypterad</translation>
     </message>
     <message>
-        <source>IMPORTANT: Any previous backups you have made of your wallet file should be replaced with the newly generated, encrypted wallet file. For vlcurity reasons, previous backups of the unencrypted wallet file will become useless as soon as you start using the new, encrypted wallet.</source>
+        <source>IMPORTANT: Any previous backups you have made of your wallet file should be replaced with the newly generated, encrypted wallet file. For security reasons, previous backups of the unencrypted wallet file will become useless as soon as you start using the new, encrypted wallet.</source>
         <translation>VIKTIGT: Alla dina tidigare säkerhetskopior du har gjort av plånboks filen bör ersättas med den nygenerade,kryyterade plånboks filen. För säkerhetsskäl, tidigar säkerhetskopior av okrypterade plånboks filer kommer bli oanvändbar så fort du börjar använda den nya krypterade plånboken.</translation>
     </message>
     <message>

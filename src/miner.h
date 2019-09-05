@@ -29,7 +29,7 @@ void UpdateTime(CBlockHeader* block, const CBlockIndex* pindexPrev);
 
 void BitcoinMiner(CWallet* pwallet, bool fProofOfStake);
 
-extern double dHashesPerVlc;
+extern double dHashesPerSec;
 extern int64_t nHPSTimerStart;
 
 #endif // BITCOIN_MINER_H

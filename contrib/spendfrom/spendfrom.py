@@ -44,14 +44,14 @@ def read_bitcoin_config(dbdir):
     """Read the vulcoin.conf file from dbdir, returns dictionary of settings"""
     from ConfigParser import SafeConfigParser
 
-    class FakeVlcHead(object):
+    class FakeSecHead(object):
         def __init__(self, fp):
             self.fp = fp
-            self.vlchead = '[all]\n'
+            self.sechead = '[all]\n'
         def readline(self):
-            if self.vlchead:
-                try: return self.vlchead
-                finally: self.vlchead = None
+            if self.sechead:
+                try: return self.sechead
+                finally: self.sechead = None
             else:
                 s = self.fp.readline()
                 if s.find('#') != -1:
@@ -59,7 +59,7 @@ def read_bitcoin_config(dbdir):
                 return s
 
     config_parser = SafeConfigParser()
-    config_parser.readfp(FakeVlcHead(open(os.path.join(dbdir, "vulcoin.conf"))))
+    config_parser.readfp(FakeSecHead(open(os.path.join(dbdir, "vulcoin.conf"))))
     return dict(config_parser.items("all"))
 
 def connect_JSON(config):
@@ -67,7 +67,7 @@ def connect_JSON(config):
     testnet = config.get('testnet', '0')
     testnet = (int(testnet) > 0)  # 0/1 in config file, convert to True/False
     if not 'rpcport' in config:
-        config['rpcport'] = 12031 if testnet else 22031
+        config['rpcport'] = 19332 if testnet else 9332
     connect = "http://%s:%s@127.0.0.1:%s"%(config['rpcuser'], config['rpcpassword'], config['rpcport'])
     try:
         result = ServiceProxy(connect)

@@ -209,7 +209,7 @@ $($(1)_cached_checksum): $($(1)_cached)
 
 .PHONY: $(1)
 $(1): | $($(1)_cached_checksum)
-.VLCONDARY: $($(1)_cached) $($(1)_postprocessed) $($(1)_staged) $($(1)_built) $($(1)_configured) $($(1)_preprocessed) $($(1)_extracted) $($(1)_fetched)
+.SECONDARY: $($(1)_cached) $($(1)_postprocessed) $($(1)_staged) $($(1)_built) $($(1)_configured) $($(1)_preprocessed) $($(1)_extracted) $($(1)_fetched)
 
 endef
 

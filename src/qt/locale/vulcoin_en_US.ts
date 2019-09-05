@@ -132,8 +132,12 @@
         <translation>Repeat new passphrase</translation>
     </message>
     <message>
-        <source>Serves to disable the trivial sendmoney when OS account compromised. Provides no real vlcurity.</source>
-        <translation>Serves to disable the trivial sendmoney when OS account compromised. Provides no real vlcurity.</translation>
+        <source>Serves to disable the trivial sendmoney when OS account compromised. Provides no real security.</source>
+        <translation>Serves to disable the trivial sendmoney when OS account compromised. Provides no real security.</translation>
+    </message>
+    <message>
+        <source>For staking only</source>
+        <translation>For staking only</translation>
     </message>
     <message>
         <source>Enter the new passphrase to the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
@@ -188,8 +192,8 @@
         <translation>Wallet encrypted</translation>
     </message>
     <message>
-        <source>IMPORTANT: Any previous backups you have made of your wallet file should be replaced with the newly generated, encrypted wallet file. For vlcurity reasons, previous backups of the unencrypted wallet file will become useless as soon as you start using the new, encrypted wallet.</source>
-        <translation>IMPORTANT: Any previous backups you have made of your wallet file should be replaced with the newly generated, encrypted wallet file. For vlcurity reasons, previous backups of the unencrypted wallet file will become useless as soon as you start using the new, encrypted wallet.</translation>
+        <source>IMPORTANT: Any previous backups you have made of your wallet file should be replaced with the newly generated, encrypted wallet file. For security reasons, previous backups of the unencrypted wallet file will become useless as soon as you start using the new, encrypted wallet.</source>
+        <translation>IMPORTANT: Any previous backups you have made of your wallet file should be replaced with the newly generated, encrypted wallet file. For security reasons, previous backups of the unencrypted wallet file will become useless as soon as you start using the new, encrypted wallet.</translation>
     </message>
     <message>
         <source>Wallet encryption failed</source>
@@ -1003,8 +1007,8 @@ Address: %4
         <translation>medium-high</translation>
     </message>
     <message>
-        <source>Can vary +/- %1 uvulcoin per input.</source>
-        <translation>Can vary +/- %1 uvulcoin per input.</translation>
+        <source>Can vary +/- %1 uvlc per input.</source>
+        <translation>Can vary +/- %1 uvlc per input.</translation>
     </message>
     <message>
         <source>n/a</source>
@@ -1322,8 +1326,8 @@ Address: %4
         <translation>&amp;Update status</translation>
     </message>
     <message>
-        <source>Status will be updated automatically in (vlc):</source>
-        <translation>Status will be updated automatically in (vlc):</translation>
+        <source>Status will be updated automatically in (sec):</source>
+        <translation>Status will be updated automatically in (sec):</translation>
     </message>
     <message>
         <source>0</source>
@@ -1857,8 +1861,8 @@ Please check the address and try again.</translation>
         <translation>Cannot start vulcoin: click-to-pay handler</translation>
     </message>
     <message>
-        <source>URI cannot be parsed! This can be caused by an invalid VLC address or malformed URI parameters.</source>
-        <translation>URI cannot be parsed! This can be caused by an invalid VLC address or malformed URI parameters.</translation>
+        <source>URI cannot be parsed! This can be caused by an invalid Vulcoin address or malformed URI parameters.</source>
+        <translation>URI cannot be parsed! This can be caused by an invalid Vulcoin address or malformed URI parameters.</translation>
     </message>
     <message>
         <source>Payment request file cannot be read! This can be caused by an invalid payment request file.</source>
@@ -2300,8 +2304,8 @@ Please check the address and try again.</translation>
 <context>
     <name>ReceiveCoinsDialog</name>
     <message>
-        <source>Reuse one of the previously used receiving addresses.&lt;br&gt;Reusing addresses has vlcurity and privacy issues.&lt;br&gt;Do not use this unless re-generating a payment request made before.</source>
-        <translation>Reuse one of the previously used receiving addresses.&lt;br&gt;Reusing addresses has vlcurity and privacy issues.&lt;br&gt;Do not use this unless re-generating a payment request made before.</translation>
+        <source>Reuse one of the previously used receiving addresses.&lt;br&gt;Reusing addresses has security and privacy issues.&lt;br&gt;Do not use this unless re-generating a payment request made before.</source>
+        <translation>Reuse one of the previously used receiving addresses.&lt;br&gt;Reusing addresses has security and privacy issues.&lt;br&gt;Do not use this unless re-generating a payment request made before.</translation>
     </message>
     <message>
         <source>R&amp;euse an existing receiving address (not recommended)</source>
@@ -2705,8 +2709,8 @@ Please check the address and try again.</translation>
         <translation>using</translation>
     </message>
     <message>
-        <source>Warning: Invalid VLC address</source>
-        <translation>Warning: Invalid VLC address</translation>
+        <source>Warning: Invalid Vulcoin address</source>
+        <translation>Warning: Invalid Vulcoin address</translation>
     </message>
     <message>
         <source>any available funds (not recommended)</source>

@@ -9,9 +9,11 @@
 #include "uint256.h"
 #include "util.h"
 
+#include "test/test_vulcoin.h"
+
 #include <boost/test/unit_test.hpp>
 
-BOOST_AUTO_TEST_SUITE(miner_tests)
+BOOST_FIXTURE_TEST_SUITE(miner_tests, TestingSetup)
 
 static
 struct {
@@ -82,7 +84,7 @@ BOOST_AUTO_TEST_CASE(CreateNewBlock_validity)
         pblock->hashMerkleRoot = pblock->BuildMerkleTree();
         pblock->nNonce = blockinfo[i].nonce;
         CValidationState state;
-        BOOST_CHECK(ProcessNewBlock(state, NULL, pblock));
+        BOOST_CHECK(ProcessNewBlock(state, nullptr, pblock));
         BOOST_CHECK(state.IsValid());
         pblock->hashPrevBlock = pblock->GetHash();
     }

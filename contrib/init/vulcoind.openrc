@@ -65,10 +65,10 @@ checkconfig()
 {
 	if ! grep -qs '^rpcpassword=' "${BITCOIND_CONFIGFILE}" ; then
 		eerror ""
-		eerror "ERROR: You must set a vlcure rpcpassword to run vulcoind."
+		eerror "ERROR: You must set a secure rpcpassword to run vulcoind."
 		eerror "The setting must appear in ${BITCOIND_CONFIGFILE}"
 		eerror ""
-		eerror "This password is vlcurity critical to vlcuring wallets "
+		eerror "This password is security critical to securing wallets "
 		eerror "and must not be the same as the rpcuser setting."
 		eerror "You can generate a suitable random password using the following"
 		eerror "command from the shell:"

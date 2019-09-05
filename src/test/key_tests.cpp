@@ -10,6 +10,8 @@
 #include "util.h"
 #include "utilstrencodings.h"
 
+#include "test/test_vulcoin.h"
+
 #include <string>
 #include <vector>
 
@@ -17,10 +19,10 @@
 
 using namespace std;
 
-static const string strVlcret1     ("2a6Rd6XtMKvFrjkDi6FcfSrJkpaKc382bCDadKjxPsSAHKXoZok");
-static const string strVlcret2     ("2YtPcre7RfCg6TdakgACcAiFBakczN41n1D68nvseWST5eVqqxU");
-static const string strVlcret1C    ("7w4wgKRKeiW4aXfm6NBWQh6dNQz57eN21vWXRKibVwc3xfUaExcT");
-static const string strVlcret2C    ("7qjpqG6oMqcXZ6YTymqcEDs3bhyXrBvJRdvMfPinYYwL7HbEPDnQ");
+static const string strSecret1     ("2a6Rd6XtMKvFrjkDi6FcfSrJkpaKc382bCDadKjxPsSAHKXoZok");
+static const string strSecret2     ("2YtPcre7RfCg6TdakgACcAiFBakczN41n1D68nvseWST5eVqqxU");
+static const string strSecret1C    ("7w4wgKRKeiW4aXfm6NBWQh6dNQz57eN21vWXRKibVwc3xfUaExcT");
+static const string strSecret2C    ("7qjpqG6oMqcXZ6YTymqcEDs3bhyXrBvJRdvMfPinYYwL7HbEPDnQ");
 static const CBitcoinAddress addr1 ("GPbEQ1hJxpJkWBDKMpc4y2KkugwuUaRUTY");
 static const CBitcoinAddress addr2 ("GMLyt6XF2uyf5D154j7VW8oYGbcmvREGBm");
 static const CBitcoinAddress addr1C("GRswJtXD3dWyWpz8oXdbxWeTEvYAuXmQUx");
@@ -44,38 +46,38 @@ void dumpKeyInfo()
 
         CKey key;
         key.SetPrivKey(s, bCompressed);
-        CPrivKey vlcret = key.GetPrivKey();
+        CPrivKey secret = key.GetPrivKey();
         CPubKey pubKey = key.GetPubKey();
 
-        CBitcoinVlcret bvlcret;
-        bvlcret.SetKey(key);
+        CBitcoinSecret bsecret;
+        bsecret.SetKey(key);
 
         printf("  * %s:\n", bCompressed ? "compressed" : "uncompressed");
-        printf("    * vlcret (base58): %s\n", bvlcret.ToString().c_str());
+        printf("    * secret (base58): %s\n", bsecret.ToString().c_str());
         printf("    * pubkey (hex): %s\n", HexStr(pubKey).c_str());
         printf("    * address (base58): %s\n", CBitcoinAddress(CTxDestination(pubKey.GetID())).ToString().c_str());
 }
 #endif
 
 
-BOOST_AUTO_TEST_SUITE(key_tests)
+BOOST_FIXTURE_TEST_SUITE(key_tests, TestingSetup)
 
 BOOST_AUTO_TEST_CASE(key_test1)
 {
-    CBitcoinVlcret bvlcret1, bvlcret2, bvlcret1C, bvlcret2C, baddress1;
-    BOOST_CHECK( bvlcret1.SetString (strVlcret1));
-    BOOST_CHECK( bvlcret2.SetString (strVlcret2));
-    BOOST_CHECK( bvlcret1C.SetString(strVlcret1C));
-    BOOST_CHECK( bvlcret2C.SetString(strVlcret2C));
+    CBitcoinSecret bsecret1, bsecret2, bsecret1C, bsecret2C, baddress1;
+    BOOST_CHECK( bsecret1.SetString (strSecret1));
+    BOOST_CHECK( bsecret2.SetString (strSecret2));
+    BOOST_CHECK( bsecret1C.SetString(strSecret1C));
+    BOOST_CHECK( bsecret2C.SetString(strSecret2C));
     BOOST_CHECK(!baddress1.SetString(strAddressBad));
 
-    CKey key1  = bvlcret1.GetKey();
+    CKey key1  = bsecret1.GetKey();
     BOOST_CHECK(key1.IsCompressed() == false);
-    CKey key2  = bvlcret2.GetKey();
+    CKey key2  = bsecret2.GetKey();
     BOOST_CHECK(key2.IsCompressed() == false);
-    CKey key1C = bvlcret1C.GetKey();
+    CKey key1C = bsecret1C.GetKey();
     BOOST_CHECK(key1C.IsCompressed() == true);
-    CKey key2C = bvlcret2C.GetKey();
+    CKey key2C = bsecret2C.GetKey();
     BOOST_CHECK(key2C.IsCompressed() == true);
 
     CPubKey pubkey1  = key1. GetPubKey();
@@ -110,7 +112,7 @@ BOOST_AUTO_TEST_CASE(key_test1)
 
     for (int n=0; n<16; n++)
     {
-        string strMsg = strprintf("Very vlcret message %i: 11", n);
+        string strMsg = strprintf("Very secret message %i: 11", n);
         uint256 hashMsg = Hash(strMsg.begin(), strMsg.end());
 
         // normal signatures

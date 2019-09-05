@@ -50,7 +50,7 @@ class WalletTest (BitcoinTestFramework):
         assert_equal(self.nodes[2].getbalance(), 0)
 
         # Send 601 BTC from 0 to 2 using sendtoaddress call.
-        # Vlcond transaction will be child of first, and will require a fee
+        # Second transaction will be child of first, and will require a fee
         self.nodes[0].sendtoaddress(self.nodes[2].getnewaddress(), 351)
         self.nodes[0].sendtoaddress(self.nodes[2].getnewaddress(), 350)
 

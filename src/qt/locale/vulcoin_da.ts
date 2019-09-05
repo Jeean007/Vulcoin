@@ -132,8 +132,12 @@
         <translation>Gentag password</translation>
     </message>
     <message>
-        <source>Serves to disable the trivial sendmoney when OS account compromised. Provides no real vlcurity.</source>
+        <source>Serves to disable the trivial sendmoney when OS account compromised. Provides no real security.</source>
         <translation>Slår ligegyldige afsendelser fra, når operativsystemets konto er kompromitteret. Denne funktion giver ikke ægte sikkerhed</translation>
+    </message>
+    <message>
+        <source>For staking only</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Enter the new passphrase to the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
@@ -188,7 +192,7 @@
         <translation>Tegnebogen er nu krypteret</translation>
     </message>
     <message>
-        <source>IMPORTANT: Any previous backups you have made of your wallet file should be replaced with the newly generated, encrypted wallet file. For vlcurity reasons, previous backups of the unencrypted wallet file will become useless as soon as you start using the new, encrypted wallet.</source>
+        <source>IMPORTANT: Any previous backups you have made of your wallet file should be replaced with the newly generated, encrypted wallet file. For security reasons, previous backups of the unencrypted wallet file will become useless as soon as you start using the new, encrypted wallet.</source>
         <translation>Vigtigt! Alle sikkerhedskopier er er lavet af tegnebogen bør fjernes og erstattes med den nye kryptograferede tegnebogsfil. Af sikkerhedsmæssige årsager vil alle tidligere sikkerhedskopier, som har været taget af den ukrypterede tegnebog være uanvendelige så snart De tager den nye, krypterede tegnebog i brug.</translation>
     </message>
     <message>
@@ -1294,7 +1298,7 @@ Adresse: %4
         <translation>&amp;opdateringsstatus</translation>
     </message>
     <message>
-        <source>Status will be updated automatically in (vlc):</source>
+        <source>Status will be updated automatically in (sec):</source>
         <translation>Status opdateres automatisk om (sek):</translation>
     </message>
     <message>
@@ -1512,7 +1516,7 @@ Kontroller adressen og prøv igen.</translation>
     </message>
     <message>
         <source>Size of &amp;database cache</source>
-        <translation>Størrelse på &amp;databavlcache</translation>
+        <translation>Størrelse på &amp;databasecache</translation>
     </message>
     <message>
         <source>MB</source>
@@ -1813,7 +1817,7 @@ Kontroller adressen og prøv igen.</translation>
         <translation>Kan ikke starte vulcoin "klik for at betale" systemet</translation>
     </message>
     <message>
-        <source>URI cannot be parsed! This can be caused by an invalid VLC address or malformed URI parameters.</source>
+        <source>URI cannot be parsed! This can be caused by an invalid Vulcoin address or malformed URI parameters.</source>
         <translation>URl kan ikke fortolkes! Det kan skyldes en ugyldig adresse, eller forkerte URl parametre.</translation>
     </message>
     <message>
@@ -2256,7 +2260,7 @@ Kontroller adressen og prøv igen.</translation>
 <context>
     <name>ReceiveCoinsDialog</name>
     <message>
-        <source>Reuse one of the previously used receiving addresses.&lt;br&gt;Reusing addresses has vlcurity and privacy issues.&lt;br&gt;Do not use this unless re-generating a payment request made before.</source>
+        <source>Reuse one of the previously used receiving addresses.&lt;br&gt;Reusing addresses has security and privacy issues.&lt;br&gt;Do not use this unless re-generating a payment request made before.</source>
         <translation>Genbrug en af de tidligere benyttede modtageradresser. &lt;br&gt; Genbrug af adresser kan kompromittere anonymiteten og sikkerheden. &lt;br&gt; Anbefales ikke, med mindre der blot er tale om genudsendelse af en tidligere genereret adresse.</translation>
     </message>
     <message>
@@ -2653,7 +2657,7 @@ Kontroller adressen og prøv igen.</translation>
         <translation>Anvender</translation>
     </message>
     <message>
-        <source>Warning: Invalid VLC address</source>
+        <source>Warning: Invalid Vulcoin address</source>
         <translation>Advarsel! Ugyldig VLC adresse</translation>
     </message>
     <message>
@@ -3548,7 +3552,7 @@ Kontroller adressen og prøv igen.</translation>
     </message>
     <message>
         <source>Cannot obtain a lock on data directory %s. Vulcoin Core is probably already running.</source>
-        <translation>Kan ikke låse datamappen %s. Vulcoin Core kører sandsynligvis allerede.</translation>
+        <translation>Kan ikke låse datamappen %s. Vulcoin core kører sandsynligvis allerede.</translation>
     </message>
     <message>
         <source>Change automatic finalized budget voting behavior. mode=auto: Vote for only exact finalized budget match to my generated budget. (string, default: auto)</source>
@@ -3749,7 +3753,7 @@ For eksempel: alertnotify=Echo %% | mail - s "Vulcoin ALARM!" e-mail@administrat
     </message>
     <message>
         <source>Warning: Please check that your computer's date and time are correct! If your clock is wrong Vulcoin Core will not work properly.</source>
-        <translation>Advarsel! Kontroller at computerens dato og tid er korrekt indstillet. Hvis tiden ikke er rigtig, vil Vulcoin Core ikke fungere ordentligt.</translation>
+        <translation>Advarsel! Kontroller at computerens dato og tid er korrekt indstillet. Hvis tiden ikke er rigtig, vil Vulcoin core ikke fungere ordentligt.</translation>
     </message>
     <message>
         <source>Warning: The network does not appear to fully agree! Some miners appear to be experiencing issues.</source>
@@ -3965,7 +3969,7 @@ For eksempel: alertnotify=Echo %% | mail - s "Vulcoin ALARM!" e-mail@administrat
     </message>
     <message>
         <source>Error loading wallet.dat: Wallet requires newer version of Vulcoin Core</source>
-        <translation>Fejl ved indlæsning af wallet.dat: Tegnebogen kræver en nyere version af Vulcoin Core</translation>
+        <translation>Fejl ved indlæsning af wallet.dat: Tegnebogen kræver en nyere version af Vulcoin core</translation>
     </message>
     <message>
         <source>Error opening block database</source>
@@ -4069,7 +4073,7 @@ For eksempel: alertnotify=Echo %% | mail - s "Vulcoin ALARM!" e-mail@administrat
     </message>
     <message>
         <source>Initialization sanity check failed. Vulcoin Core is shutting down.</source>
-        <translation>Initiering af sanitetskontrollen fejlede. Vulcoin Core lukker ned. </translation>
+        <translation>Initiering af sanitetskontrollen fejlede. Vulcoin core lukker ned. </translation>
     </message>
     <message>
         <source>Input is not valid.</source>
@@ -4357,7 +4361,7 @@ For eksempel: alertnotify=Echo %% | mail - s "Vulcoin ALARM!" e-mail@administrat
     </message>
     <message>
         <source>Set database cache size in megabytes (%d to %d, default: %d)</source>
-        <translation>Angiv databavlcachens størrelse i megabytes (%d til  %d, default: %d)</translation>
+        <translation>Angiv databasecachens størrelse i megabytes (%d til  %d, default: %d)</translation>
     </message>
     <message>
         <source>Set external address:port to get to this masternode (example: %s)</source>
@@ -4597,7 +4601,7 @@ For eksempel: alertnotify=Echo %% | mail - s "Vulcoin ALARM!" e-mail@administrat
     </message>
     <message>
         <source>Wallet needed to be rewritten: restart Vulcoin Core to complete</source>
-        <translation>Tegnebogen måtte genskrives. Genstart Vulcoin Core for at gøre færdig</translation>
+        <translation>Tegnebogen måtte genskrives. Genstart Vulcoin core for at gøre færdig</translation>
     </message>
     <message>
         <source>Wallet options:</source>

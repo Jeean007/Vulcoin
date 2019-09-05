@@ -166,8 +166,13 @@
     </message>
     <message>
         <location line="+33"/>
-        <source>Serves to disable the trivial sendmoney when OS account compromised. Provides no real vlcurity.</source>
-        <translation>Serves to disable the trivial sendmoney when OS account compromised. Provides no real vlcurity.</translation>
+        <source>Serves to disable the trivial sendmoney when OS account compromised. Provides no real security.</source>
+        <translation>Serves to disable the trivial sendmoney when OS account compromised. Provides no real security.</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>For staking only</source>
+        <translation>For staking only</translation>
     </message>
     <message>
         <location filename="../askpassphrasedialog.cpp" line="+44"/>
@@ -237,8 +242,8 @@
     </message>
     <message>
         <location line="-39"/>
-        <source>IMPORTANT: Any previous backups you have made of your wallet file should be replaced with the newly generated, encrypted wallet file. For vlcurity reasons, previous backups of the unencrypted wallet file will become useless as soon as you start using the new, encrypted wallet.</source>
-        <translation>IMPORTANT: Any previous backups you have made of your wallet file should be replaced with the newly generated, encrypted wallet file. For vlcurity reasons, previous backups of the unencrypted wallet file will become useless as soon as you start using the new, encrypted wallet.</translation>
+        <source>IMPORTANT: Any previous backups you have made of your wallet file should be replaced with the newly generated, encrypted wallet file. For security reasons, previous backups of the unencrypted wallet file will become useless as soon as you start using the new, encrypted wallet.</source>
+        <translation>IMPORTANT: Any previous backups you have made of your wallet file should be replaced with the newly generated, encrypted wallet file. For security reasons, previous backups of the unencrypted wallet file will become useless as soon as you start using the new, encrypted wallet.</translation>
     </message>
     <message>
         <location line="+7"/>
@@ -1334,8 +1339,8 @@ Address: %4
     </message>
     <message>
         <location line="+238"/>
-        <source>Can vary +/- %1 uvulcoin per input.</source>
-        <translation>Can vary +/- %1 uvulcoin per input.</translation>
+        <source>Can vary +/- %1 uvlc per input.</source>
+        <translation>Can vary +/- %1 uvlc per input.</translation>
     </message>
     <message>
         <location filename="../forms/coincontroldialog.ui" line="-334"/>
@@ -1729,7 +1734,7 @@ Address: %4
     </message>
     <message>
         <location line="+7"/>
-        <source>Status will be updated automatically in (vlc):</source>
+        <source>Status will be updated automatically in (sec):</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2650,7 +2655,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location line="+114"/>
-        <source>URI cannot be parsed! This can be caused by an invalid VLC address or malformed URI parameters.</source>
+        <source>URI cannot be parsed! This can be caused by an invalid Vulcoin address or malformed URI parameters.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3275,8 +3280,8 @@ p, li { white-space: pre-wrap; }
     <name>ReceiveCoinsDialog</name>
     <message>
         <location filename="../forms/receivecoinsdialog.ui" line="+34"/>
-        <source>Reuse one of the previously used receiving addresses.&lt;br&gt;Reusing addresses has vlcurity and privacy issues.&lt;br&gt;Do not use this unless re-generating a payment request made before.</source>
-        <translation>Reuse one of the previously used receiving addresses.&lt;br&gt;Reusing addresses has vlcurity and privacy issues.&lt;br&gt;Do not use this unless re-generating a payment request made before.</translation>
+        <source>Reuse one of the previously used receiving addresses.&lt;br&gt;Reusing addresses has security and privacy issues.&lt;br&gt;Do not use this unless re-generating a payment request made before.</source>
+        <translation>Reuse one of the previously used receiving addresses.&lt;br&gt;Reusing addresses has security and privacy issues.&lt;br&gt;Do not use this unless re-generating a payment request made before.</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -3786,7 +3791,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location line="+622"/>
-        <source>Warning: Invalid VLC address</source>
+        <source>Warning: Invalid Vulcoin address</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

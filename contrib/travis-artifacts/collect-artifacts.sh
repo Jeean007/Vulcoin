@@ -13,6 +13,10 @@ HOST=$5
 
 RELEASEDIR=$BASEDIR/$RELEASEBASE/$COMMIT/$HOST
 
+cd src
+ls
+cd ..
+mkdir -p $BASEDIR/bitcoin-$HOST
 cd $BASEDIR/bitcoin-$HOST
 
 mkdir -p $RELEASEDIR

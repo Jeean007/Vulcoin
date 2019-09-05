@@ -1,5 +1,5 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
-// Copyright (c) 2009-2019 The Bitcoin developers
+// Copyright (c) 2009-2014 The Bitcoin developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -25,7 +25,7 @@
 
 /**
  * Encode a byte sequence as a base58-encoded string.
- * pbegin and pend cannot be NULL, unless both are.
+ * pbegin and pend cannot be nullptr, unless both are.
  */
 std::string EncodeBase58(const unsigned char* pbegin, const unsigned char* pend);
 
@@ -37,13 +37,13 @@ std::string EncodeBase58(const std::vector<unsigned char>& vch);
 /**
  * Decode a base58-encoded string (psz) into a byte vector (vchRet).
  * return true if decoding is successful.
- * psz cannot be NULL.
+ * psz cannot be nullptr.
  */
 bool DecodeBase58(const char* psz, std::vector<unsigned char>& vchRet);
 
 /**
  * Decode a base58-encoded string (psz) into a string.
- * psz cannot be NULL.
+ * psz cannot be nullptr.
  */
 std::string DecodeBase58(const char* psz);
 
@@ -126,19 +126,19 @@ public:
 };
 
 /**
- * A base58-encoded vlcret key
+ * A base58-encoded secret key
  */
-class CBitcoinVlcret : public CBase58Data
+class CBitcoinSecret : public CBase58Data
 {
 public:
-    void SetKey(const CKey& vchVlcret);
+    void SetKey(const CKey& vchSecret);
     CKey GetKey();
     bool IsValid() const;
-    bool SetString(const char* pszVlcret);
-    bool SetString(const std::string& strVlcret);
+    bool SetString(const char* pszSecret);
+    bool SetString(const std::string& strSecret);
 
-    CBitcoinVlcret(const CKey& vchVlcret) { SetKey(vchVlcret); }
-    CBitcoinVlcret() {}
+    CBitcoinSecret(const CKey& vchSecret) { SetKey(vchSecret); }
+    CBitcoinSecret() {}
 };
 
 template <typename K, int Size, CChainParams::Base58Type Type>
@@ -167,7 +167,7 @@ public:
     CBitcoinExtKeyBase() {}
 };
 
-typedef CBitcoinExtKeyBase<CExtKey, 74, CChainParams::EXT_VLCRET_KEY> CBitcoinExtKey;
+typedef CBitcoinExtKeyBase<CExtKey, 74, CChainParams::EXT_SECRET_KEY> CBitcoinExtKey;
 typedef CBitcoinExtKeyBase<CExtPubKey, 74, CChainParams::EXT_PUBLIC_KEY> CBitcoinExtPubKey;
 
 #endif // BITCOIN_BASE58_H

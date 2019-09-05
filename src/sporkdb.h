@@ -2,8 +2,8 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef VLC_CSPORKDB_H
-#define VLC_CSPORKDB_H
+#ifndef VULCOIN_CSPORKDB_H
+#define VULCOIN_CSPORKDB_H
 
 #include <boost/filesystem/path.hpp>
 #include "leveldbwrapper.h"
@@ -25,4 +25,4 @@ public:
 };
 
 
-#endif //VLC_CSPORKDB_H
+#endif //VULCOIN_CSPORKDB_H

@@ -15,6 +15,19 @@ The following is a list of assets used in the bitcoin source and their proper at
 [David Vignoni](http://www.icon-king.com)
 -----------------------
 
+### Info
+* Icon Pack: NUVOLA ICON THEME for KDE 3.x
+* Designer: David Vignoni (david@icon-king.com)
+* License: LGPL
+* Site: [http://www.icon-king.com/projects/nuvola](http://www.icon-king.com/projects/nuvola)
+
+### Assets Used
+	src/qt/res/icons/address-book.png, src/qt/res/icons/export.png,
+	src/qt/res/icons/history.png, src/qt/res/icons/key.png,
+	src/qt/res/icons/lock_*.png, src/qt/res/icons/overview.png,
+	src/qt/res/icons/receive.png, src/qt/res/icons/send.png,
+	src/qt/res/icons/synced.png, src/qt/res/icons/filesave.png
+
 schollidesign
 -----------------------
 
@@ -59,7 +72,7 @@ Everaldo (Everaldo Coelho)
 ### Info
 * Icon Pack: Kids
 * Designer: Everaldo (Everaldo Coelho)
-* License: GNU/GPL
+* License: GNU/GPL 
 * Site: [http://findicons.com/icon/17102/reload?id=17102](http://findicons.com/icon/17102/reload?id=17102)
 
 ### Assets Used

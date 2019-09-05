@@ -15,6 +15,8 @@
 #include "util.h"
 #include "utilstrencodings.h"
 
+#include "test/test_vulcoin.h"
+
 #include <fstream>
 
 #include <boost/filesystem/operations.hpp>
@@ -24,7 +26,7 @@
 #if 0
 //
 // alertTests contains 7 alerts, generated with this code:
-// (SignAndSave code not shown, alert signing key is vlcret)
+// (SignAndSave code not shown, alert signing key is secret)
 //
 {
     CAlert alert;
@@ -78,7 +80,7 @@
 }
 #endif
 
-struct ReadAlerts
+struct ReadAlerts : public TestingSetup
 {
     ReadAlerts()
     {

@@ -1,4 +1,4 @@
-// Copyright (c) 2012-2019 The Bitcoin developers
+// Copyright (c) 2012-2014 The Bitcoin developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -45,7 +45,7 @@ static leveldb::Options GetOptions(size_t nCacheSize)
 
 CLevelDBWrapper::CLevelDBWrapper(const boost::filesystem::path& path, size_t nCacheSize, bool fMemory, bool fWipe)
 {
-    penv = NULL;
+    penv = nullptr;
     readoptions.verify_checksums = true;
     iteroptions.verify_checksums = true;
     iteroptions.fill_cache = false;
@@ -58,7 +58,8 @@ CLevelDBWrapper::CLevelDBWrapper(const boost::filesystem::path& path, size_t nCa
     } else {
         if (fWipe) {
             LogPrintf("Wiping LevelDB in %s\n", path.string());
-            leveldb::DestroyDB(path.string(), options);
+            leveldb::Status result = leveldb::DestroyDB(path.string(), options);
+            HandleError(result);
         }
         TryCreateDirectory(path);
         LogPrintf("Opening LevelDB in %s\n", path.string());
@@ -71,13 +72,13 @@ CLevelDBWrapper::CLevelDBWrapper(const boost::filesystem::path& path, size_t nCa
 CLevelDBWrapper::~CLevelDBWrapper()
 {
     delete pdb;
-    pdb = NULL;
+    pdb = nullptr;
     delete options.filter_policy;
-    options.filter_policy = NULL;
+    options.filter_policy = nullptr;
     delete options.block_cache;
-    options.block_cache = NULL;
+    options.block_cache = nullptr;
     delete penv;
-    options.env = NULL;
+    options.env = nullptr;
 }
 
 bool CLevelDBWrapper::WriteBatch(CLevelDBBatch& batch, bool fSync) throw(leveldb_error)

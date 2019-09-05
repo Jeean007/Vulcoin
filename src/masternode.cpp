@@ -1,11 +1,12 @@
-// Copyright (c) 2014-2019 The Dash developers
-// Copyright (c) 2015-2019 The PIVX developers
-// Copyright (c) 2019 The Vulcoin developers
+// Copyright (c) 2014-2015 The Dash developers
+// Copyright (c) 2015-2017 The PIVX developers
+// Copyright (c) 2017-2019 The Vulcoin Core developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include "masternode.h"
 #include "addrman.h"
+#include "main.h"
 #include "masternodeman.h"
 #include "masternode-payments.h"
 #include "masternode-helpers.h"
@@ -25,7 +26,7 @@ std::map<int64_t, uint256> mapCacheBlockHashes;
 //Get the last hash that matches the modulus given. Processed in reverse order
 bool GetBlockHash(uint256& hash, int nBlockHeight)
 {
-    if (chainActive.Tip() == NULL) return false;
+    if (chainActive.Tip() == nullptr) return false;
 
     if (nBlockHeight == 0)
         nBlockHeight = chainActive.Tip()->nHeight;
@@ -38,7 +39,7 @@ bool GetBlockHash(uint256& hash, int nBlockHeight)
     const CBlockIndex* BlockLastSolved = chainActive.Tip();
     const CBlockIndex* BlockReading = chainActive.Tip();
 
-    if (BlockLastSolved == NULL || BlockLastSolved->nHeight == 0 || chainActive.Tip()->nHeight + 1 < nBlockHeight) return false;
+    if (BlockLastSolved == nullptr || BlockLastSolved->nHeight == 0 || chainActive.Tip()->nHeight + 1 < nBlockHeight) return false;
 
     int nBlocksAgo = 0;
     if (nBlockHeight > 0) nBlocksAgo = (chainActive.Tip()->nHeight + 1) - nBlockHeight;
@@ -53,7 +54,7 @@ bool GetBlockHash(uint256& hash, int nBlockHeight)
         }
         n++;
 
-        if (BlockReading->pprev == NULL) {
+        if (BlockReading->pprev == nullptr) {
             assert(BlockReading);
             break;
         }
@@ -168,7 +169,7 @@ bool CMasternode::UpdateFromNewBroadcast(CMasternodeBroadcast& mnb)
 //
 uint256 CMasternode::CalculateScore(int mod, int64_t nBlockHeight)
 {
-    if (chainActive.Tip() == NULL) return 0;
+    if (chainActive.Tip() == nullptr) return 0;
 
     uint256 hash = 0;
     uint256 aux = vin.prevout.hash + vin.prevout.n;
@@ -214,7 +215,7 @@ void CMasternode::Check(bool forceCheck)
         return;
     }
 
-	if (lastPing.sigTime - sigTime < MASTERNODE_MIN_MNP_SECONDS) {
+    if (lastPing.sigTime - sigTime < MASTERNODE_MIN_MNP_SECONDS){
     	activeState = MASTERNODE_PRE_ENABLED;
     	return;
     }
@@ -230,7 +231,7 @@ void CMasternode::Check(bool forceCheck)
             TRY_LOCK(cs_main, lockMain);
             if (!lockMain) return;
 
-            if (!AcceptableInputs(mempool, state, CTransaction(tx), false, NULL)) {
+            if (!AcceptableInputs(mempool, state, CTransaction(tx), false, nullptr)) {
                 activeState = MASTERNODE_VIN_SPENT;
                 return;
             }
@@ -240,14 +241,26 @@ void CMasternode::Check(bool forceCheck)
     activeState = MASTERNODE_ENABLED; // OK
 }
 
+int CMasternode::GetMasternodeInputAge()
+{
+    if (chainActive.Tip() == nullptr) return 0;
+
+    if (cacheInputAge == 0) {
+        cacheInputAge = GetInputAge(vin);
+        cacheInputAgeBlock = chainActive.Tip()->nHeight;
+    }
+
+    return cacheInputAge + (chainActive.Tip()->nHeight - cacheInputAgeBlock);
+}
+
 int64_t CMasternode::SecondsSincePayment()
 {
     CScript pubkeyScript;
     pubkeyScript = GetScriptForDestination(pubKeyCollateralAddress.GetID());
 
-    int64_t vlc = (GetAdjustedTime() - GetLastPaid());
+    int64_t sec = (GetAdjustedTime() - GetLastPaid());
     int64_t month = 60 * 60 * 24 * 30;
-    if (vlc < month) return vlc; //if it's less than 30 days, give seconds
+    if (sec < month) return sec; //if it's less than 30 days, give seconds
 
     CHashWriter ss(SER_GETHASH, PROTOCOL_VERSION);
     ss << vin;
@@ -261,7 +274,7 @@ int64_t CMasternode::SecondsSincePayment()
 int64_t CMasternode::GetLastPaid()
 {
     CBlockIndex* pindexPrev = chainActive.Tip();
-    if (pindexPrev == NULL) return false;
+    if (pindexPrev == nullptr) return false;
 
     CScript mnpayee;
     mnpayee = GetScriptForDestination(pubKeyCollateralAddress.GetID());
@@ -274,7 +287,7 @@ int64_t CMasternode::GetLastPaid()
     // use a deterministic offset to break a tie -- 2.5 minutes
     int64_t nOffset = hash.GetCompact(false) % 150;
 
-    if (chainActive.Tip() == NULL) return false;
+    if (chainActive.Tip() == nullptr) return false;
 
     const CBlockIndex* BlockReading = chainActive.Tip();
 
@@ -296,7 +309,7 @@ int64_t CMasternode::GetLastPaid()
             }
         }
 
-        if (BlockReading->pprev == NULL) {
+        if (BlockReading->pprev == nullptr) {
             assert(BlockReading);
             break;
         }
@@ -411,7 +424,7 @@ bool CMasternodeBroadcast::Create(std::string strService, std::string strKeyMast
         return false;
     }
 
-    if (!masternodeSigner.GetKeysFromVlcret(strKeyMasternode, keyMasternodeNew, pubKeyMasternodeNew)) {
+    if (!masternodeSigner.GetKeysFromSecret(strKeyMasternode, keyMasternodeNew, pubKeyMasternodeNew)) {
         strErrorRet = strprintf("Invalid masternode key %s", strKeyMasternode);
         LogPrint("masternode","CMasternodeBroadcast::Create -- %s\n", strErrorRet);
         return false;
@@ -423,10 +436,10 @@ bool CMasternodeBroadcast::Create(std::string strService, std::string strKeyMast
         return false;
     }
 
-	// The service needs the correct default port to work properly
-    //if (!CheckDefaultPort(strService, strErrorRet, "CMasternodeBroadcast::Create"))
-    //   return false;
-	
+    // The service needs the correct default port to work properly
+    if (!CheckDefaultPort(strService, strErrorRet, "CMasternodeBroadcast::Create"))
+        return false;
+
     return Create(txin, CService(strService), keyCollateralAddressNew, pubKeyCollateralAddressNew, keyMasternodeNew, pubKeyMasternodeNew, strErrorRet, mnbRet);
 }
 
@@ -495,7 +508,7 @@ bool CMasternodeBroadcast::CheckAndUpdate(int& nDos)
     // incorrect ping or its sigTime
     if (lastPing == CMasternodePing() || !lastPing.CheckAndUpdate(nDos, false, true))
         return false;
-	
+
     if (protocolVersion < masternodePayments.GetMinMasternodePaymentsProto()) {
         LogPrint("masternode","mnb - ignoring outdated Masternode %s protocol version %d\n", vin.prevout.hash.ToString(), protocolVersion);
         return false;
@@ -539,7 +552,7 @@ bool CMasternodeBroadcast::CheckAndUpdate(int& nDos)
     CMasternode* pmn = mnodeman.Find(vin);
 
     // no such masternode, nothing to update
-    if (pmn == NULL) return true;
+    if (pmn == nullptr) return true;
 
     // this broadcast is older or equal than the one that we already have - it's bad and should never happen
     // unless someone is doing something fishy
@@ -573,13 +586,13 @@ bool CMasternodeBroadcast::CheckInputsAndAdd(int& nDoS)
     if (fMasterNode && vin.prevout == activeMasternode.vin.prevout && pubKeyMasternode == activeMasternode.pubKeyMasternode)
         return true;
 
-	// incorrect ping or its sigTime
+    // incorrect ping or its sigTime
     if (lastPing == CMasternodePing() || !lastPing.CheckAndUpdate(nDoS, false, true)) return false;
 
     // search existing Masternode list
     CMasternode* pmn = mnodeman.Find(vin);
 
-    if (pmn != NULL) {
+    if (pmn != nullptr) {
         // nothing to do here if we already know about this masternode and it's enabled
         if (pmn->IsEnabled()) return true;
         // if it's not enabled, remove old MN first and continue
@@ -602,7 +615,7 @@ bool CMasternodeBroadcast::CheckInputsAndAdd(int& nDoS)
             return false;
         }
 
-        if (!AcceptableInputs(mempool, state, CTransaction(tx), false, NULL)) {
+        if (!AcceptableInputs(mempool, state, CTransaction(tx), false, nullptr)) {
             //set nDos
             state.IsInvalid(nDoS);
             return false;
@@ -626,7 +639,7 @@ bool CMasternodeBroadcast::CheckInputsAndAdd(int& nDoS)
     GetTransaction(vin.prevout.hash, tx2, hashBlock, true);
     BlockMap::iterator mi = mapBlockIndex.find(hashBlock);
     if (mi != mapBlockIndex.end() && (*mi).second) {
-        CBlockIndex* pMNIndex = (*mi).second;                                                        // block for  VLC collateral tx -> 1 confirmation
+        CBlockIndex* pMNIndex = (*mi).second;                                                        // block for 1000 PIVX tx -> 1 confirmation
         CBlockIndex* pConfIndex = chainActive[pMNIndex->nHeight + MASTERNODE_MIN_CONFIRMATIONS - 1]; // block where tx got MASTERNODE_MIN_CONFIRMATIONS
         if (pConfIndex->GetBlockTime() > sigTime) {
             LogPrint("masternode","mnb - Bad sigTime %d for Masternode %s (%i conf block is at %d)\n",
@@ -765,7 +778,7 @@ bool CMasternodePing::CheckAndUpdate(int& nDos, bool fRequireEnabled, bool fChec
 
     // see if we have this Masternode
     CMasternode* pmn = mnodeman.Find(vin);
-    if (pmn != NULL && pmn->protocolVersion >= masternodePayments.GetMinMasternodePaymentsProto()) {
+    if (pmn != nullptr && pmn->protocolVersion >= masternodePayments.GetMinMasternodePaymentsProto()) {
         if (fRequireEnabled && !pmn->IsEnabled()) return false;
 
         // LogPrint("masternode","mnping - Found corresponding mn for vin: %s\n", vin.ToString());

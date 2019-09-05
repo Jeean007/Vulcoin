@@ -5,6 +5,8 @@
 #include "wallet.h"
 #include "walletdb.h"
 
+#include "test/test_vulcoin.h"
+
 #include <stdint.h>
 
 #include <boost/foreach.hpp>
@@ -12,7 +14,7 @@
 
 extern CWallet* pwalletMain;
 
-BOOST_AUTO_TEST_SUITE(accounting_tests)
+BOOST_FIXTURE_TEST_SUITE(accounting_tests, TestingSetup)
 
 static void
 GetResults(CWalletDB& walletdb, std::map<CAmount, CAccountingEntry>& results)
@@ -43,7 +45,7 @@ BOOST_AUTO_TEST_CASE(acc_orderupgrade)
     ae.nTime = 1333333333;
     ae.strOtherAccount = "b";
     ae.strComment = "";
-    walletdb.WriteAccountingEntry(ae);
+    pwalletMain->AddAccountingEntry(ae, walletdb);
 
     wtx.mapValue["comment"] = "z";
     pwalletMain->AddToWallet(wtx);
@@ -53,7 +55,7 @@ BOOST_AUTO_TEST_CASE(acc_orderupgrade)
 
     ae.nTime = 1333333336;
     ae.strOtherAccount = "c";
-    walletdb.WriteAccountingEntry(ae);
+    pwalletMain->AddAccountingEntry(ae, walletdb);
 
     GetResults(walletdb, results);
 
@@ -69,7 +71,7 @@ BOOST_AUTO_TEST_CASE(acc_orderupgrade)
     ae.nTime = 1333333330;
     ae.strOtherAccount = "d";
     ae.nOrderPos = pwalletMain->IncOrderPosNext();
-    walletdb.WriteAccountingEntry(ae);
+    pwalletMain->AddAccountingEntry(ae, walletdb);
 
     GetResults(walletdb, results);
 
@@ -119,7 +121,7 @@ BOOST_AUTO_TEST_CASE(acc_orderupgrade)
     ae.nTime = 1333333334;
     ae.strOtherAccount = "e";
     ae.nOrderPos = -1;
-    walletdb.WriteAccountingEntry(ae);
+    pwalletMain->AddAccountingEntry(ae, walletdb);
 
     GetResults(walletdb, results);
 

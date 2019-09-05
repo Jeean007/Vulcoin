@@ -25,8 +25,8 @@ setting is not set, vulcoind will shutdown promptly after startup.
 
 This password does not have to be remembered or typed as it is mostly used
 as a fixed token that vulcoind and client programs read from the configuration
-file, however it is recommended that a strong and vlcure password be used
-as this password is vlcurity critical to vlcuring the wallet should the
+file, however it is recommended that a strong and secure password be used
+as this password is security critical to securing the wallet should the
 wallet be enabled.
 
 If vulcoind is run with "-daemon" flag, and no rpcpassword is set, it will
@@ -52,7 +52,7 @@ PID file:            /var/run/vulcoind/vulcoind.pid (OpenRC and Upstart)
                      /var/lib/vulcoind/vulcoind.pid (systemd)
 
 The configuration file, PID directory (if applicable) and data directory
-should all be owned by the vulcoin user and group.  It is advised for vlcurity
+should all be owned by the vulcoin user and group.  It is advised for security
 reasons to make the configuration file and data directory only readable by the
 vulcoin user and group.  Access to vulcoin-cli and other vulcoind rpc clients
 can then be controlled by group membership.
@@ -89,7 +89,7 @@ use old versions of Upstart and do not supply the start-stop-daemon uitility.
 Copy vulcoind.init to /etc/init.d/vulcoind. Test by running "service vulcoind start".
 
 Using this script, you can adjust the path and flags to the vulcoind program by
-setting the vulcoind and FLAGS environment variables in the file
+setting the VULCOIND and FLAGS environment variables in the file
 /etc/sysconfig/vulcoind. You can also use the DAEMONOPTS environment variable here.
 
 5. Auto-respawn

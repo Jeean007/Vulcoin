@@ -6,6 +6,8 @@
 #ifndef BITCOIN_ALLOCATORS_H
 #define BITCOIN_ALLOCATORS_H
 
+#include <support/cleanse.h>
+
 #include <map>
 #include <string.h>
 #include <string>
@@ -13,8 +15,6 @@
 
 #include <boost/thread/mutex.hpp>
 #include <boost/thread/once.hpp>
-
-#include <openssl/crypto.h> // for OPENSSL_cleanse()
 
 /**
  * Thread-safe class to keep track of locked (ie, non-swappable) memory pages.
@@ -130,7 +130,7 @@ public:
  * MSVC's vector<T> implementation where it allocates 1 byte of memory in the allocator.)
  * Due to the unpredictable order of static initializers, we have to make sure the
  * LockedPageManager instance exists before any other STL-based objects that use
- * vlcure_allocator are created. So instead of having LockedPageManager also be
+ * secure_allocator are created. So instead of having LockedPageManager also be
  * static-initialized, it is created on demand.
  */
 class LockedPageManager : public LockedPageManagerBase<MemoryPageLocker>
@@ -173,7 +173,7 @@ void LockObject(const T& t)
 template <typename T>
 void UnlockObject(const T& t)
 {
-    OPENSSL_cleanse((void*)(&t), sizeof(T));
+    memory_cleanse((void*)(&t), sizeof(T));
     LockedPageManager::Instance().UnlockRange((void*)(&t), sizeof(T));
 }
 
@@ -182,7 +182,7 @@ void UnlockObject(const T& t)
 // out of memory and clears its contents before deletion.
 //
 template <typename T>
-struct vlcure_allocator : public std::allocator<T> {
+struct secure_allocator : public std::allocator<T> {
     // MSVC8 default copy constructor is broken
     typedef std::allocator<T> base;
     typedef typename base::size_type size_type;
@@ -192,31 +192,31 @@ struct vlcure_allocator : public std::allocator<T> {
     typedef typename base::reference reference;
     typedef typename base::const_reference const_reference;
     typedef typename base::value_type value_type;
-    vlcure_allocator() throw() {}
-    vlcure_allocator(const vlcure_allocator& a) throw() : base(a) {}
+    secure_allocator() throw() {}
+    secure_allocator(const secure_allocator& a) throw() : base(a) {}
     template <typename U>
-    vlcure_allocator(const vlcure_allocator<U>& a) throw() : base(a)
+    secure_allocator(const secure_allocator<U>& a) throw() : base(a)
     {
     }
-    ~vlcure_allocator() throw() {}
+    ~secure_allocator() throw() {}
     template <typename _Other>
     struct rebind {
-        typedef vlcure_allocator<_Other> other;
+        typedef secure_allocator<_Other> other;
     };
 
     T* allocate(std::size_t n, const void* hint = 0)
     {
         T* p;
         p = std::allocator<T>::allocate(n, hint);
-        if (p != NULL)
+        if (p != nullptr)
             LockedPageManager::Instance().LockRange(p, sizeof(T) * n);
         return p;
     }
 
     void deallocate(T* p, std::size_t n)
     {
-        if (p != NULL) {
-            OPENSSL_cleanse(p, sizeof(T) * n);
+        if (p != nullptr) {
+            memory_cleanse(p, sizeof(T) * n);
             LockedPageManager::Instance().UnlockRange(p, sizeof(T) * n);
         }
         std::allocator<T>::deallocate(p, n);
@@ -252,14 +252,14 @@ struct zero_after_free_allocator : public std::allocator<T> {
 
     void deallocate(T* p, std::size_t n)
     {
-        if (p != NULL)
-            OPENSSL_cleanse(p, sizeof(T) * n);
+        if (p != nullptr)
+            memory_cleanse(p, sizeof(T) * n);
         std::allocator<T>::deallocate(p, n);
     }
 };
 
 // This is exactly like std::string, but with a custom allocator.
-typedef std::basic_string<char, std::char_traits<char>, vlcure_allocator<char> > VlcureString;
+typedef std::basic_string<char, std::char_traits<char>, secure_allocator<char> > SecureString;
 
 // Byte-vector that clears its contents before deletion.
 typedef std::vector<char, zero_after_free_allocator<char> > CSerializeData;

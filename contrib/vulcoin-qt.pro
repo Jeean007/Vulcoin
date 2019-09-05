@@ -90,13 +90,13 @@ HEADERS += src/activemasternode.h \
            src/limitedmap.h \
            src/main.h \
            src/masternode-budget.h \
-           src/masternode-devbudget.h \
            src/masternode-payments.h \
            src/masternode-sync.h \
            src/masternode.h \
            src/masternodeconfig.h \
            src/masternodeman.h \
            src/masternode-helpers.h \
+           src/maternode-vote.h \
            src/merkleblock.h \
            src/miner.h \
            src/mruset.h \
@@ -385,13 +385,13 @@ SOURCES += src/activemasternode.cpp \
            src/leveldbwrapper.cpp \
            src/main.cpp \
            src/masternode-budget.cpp \
-           src/masternode-devbudget.cpp \
            src/masternode-payments.cpp \
            src/masternode-sync.cpp \
            src/masternode.cpp \
            src/masternodeconfig.cpp \
            src/masternodeman.cpp \
            src/masternode-helpers.cpp \
+           src/masternode-vote.cpp \
            src/merkleblock.cpp \
            src/miner.cpp \
            src/net.cpp \
@@ -406,6 +406,7 @@ SOURCES += src/activemasternode.cpp \
            src/rpcclient.cpp \
            src/rpcdump.cpp \
            src/rpcmasternode-budget.cpp \
+           src/rpcmasternode-vote.cpp \
            src/rpcmasternode.cpp \
            src/rpcmining.cpp \
            src/rpcmisc.cpp \

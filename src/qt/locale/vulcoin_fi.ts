@@ -128,8 +128,12 @@
         <translation>Toista uusi salausavain</translation>
     </message>
     <message>
-        <source>Serves to disable the trivial sendmoney when OS account compromised. Provides no real vlcurity.</source>
+        <source>Serves to disable the trivial sendmoney when OS account compromised. Provides no real security.</source>
         <translation>Ottaa pois käytöstä tavallisen sendmoneyn kun käyttöjärjestelmä on kompromisoitu. Ei tarjoa todellista turvaa.</translation>
+    </message>
+    <message>
+        <source>For staking only</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Enter the new passphrase to the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
@@ -184,7 +188,7 @@
         <translation>Lompakko salattu</translation>
     </message>
     <message>
-        <source>IMPORTANT: Any previous backups you have made of your wallet file should be replaced with the newly generated, encrypted wallet file. For vlcurity reasons, previous backups of the unencrypted wallet file will become useless as soon as you start using the new, encrypted wallet.</source>
+        <source>IMPORTANT: Any previous backups you have made of your wallet file should be replaced with the newly generated, encrypted wallet file. For security reasons, previous backups of the unencrypted wallet file will become useless as soon as you start using the new, encrypted wallet.</source>
         <translation>TÄRKEÄÄ: Kaikki edelliset varmuuskopiot, jotka olet tehnyt lompakosta täytyy korvata uudella salatulla lompakko tiedostolla. Turvallisuussyistä edelliset varmuuskopiot salaamattomasta lompakosta muuttuvat hyödyttömiksi heti kun avaat uuden, salatun lompakon.</translation>
     </message>
     <message>
@@ -1535,7 +1539,7 @@ Please check the address and try again.</source>
 <context>
     <name>ReceiveCoinsDialog</name>
     <message>
-        <source>Reuse one of the previously used receiving addresses.&lt;br&gt;Reusing addresses has vlcurity and privacy issues.&lt;br&gt;Do not use this unless re-generating a payment request made before.</source>
+        <source>Reuse one of the previously used receiving addresses.&lt;br&gt;Reusing addresses has security and privacy issues.&lt;br&gt;Do not use this unless re-generating a payment request made before.</source>
         <translation>Uudelleenkäytä yksi aikaisemmista vastaanottavista osoitteista. &lt;br&gt; Osoitteen uudelleenkäytössä on turvallisuus- ja yksityisyysongelmia.&lt;br&gt; Älä käytä tätä ellet halua uudelleen käyttää vanhaa maksupyyntöä.</translation>
     </message>
     <message>
@@ -1836,7 +1840,7 @@ Please check the address and try again.</source>
         <translation>käyttää</translation>
     </message>
     <message>
-        <source>Warning: Invalid VLC address</source>
+        <source>Warning: Invalid Vulcoin address</source>
         <translation>Varoitus: Virheellinen VLC osoite</translation>
     </message>
     <message>
@@ -1919,7 +1923,7 @@ Please check the address and try again.</source>
     <name>ShutdownWindow</name>
     <message>
         <source>Vulcoin Core is shutting down...</source>
-        <translation>Vulcoin Core sammuu...</translation>
+        <translation>Vulcoin core sammuu...</translation>
     </message>
     <message>
         <source>Do not shut down the computer until this window disappears.</source>
@@ -2081,7 +2085,7 @@ Please check the address and try again.</source>
     </message>
     <message>
         <source>The Vulcoin Core developers</source>
-        <translation>Vulcoin Core kehittäjät</translation>
+        <translation>Vulcoin core kehittäjät</translation>
     </message>
     <message>
         <source>[testnet]</source>

@@ -1,6 +1,6 @@
-// Copyright (c) 2009-2019 The Bitcoin developers
-// Copyright (c) 2014-2019 The Dash developers
-// Copyright (c) 2015-2019 The PIVX developers
+// Copyright (c) 2009-2014 The Bitcoin developers
+// Copyright (c) 2014-2015 The Dash developers
+// Copyright (c) 2015-2017 The PIVX developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -43,10 +43,10 @@ bool CheckBlock(int nHeight, const uint256& hash, bool fMatchesCheckpoint)
 //! Guess how far we are in the verification process at the given block index
 double GuessVerificationProgress(CBlockIndex* pindex, bool fSigchecks)
 {
-    if (pindex == NULL)
+    if (pindex == nullptr)
         return 0.0;
 
-    int64_t nNow = time(NULL);
+    int64_t nNow = time(nullptr);
 
     double fSigcheckVerificationFactor = fSigchecks ? SIGCHECK_VERIFICATION_FACTOR : 1.0;
     double fWorkBefore = 0.0; // Amount of work done before pindex
@@ -86,7 +86,7 @@ int GetTotalBlocksEstimate()
 CBlockIndex* GetLastCheckpoint()
 {
     if (!fEnabled)
-        return NULL;
+        return nullptr;
 
     const MapCheckpoints& checkpoints = *Params().Checkpoints().mapCheckpoints;
 
@@ -96,7 +96,7 @@ CBlockIndex* GetLastCheckpoint()
         if (t != mapBlockIndex.end())
             return t->second;
     }
-    return NULL;
+    return nullptr;
 }
 
 } // namespace Checkpoints

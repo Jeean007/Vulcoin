@@ -1,4 +1,4 @@
-// Copyright (c) 2012-2019 The Bitcoin developers
+// Copyright (c) 2012-2014 The Bitcoin developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -64,7 +64,7 @@ public:
 class CLevelDBWrapper
 {
 private:
-    //! custom environment this database is using (may be NULL in case of default environment)
+    //! custom environment this database is using (may be nullptr in case of default environment)
     leveldb::Env* penv;
 
     //! database options used

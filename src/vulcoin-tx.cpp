@@ -1,6 +1,6 @@
-// Copyright (c) 2009-2019 The Bitcoin developers
-// Copyright (c) 2015-2019 The PIVX developers
-// Copyright (c) 2019 The Vulcoin developers
+// Copyright (c) 2009-2014 The Bitcoin developers
+// Copyright (c) 2015-2017 The PIVX developers
+// Copyright (c) 2017-2019 The Vulcoin Core developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -189,7 +189,7 @@ static void MutateTxAddInput(CMutableTransaction& tx, const string& strInput)
     string strTxid = strInput.substr(0, pos);
     if ((strTxid.size() != 64) || !IsHex(strTxid))
         throw runtime_error("invalid TX input txid");
-    uint256 txid(strTxid);
+    uint256 txid(uint256S(strTxid));
 
     static const unsigned int minTxOutSz = 9;
     unsigned int nMaxSize = MAX_BLOCK_SIZE;
@@ -314,7 +314,7 @@ static bool findSighashFlags(int& flags, const string& flagStr)
 uint256 ParseHashUO(map<string, UniValue>& o, string strKey)
 {
     if (!o.count(strKey))
-        return 0;
+        return uint256();
     return ParseHashUV(o[strKey], strKey);
 }
 
@@ -355,12 +355,12 @@ static void MutateTxSign(CMutableTransaction& tx, const string& flagStr)
     for (unsigned int kidx = 0; kidx < keysObj.size(); kidx++) {
         if (!keysObj[kidx].isStr())
             throw runtime_error("privatekey not a string");
-        CBitcoinVlcret vchVlcret;
-        bool fGood = vchVlcret.SetString(keysObj[kidx].getValStr());
+        CBitcoinSecret vchSecret;
+        bool fGood = vchSecret.SetString(keysObj[kidx].getValStr());
         if (!fGood)
             throw runtime_error("privatekey not valid");
 
-        CKey key = vchVlcret.GetKey();
+        CKey key = vchSecret.GetKey();
         tempKeystore.AddKey(key);
     }
 
@@ -448,8 +448,22 @@ static void MutateTxSign(CMutableTransaction& tx, const string& flagStr)
     tx = mergedTx;
 }
 
+class Secp256k1Init
+{
+    ECCVerifyHandle globalVerifyHandle;
+
+public:
+    Secp256k1Init() {
+        ECC_Start();
+    }
+    ~Secp256k1Init() {
+        ECC_Stop();
+    }
+};
+
 static void MutateTx(CMutableTransaction& tx, const string& command, const string& commandVal)
 {
+    boost::scoped_ptr<Secp256k1Init> ecc;
     if (command == "nversion")
         MutateTxVersion(tx, commandVal);
     else if (command == "locktime")
@@ -467,8 +481,10 @@ static void MutateTx(CMutableTransaction& tx, const string& command, const strin
     else if (command == "outscript")
         MutateTxAddOutScript(tx, commandVal);
 
-    else if (command == "sign")
+    else if (command == "sign") {
+        if (!ecc) { ecc.reset(new Secp256k1Init()); }
         MutateTxSign(tx, commandVal);
+    }
 
     else if (command == "load")
         RegisterLoad(commandVal);
@@ -483,7 +499,7 @@ static void MutateTx(CMutableTransaction& tx, const string& command, const strin
 static void OutputTxJSON(const CTransaction& tx)
 {
     UniValue entry(UniValue::VOBJ);
-    TxToUniv(tx, 0, entry);
+    TxToUniv(tx, uint256(), entry);
 
     string jsonOutput = entry.write(4);
     fprintf(stdout, "%s\n", jsonOutput.c_str());
@@ -590,7 +606,7 @@ static int CommandLineRawTx(int argc, char* argv[])
         strPrint = string("error: ") + e.what();
         nRet = EXIT_FAILURE;
     } catch (...) {
-        PrintExceptionContinue(NULL, "CommandLineRawTx()");
+        PrintExceptionContinue(nullptr, "CommandLineRawTx()");
         throw;
     }
 
@@ -611,7 +627,7 @@ int main(int argc, char* argv[])
         PrintExceptionContinue(&e, "AppInitRawTx()");
         return EXIT_FAILURE;
     } catch (...) {
-        PrintExceptionContinue(NULL, "AppInitRawTx()");
+        PrintExceptionContinue(nullptr, "AppInitRawTx()");
         return EXIT_FAILURE;
     }
 
@@ -621,7 +637,7 @@ int main(int argc, char* argv[])
     } catch (std::exception& e) {
         PrintExceptionContinue(&e, "CommandLineRawTx()");
     } catch (...) {
-        PrintExceptionContinue(NULL, "CommandLineRawTx()");
+        PrintExceptionContinue(nullptr, "CommandLineRawTx()");
     }
     return ret;
 }

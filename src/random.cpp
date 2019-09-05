@@ -1,10 +1,11 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
-// Copyright (c) 2009-2019 The Bitcoin developers
+// Copyright (c) 2009-2014 The Bitcoin developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include "random.h"
 
+#include <support/cleanse.h>
 #ifdef WIN32
 #include "compat.h" // for Windows API
 #endif
@@ -18,7 +19,6 @@
 #include <sys/time.h>
 #endif
 
-#include <openssl/crypto.h>
 #include <openssl/err.h>
 #include <openssl/rand.h>
 
@@ -29,7 +29,7 @@ static inline int64_t GetPerformanceCounter()
     QueryPerformanceCounter((LARGE_INTEGER*)&nCounter);
 #else
     timeval t;
-    gettimeofday(&t, NULL);
+    gettimeofday(&t, nullptr);
     nCounter = (int64_t)(t.tv_sec * 1000000 + t.tv_usec);
 #endif
     return nCounter;
@@ -40,7 +40,7 @@ void RandAddSeed()
     // Seed with CPU performance counter
     int64_t nCounter = GetPerformanceCounter();
     RAND_add(&nCounter, sizeof(nCounter), 1.5);
-    OPENSSL_cleanse((void*)&nCounter, sizeof(nCounter));
+    memory_cleanse((void*)&nCounter, sizeof(nCounter));
 }
 
 void RandAddSeedPerfmon()
@@ -62,7 +62,7 @@ void RandAddSeedPerfmon()
     const size_t nMaxSize = 10000000; // Bail out at more than 10MB of performance data
     while (true) {
         nSize = vData.size();
-        ret = RegQueryValueExA(HKEY_PERFORMANCE_DATA, "Global", NULL, NULL, begin_ptr(vData), &nSize);
+        ret = RegQueryValueExA(HKEY_PERFORMANCE_DATA, "Global", nullptr, nullptr, begin_ptr(vData), &nSize);
         if (ret != ERROR_MORE_DATA || vData.size() >= nMaxSize)
             break;
         vData.resize(std::max((vData.size() * 3) / 2, nMaxSize)); // Grow size of buffer exponentially
@@ -70,7 +70,7 @@ void RandAddSeedPerfmon()
     RegCloseKey(HKEY_PERFORMANCE_DATA);
     if (ret == ERROR_SUCCESS) {
         RAND_add(begin_ptr(vData), nSize, nSize / 100.0);
-        OPENSSL_cleanse(begin_ptr(vData), nSize);
+        memory_cleanse(begin_ptr(vData), nSize);
         LogPrint("rand", "%s: %lu bytes\n", __func__, nSize);
     } else {
         static bool warned = false; // Warn only once
@@ -85,7 +85,7 @@ void RandAddSeedPerfmon()
 void GetRandBytes(unsigned char* buf, int num)
 {
     if (RAND_bytes(buf, num) != 1) {
-        LogPrintf("%s: OpenSSL RAND_bytes() failed with error: %s\n", __func__, ERR_error_string(ERR_get_error(), NULL));
+        LogPrintf("%s: OpenSSL RAND_bytes() failed with error: %s\n", __func__, ERR_error_string(ERR_get_error(), nullptr));
         assert(false);
     }
 }
@@ -117,22 +117,22 @@ uint256 GetRandHash()
     return hash;
 }
 
-uint32_t invlcure_rand_Rz = 11;
-uint32_t invlcure_rand_Rw = 11;
-void seed_invlcure_rand(bool fDeterministic)
+uint32_t insecure_rand_Rz = 11;
+uint32_t insecure_rand_Rw = 11;
+void seed_insecure_rand(bool fDeterministic)
 {
     // The seed values have some unlikely fixed points which we avoid.
     if (fDeterministic) {
-        invlcure_rand_Rz = invlcure_rand_Rw = 11;
+        insecure_rand_Rz = insecure_rand_Rw = 11;
     } else {
         uint32_t tmp;
         do {
             GetRandBytes((unsigned char*)&tmp, 4);
         } while (tmp == 0 || tmp == 0x9068ffffU);
-        invlcure_rand_Rz = tmp;
+        insecure_rand_Rz = tmp;
         do {
             GetRandBytes((unsigned char*)&tmp, 4);
         } while (tmp == 0 || tmp == 0x464fffffU);
-        invlcure_rand_Rw = tmp;
+        insecure_rand_Rw = tmp;
     }
 }

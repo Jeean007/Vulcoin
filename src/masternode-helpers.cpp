@@ -1,6 +1,6 @@
-// Copyright (c) 2014-2019 The Dash developers
-// Copyright (c) 2015-2019 The PIVX developers
-// Copyright (c) 2019 The Vulcoin developers
+// Copyright (c) 2014-2015 The Dash developers
+// Copyright (c) 2015-2017 The PIVX developers
+// Copyright (c) 2017-2019 The Vulcoin Core developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -39,7 +39,6 @@ void ThreadMasternodePool()
 
             if (c % 60 == 0) {
                 mnodeman.CheckAndRemove();
-                mnodeman.ProcessMasternodeConnections();
                 masternodePayments.CleanPaymentList();
                 CleanTransactionLocksList();
             }
@@ -65,29 +64,29 @@ bool CMasternodeSigner::IsVinAssociatedWithPubkey(CTxIn& vin, CPubKey& pubkey)
     return false;
 }
 
-bool CMasternodeSigner::SetKey(std::string strVlcret, std::string& errorMessage, CKey& key, CPubKey& pubkey)
+bool CMasternodeSigner::SetKey(std::string strSecret, std::string& errorMessage, CKey& key, CPubKey& pubkey)
 {
-    CBitcoinVlcret vchVlcret;
-    bool fGood = vchVlcret.SetString(strVlcret);
+    CBitcoinSecret vchSecret;
+    bool fGood = vchSecret.SetString(strSecret);
 
     if (!fGood) {
         errorMessage = _("Invalid private key.");
         return false;
     }
 
-    key = vchVlcret.GetKey();
+    key = vchSecret.GetKey();
     pubkey = key.GetPubKey();
 
     return true;
 }
 
-bool CMasternodeSigner::GetKeysFromVlcret(std::string strVlcret, CKey& keyRet, CPubKey& pubkeyRet)
+bool CMasternodeSigner::GetKeysFromSecret(std::string strSecret, CKey& keyRet, CPubKey& pubkeyRet)
 {
-    CBitcoinVlcret vchVlcret;
+    CBitcoinSecret vchSecret;
 
-    if (!vchVlcret.SetString(strVlcret)) return false;
+    if (!vchSecret.SetString(strSecret)) return false;
 
-    keyRet = vchVlcret.GetKey();
+    keyRet = vchSecret.GetKey();
     pubkeyRet = keyRet.GetPubKey();
 
     return true;

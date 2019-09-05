@@ -132,8 +132,12 @@
         <translation>yeni şifre sözcüğünü tekrarlayın</translation>
     </message>
     <message>
-        <source>Serves to disable the trivial sendmoney when OS account compromised. Provides no real vlcurity.</source>
+        <source>Serves to disable the trivial sendmoney when OS account compromised. Provides no real security.</source>
         <translation>OS hesabı tehlikeye atıldığında önemsiz para göndermeyi devre dışı bırakır. Gerçek bir güvenlik sağlamaz.</translation>
+    </message>
+    <message>
+        <source>For staking only</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Enter the new passphrase to the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
@@ -188,7 +192,7 @@
         <translation>Cüzdan şifrelendi</translation>
     </message>
     <message>
-        <source>IMPORTANT: Any previous backups you have made of your wallet file should be replaced with the newly generated, encrypted wallet file. For vlcurity reasons, previous backups of the unencrypted wallet file will become useless as soon as you start using the new, encrypted wallet.</source>
+        <source>IMPORTANT: Any previous backups you have made of your wallet file should be replaced with the newly generated, encrypted wallet file. For security reasons, previous backups of the unencrypted wallet file will become useless as soon as you start using the new, encrypted wallet.</source>
         <translation>Önemli: wallet dosyası ile daha önce yaptığınız yedeklemeler şifreleme sonrası yenisi ile tekrar yedeklenmelidir.Güvenlik nedenleri ile, şifrelenmemiş cüzdanınıza ait yedeklemeler yeni şifrelenmiş cüzdanoınızla birlikte kullanılmaz hale gelecektir.</translation>
     </message>
     <message>

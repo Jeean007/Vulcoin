@@ -12,7 +12,7 @@ document establishes some basic expectations for the expectations
 for the operation of dnsseeds.
 
 0. A DNS seed operating organization or person is expected
-to follow good host vlcurity practices and maintain control of
+to follow good host security practices and maintain control of
 their serving infrastructure and not sell or transfer control of their
 DNS seed. Any hosting services contracted by the operator are
 equally expected to uphold these expectations.

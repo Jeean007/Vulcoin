@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2019 The Bitcoin developers
+// Copyright (c) 2011-2014 The Bitcoin developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -30,6 +30,7 @@ class UnitDisplayStatusBarControl;
 class WalletFrame;
 class WalletModel;
 class MasternodeList;
+class ProposalList;
 
 class CWallet;
 
@@ -78,8 +79,6 @@ protected:
     bool eventFilter(QObject* object, QEvent* event);
 
 private:
-    int nDisplayUnit;
-
     ClientModel* clientModel;
     WalletFrame* walletFrame;
 
@@ -88,9 +87,6 @@ private:
     QPushButton* labelEncryptionIcon;
     QPushButton* labelConnectionsIcon;
     QLabel* labelBlocksIcon;
-    QWidget* statusBarSpacer;
-    QWidget* statusBarSpacer2;
-
     QLabel* progressBarLabel;
     QProgressBar* progressBar;
     QProgressDialog* progressDialog;
@@ -99,6 +95,7 @@ private:
     QAction* overviewAction;
     QAction* historyAction;
     QAction* masternodeAction;
+    QAction* proposalAction;
     QAction* quitAction;
     QAction* sendCoinsAction;
     QAction* usedSendingAddressesAction;
@@ -131,8 +128,6 @@ private:
     QAction* openBlockExplorerAction;
     QAction* showHelpMessageAction;
     QAction* multiSendAction;
-
-    QLabel* labelBalance;
 
     QSystemTrayIcon* trayIcon;
     QMenu* trayIconMenu;
@@ -184,11 +179,11 @@ public slots:
                             @see CClientUIInterface::MessageBoxFlags
        @param[in] ret       pointer to a bool that will be modified to whether Ok was clicked (modal only)
     */
-    void message(const QString& title, const QString& message, unsigned int style, bool* ret = NULL);
-
-    void setStakingStatus();
+    void message(const QString& title, const QString& message, unsigned int style, bool* ret = nullptr);
 
 #ifdef ENABLE_WALLET
+    void setStakingStatus();
+
     /** Set the encryption status as shown in the UI.
        @param[in] status            current encryption status
        @see WalletModel::EncryptionStatus
@@ -199,9 +194,6 @@ public slots:
 
     /** Show incoming transaction notification for new transactions. */
     void incomingTransaction(const QString& date, int unit, const CAmount& amount, const QString& type, const QString& address);
-
-    /** Update wallet balance */
-    void setBalance(const CAmount& balance, const CAmount& unconfirmedBalance, const CAmount& immatureBalance, const CAmount& watchOnlyBalance, const CAmount& watchUnconfBalance, const CAmount& watchImmatureBalance);
 #endif // ENABLE_WALLET
 
 private slots:
@@ -210,6 +202,8 @@ private slots:
     void gotoOverviewPage();
     /** Switch to history (transactions) page */
     void gotoHistoryPage();
+    /** Switch to proposal page */
+    void gotoProposalPage();
     /** Switch to Explorer Page */
     void gotoBlockExplorerPage();
     /** Switch to masternode page */

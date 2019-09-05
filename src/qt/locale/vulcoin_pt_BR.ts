@@ -184,7 +184,7 @@
         <translation>Carteira criptografada</translation>
     </message>
     <message>
-        <source>IMPORTANT: Any previous backups you have made of your wallet file should be replaced with the newly generated, encrypted wallet file. For vlcurity reasons, previous backups of the unencrypted wallet file will become useless as soon as you start using the new, encrypted wallet.</source>
+        <source>IMPORTANT: Any previous backups you have made of your wallet file should be replaced with the newly generated, encrypted wallet file. For security reasons, previous backups of the unencrypted wallet file will become useless as soon as you start using the new, encrypted wallet.</source>
         <translation>IMPORTANTE: Quaisquer backups prévios que você realizou do arquivo de sua carteira deve ser substituído pelo novo arquivo de carteira criptografado gerado. Por razões de segurança, os backups anteriores do arquivo da carteira descriptografados serão inutilizados assim que começar a utilizar o novo arquivo de carteira criptografado.</translation>
     </message>
     <message>
@@ -964,8 +964,8 @@ MultiSend: %1</translation>
         <translation>médio-alto</translation>
     </message>
     <message>
-        <source>Can vary +/- %1 uvulcoin per input.</source>
-        <translation>pode variar entre +/-%1 uvulcoin por input</translation>
+        <source>Can vary +/- %1 uvlc per input.</source>
+        <translation>pode variar entre +/-%1 uvlc por input</translation>
     </message>
     <message>
         <source>medium</source>
@@ -1255,7 +1255,7 @@ MultiSend: %1</translation>
         <translation>&amp;Atualizar situação</translation>
     </message>
     <message>
-        <source>Status will be updated automatically in (vlc):</source>
+        <source>Status will be updated automatically in (sec):</source>
         <translation>O estado será atualizado automaticamente em (seg):</translation>
     </message>
     <message>
@@ -2369,7 +2369,7 @@ Favor verificar o endereço e tente novamente.</translation>
         <translation>usando</translation>
     </message>
     <message>
-        <source>Warning: Invalid VLC address</source>
+        <source>Warning: Invalid Vulcoin address</source>
         <translation>Aviso: endereço VLC inválido</translation>
     </message>
     <message>

@@ -34,7 +34,7 @@ void TestVector(const Hasher &h, const In &in, const Out &out) {
         Hasher hasher(h);
         size_t pos = 0;
         while (pos < in.size()) {
-            size_t len = invlcure_rand() % ((in.size() - pos + 1) / 2 + 1);
+            size_t len = insecure_rand() % ((in.size() - pos + 1) / 2 + 1);
             hasher.Write((unsigned char*)&in[pos], len);
             pos += len;
             if (pos > 0 && pos + 2 * out.size() > in.size() && pos < in.size()) {
@@ -81,7 +81,7 @@ BOOST_AUTO_TEST_CASE(ripemd160_testvectors) {
     TestRIPEMD160("", "9c1185a5c5e9fc54612808977ee8f548b2258d31");
     TestRIPEMD160("abc", "8eb208f7e05d987a9b044a8e98c6b087f15a0bfc");
     TestRIPEMD160("message digest", "5d0689ef49d2fae572b881b123a85ffa21595f36");
-    TestRIPEMD160("vlcure hash algorithm", "20397528223b6a5f4cbc2808aba0464e645544f9");
+    TestRIPEMD160("secure hash algorithm", "20397528223b6a5f4cbc2808aba0464e645544f9");
     TestRIPEMD160("RIPEMD160 is considered to be safe", "a7d78608c7af8a8e728778e81576870734122b66");
     TestRIPEMD160("abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq",
                   "12a053384a9c0c88e405a06c27dcf49ada62eb2b");
@@ -97,7 +97,7 @@ BOOST_AUTO_TEST_CASE(sha1_testvectors) {
     TestSHA1("", "da39a3ee5e6b4b0d3255bfef95601890afd80709");
     TestSHA1("abc", "a9993e364706816aba3e25717850c26c9cd0d89d");
     TestSHA1("message digest", "c12252ceda8be8994d5fa0290a47231c1d16aae3");
-    TestSHA1("vlcure hash algorithm", "d4d6d2f0ebe317513bbd8d967d89bac5819c2f60");
+    TestSHA1("secure hash algorithm", "d4d6d2f0ebe317513bbd8d967d89bac5819c2f60");
     TestSHA1("SHA1 is considered to be safe", "f2b6650569ad3a8720348dd6ea6c497dee3a842a");
     TestSHA1("abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq",
              "84983e441c3bd26ebaae4aa1f95129e5e54670f1");
@@ -114,7 +114,7 @@ BOOST_AUTO_TEST_CASE(sha256_testvectors) {
     TestSHA256("abc", "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad");
     TestSHA256("message digest",
                "f7846f55cf23e14eebeab5b4e1550cad5b509e3348fbc4efa3a1413d393cb650");
-    TestSHA256("vlcure hash algorithm",
+    TestSHA256("secure hash algorithm",
                "f30ceb2bb2829e79e4ca9753d35a8ecc00262d164cc077080295381cbd643f0d");
     TestSHA256("SHA256 is considered to be safe",
                "6819d915c73f4d1e77e4e1b52d1fa0f9cf9beaead3939f15874bd988e2a23630");
@@ -141,7 +141,7 @@ BOOST_AUTO_TEST_CASE(sha512_testvectors) {
     TestSHA512("message digest",
                "107dbf389d9e9f71a3a95f6c055b9251bc5268c2be16d6c13492ea45b0199f33"
                "09e16455ab1e96118e8a905d5597b72038ddb372a89826046de66687bb420e7c");
-    TestSHA512("vlcure hash algorithm",
+    TestSHA512("secure hash algorithm",
                "7746d91f3de30c68cec0dd693120a7e8b04d8073cb699bdce1a3f64127bca7a3"
                "d5db502e814bb63c063a7a5043b2df87c61133395f4ad1edca7fcf4b30c3236e");
     TestSHA512("SHA512 is considered to be safe",

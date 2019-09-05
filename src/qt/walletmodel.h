@@ -1,14 +1,20 @@
-// Copyright (c) 2011-2019 The Bitcoin developers
+// Copyright (c) 2011-2014 The Bitcoin developers
+// Copyright (c) 2014-2016 The Dash developers
+// Copyright (c) 2017-2018 The PIVX developers
+// Copyright (c) 2017-2019 The Vulcoin Core developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #ifndef BITCOIN_QT_WALLETMODEL_H
 #define BITCOIN_QT_WALLETMODEL_H
 
+#include "askpassphrasedialog.h"
 #include "paymentrequestplus.h"
 #include "walletmodeltransaction.h"
+#include "proposaltablemodel.h"
+#include "proposalcommunitytablemodel.h"
 
-#include "allocators.h" /* for VlcureString */
+#include "allocators.h" /* for SecureString */
 #include "swifttx.h"
 #include "wallet.h"
 
@@ -41,7 +47,7 @@ public:
     explicit SendCoinsRecipient() : amount(0), nVersion(SendCoinsRecipient::CURRENT_VERSION) {}
     explicit SendCoinsRecipient(const QString& addr, const QString& label, const CAmount& amount, const QString& message) : address(addr), label(label), amount(amount), message(message), nVersion(SendCoinsRecipient::CURRENT_VERSION) {}
 
-    // If from an invlcure payment request, this is used for storing
+    // If from an insecure payment request, this is used for storing
     // the addresses, e.g. address-A<br />address-B<br />address-C.
     // Info: As we don't need to process addresses in here when using
     // payment requests, we can abuse it for displaying an address list.
@@ -128,11 +134,14 @@ public:
     OptionsModel* getOptionsModel();
     AddressTableModel* getAddressTableModel();
     TransactionTableModel* getTransactionTableModel();
+    ProposalTableModel* getProposalTableModel();
+    ProposalCommunityTableModel* getProposalCommunityTableModel();
     RecentRequestsTableModel* getRecentRequestsTableModel();
 
-    CAmount getBalance(const CCoinControl* coinControl = NULL) const;
+    CAmount getBalance(const CCoinControl* coinControl = nullptr) const;
     CAmount getUnconfirmedBalance() const;
     CAmount getImmatureBalance() const;
+    CAmount getLockedBalance() const;
     bool haveWatchOnly() const;
     CAmount getWatchBalance() const;
     CAmount getWatchUnconfirmedBalance() const;
@@ -154,16 +163,16 @@ public:
     };
 
     // prepare transaction for getting txfee before sending coins
-    SendCoinsReturn prepareTransaction(WalletModelTransaction& transaction, const CCoinControl* coinControl = NULL);
+    SendCoinsReturn prepareTransaction(WalletModelTransaction& transaction, const CCoinControl* coinControl = nullptr);
 
     // Send coins to a list of recipients
     SendCoinsReturn sendCoins(WalletModelTransaction& transaction);
 
     // Wallet encryption
-    bool setWalletEncrypted(bool encrypted, const VlcureString& passphrase);
+    bool setWalletEncrypted(bool encrypted, const SecureString& passphrase);
     // Passphrase only needed when unlocking
-    bool setWalletLocked(bool locked, const VlcureString& passPhrase = VlcureString(), bool stakingOnly = false);
-    bool changePassphrase(const VlcureString& oldPass, const VlcureString& newPass);
+    bool setWalletLocked(bool locked, const SecureString& passPhrase = SecureString(), bool stakingOnly = false);
+    bool changePassphrase(const SecureString& oldPass, const SecureString& newPass);
     // Is wallet unlocked for staking only?
     bool isStakingOnlyUnlocked();
     // Wallet backup
@@ -193,7 +202,7 @@ public:
         void CopyFrom(const UnlockContext& rhs);
     };
 
-    UnlockContext requestUnlock(bool relock = false);
+    UnlockContext requestUnlock(AskPassphraseDialog::Context context, bool relock = false);
 
     bool getPubKey(const CKeyID& address, CPubKey& vchPubKeyOut) const;
     bool isMine(CBitcoinAddress address);
@@ -222,6 +231,8 @@ private:
     AddressTableModel* addressTableModel;
     TransactionTableModel* transactionTableModel;
     RecentRequestsTableModel* recentRequestsTableModel;
+    ProposalTableModel* proposalTableModel;
+    ProposalCommunityTableModel* proposalCommunityTableModel;
 
     // Cache some values to be able to detect changes
     CAmount cachedBalance;
@@ -238,7 +249,7 @@ private:
 
     void subscribeToCoreSignals();
     void unsubscribeFromCoreSignals();
-    void checkBalanceChanged();
+    Q_INVOKABLE void checkBalanceChanged();
 
 signals:
     // Signal that balance in wallet changed
@@ -250,7 +261,7 @@ signals:
     // Signal emitted when wallet needs to be unlocked
     // It is valid behaviour for listeners to keep the wallet locked after this signal;
     // this means that the unlocking failed or was cancelled.
-    void requireUnlock();
+    void requireUnlock(AskPassphraseDialog::Context context);
 
     // Fired when a message should be reported to the user
     void message(const QString& title, const QString& message, unsigned int style);
@@ -279,6 +290,8 @@ public slots:
     void updateMultiSigFlag(bool fHaveMultiSig);
     /* Current, immature or unconfirmed balance might have changed - emit 'balanceChanged' if so */
     void pollBalanceChanged();
+    /* Update address book labels in the database */
+    void updateAddressBookLabels(const CTxDestination& address, const string& strName, const string& strPurpose);
 };
 
 #endif // BITCOIN_QT_WALLETMODEL_H

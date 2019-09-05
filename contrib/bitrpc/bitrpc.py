@@ -11,9 +11,9 @@ rpcpass = ""
 
 
 if rpcpass == "":
-    access = ServiceProxy("http://127.0.0.1:22031")
+    access = ServiceProxy("http://127.0.0.1:9332")
 else:
-    access = ServiceProxy("http://"+rpcuser+":"+rpcpass+"@127.0.0.1:22031")
+    access = ServiceProxy("http://"+rpcuser+":"+rpcpass+"@127.0.0.1:9332")
 cmd = sys.argv[1].lower()
 
 if cmd == "backupwallet":
@@ -22,7 +22,7 @@ if cmd == "backupwallet":
         print access.backupwallet(path)
     except:
         print "\n---An error occurred---\n"
-
+        
 elif cmd == "encryptwallet":
     try:
         pwd = getpass.getpass(prompt="Enter passphrase: ")
@@ -104,9 +104,9 @@ elif cmd == "getgenerate":
     except:
         print "\n---An error occurred---\n"
 
-elif cmd == "gethashespervlc":
+elif cmd == "gethashespersec":
     try:
-        print access.gethashespervlc()
+        print access.gethashespersec()
     except:
         print "\n---An error occurred---\n"
 
@@ -321,11 +321,11 @@ elif cmd == "walletpassphrase":
     except:
         print "\n---An error occurred---\n"
 
-elif cmd == "walletpassphravlchange":
+elif cmd == "walletpassphrasechange":
     try:
         pwd = getpass.getpass(prompt="Enter old wallet passphrase: ")
         pwd2 = getpass.getpass(prompt="Enter new wallet passphrase: ")
-        access.walletpassphravlchange(pwd, pwd2)
+        access.walletpassphrasechange(pwd, pwd2)
         print
         print "\n---Passphrase changed---\n"
     except:
