@@ -57,7 +57,7 @@ public:
  * critical; in unusual circumstances like a(nother) overflow bug that allowed
  * for the creation of coins out of thin air modification could lead to a fork.
  * */
-static const CAmount MAX_MONEY = 45000000 * COIN;
+static const CAmount MAX_MONEY = 77000000 * COIN;
 inline bool MoneyRange(const CAmount nValueOut) { return nValueOut >= 0 && nValueOut <= MAX_MONEY; }
 
 #endif //  BITCOIN_AMOUNT_H
