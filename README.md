@@ -14,7 +14,7 @@ Please reach out at info@vlc.org
 ### Coin Specs
 | Block Time                  | 10 Minutes      |
 | Max Coin Supply (PoW Phase) | 9,000,000 VLC    |
-| Max Coin Supply (PoS Phase) | 77,000,000 VLC |
+| Max Coin Supply (PoS Phase) | 45,000,000 VLC |
 | Premine                     | 9,000,000 VLC    |
 
 ### Reward Distribution
